@@ -5,14 +5,14 @@
  * @var array $colors Theme colors from WordPress palette
  */
 ?>
-<section class="dev-kit__section flow">
+<section class="dev-kit__section alignfull flow">
     <h2 data-dev-ui>Design Tokens</h2>
 
     <?php if (! empty($colors)) : ?>
 
         <!-- Colors -->
         <div class="dev-kit__subsection">
-            <h3>Colors</h3>
+            <h3 data-dev-ui>Colors</h3>
             <small><code class="dev-kit__code">--color-{name}</code></small>
             <div class="dev-kit__demo">
                 <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
@@ -29,7 +29,7 @@
 
         <!-- Color Contexts -->
         <div class="dev-kit__subsection">
-            <h3>Color Contexts</h3>
+            <h3 data-dev-ui>Color Contexts</h3>
             <small>
                 <code class="dev-kit__code">.color-context-{color}</code> — sets background, foreground, link, and focus colors together.
             </small>

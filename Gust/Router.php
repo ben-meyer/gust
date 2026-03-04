@@ -76,12 +76,6 @@ class Router
         return static::decorate('404', $handler);
     }
 
-    /** Decorate the blog home (posts archive). @param string|callable $handler */
-    public static function decorateArchive(mixed $handler): Route
-    {
-        return static::decorate('archive:post', $handler);
-    }
-
     public static function ensurePage(string $role, array $attributes = []): void
     {
         RouterPage::ensure($role, $attributes);

@@ -85,8 +85,7 @@ Router::route('/tools/demo', fn() => DemoController::index())
 - **Template Resolution** - Follows WordPress hierarchy (`archive-{type}.php`, etc.)
 
 **Route Types:**
-- `archive:post` - Blog archive
-- `post_type:{name}` - CPT archive
+- `post_type:{name}` - CPT archive (also matches blog home)
 - `taxonomy:{name}` - Taxonomy archive
 - `search` - Search results
 - `404` - Not found

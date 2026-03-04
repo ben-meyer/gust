@@ -7,12 +7,12 @@
      PATTERNS (3-patterns)
      ============================================ -->
 
-<section class="dev-kit__section flow">
-    <h2>Patterns</h2>
+<section class="dev-kit__section alignfull flow">
+    <h2 data-dev-ui>Patterns</h2>
 
     <!-- Buttons -->
     <div class="dev-kit__subsection">
-        <h3>Buttons</h3>
+        <h3 data-dev-ui>Buttons</h3>
         <small><code class="dev-kit__code">.btn</code> and variants</small>
         <div class="dev-kit__demo">
             <div class="flex-list">
@@ -28,7 +28,7 @@
 
     <!-- Button Icons -->
     <div class="dev-kit__subsection">
-        <h3>Button Icons</h3>
+        <h3 data-dev-ui>Button Icons</h3>
         <small>
             <code class="dev-kit__code">.btn__icon</code>
             <code class="dev-kit__code">.btn--icon</code>
@@ -63,7 +63,7 @@
 
     <!-- Button Resets -->
     <div class="dev-kit__subsection">
-        <h3>Button Resets</h3>
+        <h3 data-dev-ui>Button Resets</h3>
         <small><code class="dev-kit__code">.button-reset</code> <code class="dev-kit__code">.button-reset-hard</code></small>
         <div class="dev-kit__demo">
             <div class="flex-list">
@@ -76,7 +76,7 @@
 
     <!-- Links -->
     <div class="dev-kit__subsection">
-        <h3>Link Styles</h3>
+        <h3 data-dev-ui>Link Styles</h3>
         <small><code class="dev-kit__code">.link</code> variants</small>
         <div class="dev-kit__demo">
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
@@ -89,7 +89,7 @@
 
     <!-- Typography -->
     <div class="dev-kit__subsection">
-        <h3>Typography</h3>
+        <h3 data-dev-ui>Typography</h3>
         <small><code class="dev-kit__code">.type-*</code> styles</small>
         <div class="dev-kit__demo">
             <div class="type-hero">.type-hero</div>
@@ -106,7 +106,7 @@
 
     <!-- Grid -->
     <div class="dev-kit__subsection">
-        <h3>Grid</h3>
+        <h3 data-dev-ui>Grid</h3>
         <small><code class="dev-kit__code">.grid-simple</code> <code class="dev-kit__code">.grid-columns-*</code> <code class="dev-kit__code">.grid-auto</code></small>
         <div class="dev-kit__demo">
             <p style="margin-bottom: 0.5rem;"><strong>.grid-simple .sm:[--cols:2] .md:[--cols:3]</strong></p>
@@ -132,7 +132,7 @@
 
     <!-- Flex Grid -->
     <div class="dev-kit__subsection">
-        <h3>Flex Grid</h3>
+        <h3 data-dev-ui>Flex Grid</h3>
         <small><code class="dev-kit__code">.flex-grid</code> <code class="dev-kit__code">.flex-grid-auto</code></small>
         <div class="dev-kit__demo">
             <p style="margin-bottom: 0.5rem;"><strong>.flex-grid</strong> (uses --cols)</p>
@@ -147,7 +147,7 @@
 
     <!-- Flex List -->
     <div class="dev-kit__subsection">
-        <h3>Flex List</h3>
+        <h3 data-dev-ui>Flex List</h3>
         <small><code class="dev-kit__code">.flex-list</code></small>
         <div class="dev-kit__demo">
             <ul class="flex-list">
@@ -161,7 +161,7 @@
 
     <!-- Form Inputs -->
     <div class="dev-kit__subsection">
-        <h3>Form Inputs</h3>
+        <h3 data-dev-ui>Form Inputs</h3>
         <small><code class="dev-kit__code">.input</code> <code class="dev-kit__code">.select</code></small>
         <div class="dev-kit__demo">
             <div style="display: grid; gap: 1rem; max-width: 400px;">
@@ -179,7 +179,7 @@
 
     <!-- Checkbox -->
     <div class="dev-kit__subsection">
-        <h3>Checkbox</h3>
+        <h3 data-dev-ui>Checkbox</h3>
         <small><code class="dev-kit__code">.checkbox-field</code></small>
         <div class="dev-kit__demo">
             <div style="max-width: 400px;">
@@ -197,7 +197,7 @@
 
     <!-- Radio -->
     <div class="dev-kit__subsection">
-        <h3>Radio</h3>
+        <h3 data-dev-ui>Radio</h3>
         <small><code class="dev-kit__code">.radio-field</code></small>
         <div class="dev-kit__demo">
             <div style="max-width: 400px;">
@@ -215,7 +215,7 @@
 
     <!-- Blockquote -->
     <div class="dev-kit__subsection">
-        <h3>Blockquote</h3>
+        <h3 data-dev-ui>Blockquote</h3>
         <small><code class="dev-kit__code">.blockquote</code></small>
         <div class="dev-kit__demo">
             <blockquote class="blockquote">
@@ -227,7 +227,7 @@
 
     <!-- Tooltip -->
     <div class="dev-kit__subsection">
-        <h3>Tooltip</h3>
+        <h3 data-dev-ui>Tooltip</h3>
         <small><code class="dev-kit__code">.tooltip</code></small>
         <div class="dev-kit__demo">
             <div style="padding-top: 1rem;">
@@ -238,7 +238,7 @@
 
     <!-- Prose -->
     <div class="dev-kit__subsection">
-        <h3>Prose</h3>
+        <h3 data-dev-ui>Prose</h3>
         <small><code class="dev-kit__code">.prose</code> — adds consistent margins to content elements</small>
         <div class="dev-kit__demo">
             <div class="prose" style="max-width: 500px;">
@@ -255,7 +255,7 @@
 
     <!-- Focus Styles -->
     <div class="dev-kit__subsection">
-        <h3>Focus Styles</h3>
+        <h3 data-dev-ui>Focus Styles</h3>
         <small><code class="dev-kit__code">.focus-base</code></small>
         <div class="dev-kit__demo">
             <div class="flex-list">
@@ -266,7 +266,7 @@
 
     <!-- Cross Icon -->
     <div class="dev-kit__subsection">
-        <h3>Cross Icon</h3>
+        <h3 data-dev-ui>Cross Icon</h3>
         <small><code class="dev-kit__code">.cross</code></small>
         <div class="dev-kit__demo">
             <div class="flex-list">
@@ -278,7 +278,7 @@
 
     <!-- Mask Icon -->
     <div class="dev-kit__subsection">
-        <h3>Mask Icon</h3>
+        <h3 data-dev-ui>Mask Icon</h3>
         <small><code class="dev-kit__code">.mask-icon</code> — apply to a pseudo-element; sets <code class="dev-kit__code">background-color: currentColor</code> + mask properties. Set <code class="dev-kit__code">mask-image</code> and dimensions separately.</small>
         <style>
             /* Demo only: dimensions and icon image (mask-icon doesn't set these) */
@@ -306,7 +306,7 @@
 
     <!-- Responsive Embed -->
     <div class="dev-kit__subsection">
-        <h3>Responsive Embed</h3>
+        <h3 data-dev-ui>Responsive Embed</h3>
         <small><code class="dev-kit__code">.responsive-embed</code></small>
         <div class="dev-kit__demo">
             <div class="responsive-embed" style="max-width: 400px; aspect-ratio: 16/9;">
@@ -317,7 +317,7 @@
 
     <!-- Media Embed -->
     <div class="dev-kit__subsection">
-        <h3>Media Embed</h3>
+        <h3 data-dev-ui>Media Embed</h3>
         <small><code class="dev-kit__code">.media-embed</code> — grid container with figcaption styling</small>
         <div class="dev-kit__demo">
             <figure class="media-embed" style="max-width: 400px;">
@@ -332,12 +332,12 @@
      UTILITIES (4-utilities)
      ============================================ -->
 
-<section class="dev-kit__section flow">
-    <h2>Utilities</h2>
+<section class="dev-kit__section alignfull flow">
+    <h2 data-dev-ui>Utilities</h2>
 
     <!-- Color Context -->
     <div class="dev-kit__subsection">
-        <h3>Color Context</h3>
+        <h3 data-dev-ui>Color Context</h3>
         <small><code class="dev-kit__code">.color-context-{color}</code> <code class="dev-kit__code">.has-{color}-background-color</code></small>
         <p style="margin: 0.5rem 0;">Sets background color, foreground color, focus color, and link colors based on the color's configuration.</p>
         <div class="dev-kit__demo" style="padding: 0; overflow: hidden; border-radius: var(--radius--lg);">
@@ -354,7 +354,7 @@
 
     <!-- Foreground Color -->
     <div class="dev-kit__subsection">
-        <h3>Foreground Color</h3>
+        <h3 data-dev-ui>Foreground Color</h3>
         <small><code class="dev-kit__code">.foreground-from-{color}</code></small>
         <p style="margin: 0.5rem 0;">Sets only the foreground color (text, links, focus) without changing background.</p>
         <div class="dev-kit__demo">
@@ -377,7 +377,7 @@
 
     <!-- Alignment -->
     <div class="dev-kit__subsection alignfull">
-        <h3>Content Grid and Alignment Classes</h3>
+        <h3 data-dev-ui>Content Grid and Alignment Classes</h3>
         <small><code>.content-grid</code></small>
         <small><code class="dev-kit__code">.alignleft</code> <code class="dev-kit__code">.alignright</code> <code class="dev-kit__code">.aligncenter</code> <code class="dev-kit__code">.alignwide</code> <code class="dev-kit__code">.alignfull</code></small>
 
@@ -396,7 +396,7 @@
 
     <!-- Content Width -->
     <div class="dev-kit__subsection alignfull">
-        <h3 class="alignwide">Content Width</h3>
+        <h3 data-dev-ui class="alignwide">Content Width</h3>
         <small><code class="dev-kit__code">.content-width-*</code> <code class="dev-kit__code">.content-width-fluid-*</code> <code class="dev-kit__code">.content-width-full</code></small>
         <div class="dev-kit__demo flow">
             <div class="content-width-2xs dev-kit__box">.content-width-2xs</div>
@@ -409,7 +409,7 @@
 
     <!-- Max Width Fluid -->
     <div class="dev-kit__subsection alignfull">
-        <h3 class="alignwide">Content Width Fluid</h3>
+        <h3 data-dev-ui class="alignwide">Content Width Fluid</h3>
         <small><code class="dev-kit__code">.content-width-fluid-*</code></small>
         <div class="dev-kit__demo flow">
             <div class="content-width-fluid-xs dev-kit__box">.content-width-fluid-xs</div>
@@ -422,7 +422,7 @@
 
     <!-- List Reset -->
     <div class="dev-kit__subsection">
-        <h3>List Reset</h3>
+        <h3 data-dev-ui>List Reset</h3>
         <small><code class="dev-kit__code">.list-reset</code> <code class="dev-kit__code">.list-reset-hard</code></small>
         <div class="dev-kit__demo">
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
@@ -453,7 +453,7 @@
 
     <!-- Margin Trim -->
     <div class="dev-kit__subsection">
-        <h3>Margin Trim</h3>
+        <h3 data-dev-ui>Margin Trim</h3>
         <small><code class="dev-kit__code">.margin-trim</code> <code class="dev-kit__code">.margin-trim-first</code> <code class="dev-kit__code">.margin-trim-last</code></small>
         <div class="dev-kit__demo">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
@@ -473,7 +473,7 @@
 
     <!-- Img Fit -->
     <div class="dev-kit__subsection">
-        <h3>Image Fit</h3>
+        <h3 data-dev-ui>Image Fit</h3>
         <small><code class="dev-kit__code">.img-fit</code> — container for object-fit: cover images</small>
         <div class="dev-kit__demo">
             <div class="img-fit" style="width: 200px; aspect-ratio: 16/9;">
@@ -484,7 +484,7 @@
 
     <!-- Screen Reader -->
     <div class="dev-kit__subsection">
-        <h3>Screen Reader Text</h3>
+        <h3 data-dev-ui>Screen Reader Text</h3>
         <small><code class="dev-kit__code">.screen-reader</code> <code class="dev-kit__code">.sr-only</code> <code class="dev-kit__code">.screen-reader-text</code></small>
         <div class="dev-kit__demo">
             <p>Visually hidden but accessible to screen readers:</p>
@@ -498,7 +498,7 @@
 
     <!-- No Scroll -->
     <div class="dev-kit__subsection">
-        <h3>No Scroll</h3>
+        <h3 data-dev-ui>No Scroll</h3>
         <small><code class="dev-kit__code">.no-scroll</code> — overflow: hidden (for modals)</small>
         <div class="dev-kit__demo">
             <p>Apply to body when modal is open to prevent background scrolling.</p>
@@ -507,7 +507,7 @@
 
     <!-- No Focus -->
     <div class="dev-kit__subsection">
-        <h3>No Focus</h3>
+        <h3 data-dev-ui>No Focus</h3>
         <small><code class="dev-kit__code">.no-focus-be-careful</code> — removes focus outline (use carefully!)</small>
         <div class="dev-kit__demo">
             <p>Only use when providing alternative focus indication. Name reminds developers to be careful about accessibility.</p>

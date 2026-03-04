@@ -9,6 +9,11 @@ $lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmo
 $short = 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
 ?>
 
+<section class="dev-kit__section alignfull flow">
+<h2 data-dev-ui>Content Flow</h2>
+
+<div class="content-flow content-grid alignfull">
+
 <!-- Prose — max-width constraint -->
 <h2 class="wp-block-heading">Heading 2</h2>
 <h3 class="wp-block-heading">Heading 3</h3>
@@ -65,3 +70,7 @@ $short = 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
         <p><?= $short ?></p>
     </div>
 </div>
+
+</div><!-- /.content-flow.content-grid -->
+
+</section><!-- /.dev-kit__section -->

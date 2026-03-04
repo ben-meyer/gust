@@ -3,7 +3,7 @@
  * HTML Elements kitchen sink for style guide.
  */
 ?>
-<section class="dev-kit__section flow">
+<section class="dev-kit__section alignfull flow">
     <h2 class="dev-page-title">HTML Elements</h2>
 
     <section class="flow">

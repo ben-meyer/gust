@@ -159,12 +159,12 @@ class DevRoutes
                 }
 
                 /* ---- Dev chrome element resets (scoped to [data-dev-ui] only) ---- */
-                [data-dev-ui] h1, h1[data-dev-ui],
-                [data-dev-ui] h2, h2[data-dev-ui],
-                [data-dev-ui] h3, h3[data-dev-ui],
-                [data-dev-ui] h4, h4[data-dev-ui],
-                [data-dev-ui] h5, h5[data-dev-ui],
-                [data-dev-ui] h6, h6[data-dev-ui] {
+                h1[data-dev-ui],
+                h2[data-dev-ui],
+                h3[data-dev-ui],
+                h4[data-dev-ui],
+                h5[data-dev-ui],
+                h6[data-dev-ui] {
                     font-family: var(--dev-sans) !important;
                     font-weight: 600 !important;
                     line-height: 1.3 !important;
@@ -173,11 +173,7 @@ class DevRoutes
                     color: var(--dev-text) !important;
                 }
 
-                [data-dev-ui] h2, h2[data-dev-ui] { font-size: 1.375rem !important; margin: 2rem 0 0.75rem !important; }
-                [data-dev-ui] h3, h3[data-dev-ui] { font-size: 1.0625rem !important; margin: 1.5rem 0 0.5rem !important; }
-                [data-dev-ui] h4, h4[data-dev-ui] { font-size: 0.9375rem !important; margin: 1.25rem 0 0.5rem !important; }
-
-                [data-dev-ui] p, p[data-dev-ui] {
+                p[data-dev-ui] {
                     font-size: 0.9375rem;
                     line-height: 1.6;
                     color: var(--dev-text);
@@ -188,15 +184,15 @@ class DevRoutes
                 .dev-page-header {
                     display: flex;
                     flex-direction: column;
-                    gap: 0.5rem;
-                    padding-bottom: 1.25rem;
-                    margin-bottom: 2rem;
-                    border-bottom: 1px solid var(--dev-border);
+                    gap: 0.375rem;
+                    padding-bottom: 1rem;
+                    border-bottom: 2px solid var(--dev-text);
                 }
 
                 /* ---- Page title ---- */
                 .dev-page-title {
-                    font-size: 20px !important;
+                    font-family: var(--dev-sans) !important;
+                    font-size: 32px;
                     font-weight: 600 !important;
                     text-transform: uppercase !important;
                     letter-spacing: 0.08em !important;
@@ -258,7 +254,6 @@ class DevRoutes
                 .dev-link-list {
                     list-style: none;
                     padding: 0;
-                    margin: 0;
                     display: flex;
                     flex-wrap: wrap;
                     gap: 0.4rem;
@@ -320,8 +315,28 @@ class DevRoutes
                 /* ---- Dev Kit section/subsection layout ---- */
                 .dev-kit__section {
                     --flow-space: 2rem;
-                    max-width: 100%;
-                    padding: var(--space-base, 2rem) 0;
+                    display: grid;
+                    grid-template-columns:
+                        [full-start] minmax(var(--dev-grid-padding), 1fr)
+                        [wide-start] minmax(0, var(--dev-grid-max))
+                        [wide-end] minmax(var(--dev-grid-padding), 1fr)
+                        [full-end];
+                    padding-block: var(--space-base, 2rem);
+
+                    > * {
+                        grid-column: wide;
+                    }
+
+                    > .alignwide {
+                        grid-column: wide;
+                        width: 100%;
+                    }
+
+                    > .alignfull {
+                        grid-column: full;
+                        width: 100%;
+                        max-width: 100%;
+                    }
                 }
 
                 .dev-kit__section + .dev-kit__section {
@@ -329,19 +344,19 @@ class DevRoutes
                     margin-top: 0;
                 }
 
-                .dev-kit__section h2 {
+                h2[data-dev-ui] {
                     font-family: var(--dev-sans) !important;
-                    font-size: 0.6875rem !important;
+                    font-size: 12px !important;
                     font-weight: 600 !important;
                     text-transform: uppercase !important;
                     letter-spacing: 0.08em !important;
                     color: var(--dev-muted) !important;
                     margin-bottom: 1.5rem !important;
                     padding-bottom: 0.5rem;
-                    border-bottom: 2px solid var(--dev-text);
+                    border-bottom: 2px solid var(--dev-border);
                 }
 
-                .dev-kit__section h3 {
+                h3[data-dev-ui] {
                     font-family: var(--dev-sans) !important;
                     font-size: 0.75rem !important;
                     font-weight: 600 !important;
@@ -647,7 +662,7 @@ class DevRoutes
     {
         $content = '<div class="dev-index" data-dev-ui>';
         $content .= '<div class="dev-page-header">';
-        $content .= '<h1 class="dev-page-title">Dev Kit</h1>';
+        $content .= '<h1 class="dev-page-title" data-dev-ui>Dev Kit</h1>';
         $content .= '</div>';
         $content .= '<ul class="dev-link-list">';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/globals/')).'">Globals</a></li>';
@@ -664,9 +679,9 @@ class DevRoutes
     {
         $components = static::getComponentsWithExamples();
 
-        $content = '<div class="dev-component-list" data-dev-ui>';
+        $content = '<div class="dev-component-list flow" data-dev-ui>';
         $content .= '<div class="dev-page-header">';
-        $content .= '<h1 class="dev-page-title">Components</h1>';
+        $content .= '<h1 class="dev-page-title" data-dev-ui>Components</h1>';
         $content .= '</div>';
 
         if (empty($components)) {
@@ -693,7 +708,7 @@ class DevRoutes
         static::devPageOpen('Globals', 'globals');
 
         echo '<div class="dev-page-header" data-dev-ui>';
-        echo '<h1 class="dev-page-title">Globals</h1>';
+        echo '<h1 class="dev-page-title" data-dev-ui>Globals</h1>';
         echo '</div>';
 
         $template_path = static::getTemplatePath('globals.php');
@@ -714,7 +729,7 @@ class DevRoutes
         static::devPageOpen('Content', 'content');
 
         echo '<div class="dev-page-header" data-dev-ui>';
-        echo '<h1 class="dev-page-title">Content</h1>';
+        echo '<h1 class="dev-page-title" data-dev-ui>Content</h1>';
         echo '</div>';
 
         $template_path = static::getTemplatePath('content.php');
@@ -730,7 +745,7 @@ class DevRoutes
         static::devPageOpen('Utilities', 'utilities');
 
         echo '<div class="dev-page-header" data-dev-ui>';
-        echo '<h1 class="dev-page-title">Utilities</h1>';
+        echo '<h1 class="dev-page-title" data-dev-ui>Utilities</h1>';
         echo '</div>';
 
         $template_path = static::getTemplatePath('utilities.php');

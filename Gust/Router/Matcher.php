@@ -111,7 +111,6 @@ class Matcher
 
         // Blog home (posts archive)
         if (\is_home()) {
-            $contexts[] = 'archive:post';
             $contexts[] = 'post_type:post';
 
             return $contexts;
