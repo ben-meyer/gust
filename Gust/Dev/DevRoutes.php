@@ -312,9 +312,14 @@ class DevRoutes
                     border-radius: 6px;
                 }
 
+                @layer base {
+                    .dev-kit__section {
+                        /* --flow-space: 32px; */
+                    }
+                }
+
                 /* ---- Dev Kit section/subsection layout ---- */
                 .dev-kit__section {
-                    --flow-space: 2rem;
                     display: grid;
                     grid-template-columns:
                         [full-start] minmax(var(--dev-grid-padding), 1fr)
@@ -351,7 +356,7 @@ class DevRoutes
                     text-transform: uppercase !important;
                     letter-spacing: 0.08em !important;
                     color: var(--dev-muted) !important;
-                    margin-bottom: 1.5rem !important;
+                    /* margin-bottom: 1.5rem !important; */
                     padding-bottom: 0.5rem;
                     border-bottom: 2px solid var(--dev-border);
                 }
@@ -364,7 +369,7 @@ class DevRoutes
                     letter-spacing: 0.06em !important;
                     color: var(--dev-text) !important;
                     margin-top: 1.25rem !important;
-                    margin-bottom: 0.4rem !important;
+                    /* margin-bottom: 0.4rem !important; */
                 }
 
                 .dev-kit__subsection {
@@ -660,7 +665,7 @@ class DevRoutes
 
     protected static function getDevIndexContent(): string
     {
-        $content = '<div class="dev-index" data-dev-ui>';
+        $content = '<div class="dev-index flow" data-dev-ui>';
         $content .= '<div class="dev-page-header">';
         $content .= '<h1 class="dev-page-title" data-dev-ui>Dev Kit</h1>';
         $content .= '</div>';

@@ -21,7 +21,7 @@
         </div>
     </section>
     <hr>
-    <section>
+    <section class="content-flow">
         <header>
             <nav>
                 <ul>
@@ -31,7 +31,7 @@
                 </ul>
             </nav>
         </header>
-        <article>
+        <article class="content-flow">
             <p>This paragraph is nested inside an article. It contains many different, sometimes useful,
                 <a href="https://www.w3schools.com/tags/">HTML5 tags</a>. Of course there are classics like
                 <em>emphasis</em>, <strong>strong</strong>, and <small>small</small> but there are many others
@@ -103,7 +103,7 @@
         </dl>
     </section>
     <hr>
-    <section>
+    <section class="content-flow">
         <ul>
             <li>Unordered List item one
                 <ul>
@@ -154,7 +154,7 @@
     </section>
     <hr>
     <section>
-        <form>
+        <form class="flow">
             <p>
                 <label for="example-input-email">Email address</label>
                 <input type="email" id="example-input-email" placeholder="Enter email">

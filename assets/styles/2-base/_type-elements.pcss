@@ -17,6 +17,11 @@ a {
     + :is(h1, h2, h3, h4, h5, h6) {
         --flow-space: space(4);
     }
+
+    /* Restore layout-size gap when prose follows a major/layout block */
+    :where(.alignwide, .alignfull, .section) + & {
+        --flow-space: var(--space-layout);
+    }
 }
 
 h1 {
@@ -47,6 +52,10 @@ p {
     --flow-space: var(--space-base);
 
     text-wrap: pretty;
+
+    :where(.alignwide, .alignfull, .section) + & {
+        --flow-space: var(--space-layout);
+    }
 }
 
 dd {

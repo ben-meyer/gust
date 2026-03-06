@@ -376,7 +376,7 @@
     </div>
 
     <!-- Alignment -->
-    <div class="dev-kit__subsection alignfull">
+    <div class="dev-kit__subsection alignfull content-grid">
         <h3 data-dev-ui>Content Grid and Alignment Classes</h3>
         <small><code>.content-grid</code></small>
         <small><code class="dev-kit__code">.alignleft</code> <code class="dev-kit__code">.alignright</code> <code class="dev-kit__code">.aligncenter</code> <code class="dev-kit__code">.alignwide</code> <code class="dev-kit__code">.alignfull</code></small>
@@ -395,7 +395,7 @@
     </div>
 
     <!-- Content Width -->
-    <div class="dev-kit__subsection alignfull">
+    <div class="dev-kit__subsection alignfull content-grid">
         <h3 data-dev-ui class="alignwide">Content Width</h3>
         <small><code class="dev-kit__code">.content-width-*</code> <code class="dev-kit__code">.content-width-fluid-*</code> <code class="dev-kit__code">.content-width-full</code></small>
         <div class="dev-kit__demo flow">
@@ -408,7 +408,7 @@
     </div>
 
     <!-- Max Width Fluid -->
-    <div class="dev-kit__subsection alignfull">
+    <div class="dev-kit__subsection alignfull content-grid">
         <h3 data-dev-ui class="alignwide">Content Width Fluid</h3>
         <small><code class="dev-kit__code">.content-width-fluid-*</code></small>
         <div class="dev-kit__demo flow">
@@ -456,16 +456,16 @@
         <h3 data-dev-ui>Margin Trim</h3>
         <small><code class="dev-kit__code">.margin-trim</code> <code class="dev-kit__code">.margin-trim-first</code> <code class="dev-kit__code">.margin-trim-last</code></small>
         <div class="dev-kit__demo">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="prose" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start;">
                 <div style="border: 2px solid var(--color-accent); padding: 0.5rem;">
                     <p><strong>Without .margin-trim:</strong></p>
-                    <p style="margin: 1rem 0;">Paragraph with margins</p>
-                    <p style="margin: 1rem 0;">Another paragraph</p>
+                    <p>Paragraph with margins</p>
+                    <p>Another paragraph</p>
                 </div>
                 <div class="margin-trim" style="border: 2px solid var(--color-accent); padding: 0.5rem;">
                     <p><strong>With .margin-trim:</strong></p>
-                    <p style="margin: 1rem 0;">Paragraph with margins</p>
-                    <p style="margin: 1rem 0;">Another paragraph</p>
+                    <p>Paragraph with margins</p>
+                    <p>Another paragraph</p>
                 </div>
             </div>
         </div>
