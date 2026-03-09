@@ -1,5 +1,5 @@
 .taxonomy-filters {
-    --block--margin-bottom: calc(var(--block--margin-bottom) / 2);
+    --section--margin-bottom: calc(var(--section--margin-bottom) / 2);
 
     display: grid;
     align-items: center;
@@ -12,11 +12,6 @@
 
     + * {
         margin-block-start: calc(var(--flow-space, var(--space-layout)) / 2);
-    }
-
-    .blocks > & {
-        margin-top: space(24);
-        margin-bottom: space(24);
     }
 
     :where(.taxonomy-filters__label) {

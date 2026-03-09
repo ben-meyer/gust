@@ -1,5 +1,5 @@
 .logo-grid {
-    --logo-grid--padding-y: var(--block--padding-y);
+    --logo-grid--padding-y: var(--section--padding-y);
     --logo-grid--box-shadow: var(--base--shadow);
     --logo-grid--box-shadow--hover: var(--base--shadow--hover);
     --logo-grid--spacing: var(--space-base);
@@ -14,15 +14,15 @@
         padding-bottom: var(--logo-grid--padding-y);
 
         &:not(.alignfull) {
-            padding-right: var(--block--padding-x);
-            padding-left: var(--block--padding-x);
+            padding-right: var(--section--padding-x);
+            padding-left: var(--section--padding-x);
         }
     }
 
     :where(.logo-grid__header) {
         @apply margin-trim;
 
-        margin-bottom: var(--block--header--margin-bottom);
+        margin-bottom: var(--section--header--margin-bottom);
     }
 
     :where(.logo-grid__heading) {

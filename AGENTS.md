@@ -31,6 +31,7 @@ Key features include:
 |-----|-------------|
 | [architecture.md](.claude/agent_docs/architecture.md) | Theme init flow, module system internals, WP integration |
 | [build-system.md](.claude/agent_docs/build-system.md) | Vite setup, entry points, component asset bundling, static assets, versioning |
+| [components.md](.claude/agent_docs/components.md) | Component structure, class patterns, templates, ACF fields, blocks |
 | [css.md](.claude/agent_docs/css.md) | CSS architecture, color system, spacing, type utilities, page grid |
 
 ## Skills

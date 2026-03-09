@@ -1,13 +1,13 @@
 .media-content {
     --media-content--aspect-ratio: 16 / 9;
-    --media-content--outer-padding-y: var(--block--padding-y);
-    --media-content--outer-padding-x: var(--block--padding-x);
+    --media-content--outer-padding-y: var(--section--padding-y);
+    --media-content--outer-padding-x: var(--section--padding-x);
     --media-content--inner-padding-y: 0px;
     --media-content--content--max-width: 28.125rem; /* 450px */
     --media-content--gap: spaceFluid(16, 24);
 
     @media (min-width: theme('screens.md')) {
-        --media-content--inner-padding-y: var(--block--padding-y);
+        --media-content--inner-padding-y: var(--section--padding-y);
     }
 
     :where(.media-content__inner) {
