@@ -9,57 +9,11 @@ Key features include:
 - **ACF Pro**: Custom fields, option pages, and editor blocks. Field groups managed as local JSON in `acf-json/`. Blocks render via `ComponentName::fromBlock()`.
 - **CSS Architecture**: Tailwind + BEM hybrid. Tailwind for layout utilities in templates (`flex`, `gap-4`); per-component `styles.pcss` (BEM) for component styles. Custom type, color, and spacing systems — never use raw Tailwind typography or color classes in components.
 - **Build System**: Vite with per-component entry points. Component `styles.pcss` and `scripts.js` are auto-bundled into the main CSS/JS.
-- **Deployment**: Single-command build and deploy to staging/production; database and asset sync between environments via WP Sync CLI.
-
-
-### Dev Workflow
-1. `npm run dev` — HMR auto-detects;
-2. `npm run lint` / `npm run fix` — JS/CSS (Biome)
-3. `./vendor/bin/pint` — PHP formatting (PSR-12)
-4. Access WP at `APP_URL` from `.env`
-
-
-### Deployment
-
-Single-dev deployments via `npm run deploy:*`. Environment config (SSH host, path) lives in `wp-sync.yml`. The deploy commands run a production build first, then rsync to the target server.
-
-```
-npm run deploy:staging         # build + deploy to staging
-npm run deploy:staging:dry     # dry-run (no files transferred)
-npm run deploy:production      # build + deploy to production
-npm run deploy:production:dry  # dry-run
-```
-
-`build:production` = `npm install && composer install --no-dev && vite build && wp works generate-json`
-
-Environment targets are defined in `wp-sync.yml` under `environments:` (staging/production), each with `host` (user@host) and `path`. The `pull`/`push` keys in `wp-sync.yml` control which assets (db, themes, plugins, uploads) sync in each direction — used separately via WP Sync CLI, not the npm deploy scripts.
-
-
-### Module System
-Modules in `Theme/Modules/*/module.php` auto-load via `Gust\Module::init()`.
-Each has a static `init()` method. Disable via `gust/modules/disabled` filter.
-
+- **Deployment**: Single-command build and deploy to staging/production; database and asset sync between environments via WP Sync CLI. Don't run these unless specifically requested.
 
 ### MCPs to use:
 - **context7** — look up library/framework docs before implementing with any SDK or package
 - **chrome-devtools** — browser testing; navigate, snapshot DOM, check console/network
-
-
-### Styling Rules
-
-**Typography**: Use `type-{name}` utilities — `@apply type-h2`, `type-meta`, etc. Never raw Tailwind font/size properties. Defined in `assets/styles/3-patterns/_type-styles.pcss`. Semantic names: `type-hero`, `type-h1`–`type-h6`, `type-base`, `type-meta`.
-
-**Colors**: Defined in `assets/theme-config.json`, processed at build time into CSS custom properties. Each color generates:
-- `--color-{name}` — raw hex
-- `--color-{name}--foreground` — contrasting text color
-- `color-context-{name}` utility — sets background AND `--color-background`, `--color-foreground`, link/focus colors together
-
-Always use `color-context-{name}` for sections with a background — never set `background-color` alone. Within a color context use `var(--color-foreground)` / `var(--color-background)` for text and backgrounds.
-
-**Spacing**: Use `space(px)` (converts px → rem). Responsive: `spaceFluid(min, max)`. Layout tokens: `var(--space-layout)`, `var(--container-padding)`.
-
-**Patterns vs utilities**: Use Tailwind utilities (`flex`, `gap-4`, `hidden`) for layout directly in templates. Use `@apply` with custom patterns (`type-h2`, `color-context-name`) inside component `.pcss` files — not as inline template classes.
-
 
 ### Testing
 - **PHP errors**: `cat ../../debug.log` after page load
@@ -76,6 +30,7 @@ Always use `color-context-{name}` for sections with a background — never set `
 | Doc | When to read |
 |-----|-------------|
 | [architecture.md](.claude/agent_docs/architecture.md) | Theme init flow, module system internals, WP integration |
+| [build-system.md](.claude/agent_docs/build-system.md) | Vite setup, entry points, component asset bundling, static assets, versioning |
 | [css.md](.claude/agent_docs/css.md) | CSS architecture, color system, spacing, type utilities, page grid |
 
 ## Skills

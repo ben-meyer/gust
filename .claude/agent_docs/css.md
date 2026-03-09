@@ -4,6 +4,21 @@
 
 Tailwind + BEM hybrid. Use BEM with custom patterns in per-component `styles.pcss` files. Use Tailwind sparingly directly in templates for layout purposes only. Never use raw Tailwind typography or color classes inside component CSS — always use the custom type and color systems.
 
+
+### Styling Rules
+
+**Colors**: Defined in `assets/theme-config.json`, processed at build time into CSS custom properties. Each color generates:
+- `--color-{name}` — raw hex
+- `--color-{name}--foreground` — contrasting text color
+- `color-context-{name}` utility — sets background AND `--color-background`, `--color-foreground`, link/focus colors together
+
+Always use `color-context-{name}` for sections with a background — never set `background-color` alone. Within a color context use `var(--color-foreground)` / `var(--color-background)` for text and backgrounds.
+
+**Spacing**: Use `space(px)` (converts px → rem). Responsive: `spaceFluid(min, max)`. Layout tokens: `var(--space-layout)`, `var(--container-padding)`.
+
+**Patterns vs utilities**: Use Tailwind utilities (`flex`, `gap-4`, `hidden`) for layout directly in templates. Use `@apply` with custom patterns (`type-h2`, `color-context-name`) inside component `.pcss` files — not as inline template classes.
+
+
 ```php
 <!-- Template: Tailwind for layout, BEM for component classes -->
 <div class="card flex flex-col gap-4">
@@ -91,16 +106,7 @@ Colors are defined per project in [`assets/theme-config.json`](../../assets/them
 
 ## Typography
 
-Type utilities in `assets/styles/3-patterns/_type-styles.pcss`. Each bundles font-family, size, weight, line-height, and letter-spacing. Use with `@apply` in CSS or as a class in templates.
-
-```pcss
-.component__heading   { @apply type-h2; }
-.component__preheading { @apply type-meta; }
-```
-
-Available type utilities are defined per project in [`assets/styles/3-patterns/_type-styles.pcss`](../../assets/styles/3-patterns/_type-styles.pcss). Check that file for the current names before using any `type-{name}` utility.
-
-WordPress block editor aliases: `.is-style-type-{name}`
+Type utilities in `assets/styles/3-patterns/_type-styles.pcss`. Check that file for the current names before using any `type-{name}` utility.. Each bundles font-family, size, weight, line-height, and letter-spacing. Use with `@apply` in CSS or as a class in templates. Never raw Tailwind font/size properties. Defined in `assets/styles/3-patterns/_type-styles.pcss`. Semantic names - e.g.: `type-hero`, `type-h1`–`type-h6`, `type-base`, `type-meta`.
 
 **Responsive font sizing with `rfs()`:**
 ```pcss
@@ -119,7 +125,6 @@ WordPress block editor aliases: `.is-style-type-{name}`
 .component {
     padding: space(16);           /* 1rem */
     margin-block: space(32);      /* 2rem */
-    gap: space(8);                /* 0.5rem */
 }
 ```
 
@@ -168,7 +173,7 @@ Default `--flow-space` by context:
 
 ---
 
-## Page Grid
+## Content Grid
 
 WordPress block content layout — children of `.content-grid` span the 12-col wide area by default.
 
@@ -180,9 +185,9 @@ WordPress block content layout — children of `.content-grid` span the 12-col w
 |-------|-------------|
 | `alignfull` | full viewport width |
 | `alignwide` | content width (wide) |
-| `alignleft` | columns 2–8 |
-| `alignright` | columns 8–14 |
-| `alignprose` | wide + max-width 65ch |
+| `alignleft` | e.g. columns 2–8 |
+| `alignright` | e.g. columns 8–14 |
+| `alignprose` | wide + max-width |
 
 ---
 
