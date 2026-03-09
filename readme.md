@@ -157,9 +157,9 @@ Components become Gutenberg blocks by adding `block.json`:
 
 ### Setup
 ```bash
-cp .env.example .env    # Enable dev mode
+cp .env.example .env    # Update with your APP_URL
 npm run setup           # Install deps + build (add ACF Pro key to auth.json before running)
-npm run site-setup      # Configure WP site for dev
+npm run site-setup      # Configure WP site for dev (optional, see dev-scripts/site-setup.sh)
 npm run dev             # Start Vite dev server
 ```
 
