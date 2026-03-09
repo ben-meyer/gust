@@ -284,10 +284,6 @@ class DevRoutes
                     margin: 0 !important;
                 }
 
-                .component-example-section {
-                    margin-bottom: 2rem;
-                }
-
                 .component-example-section__title {
                     font-size: 0.6875rem;
                     font-weight: 600;
@@ -653,11 +649,11 @@ class DevRoutes
         $title = \esc_html(\ucwords(\str_replace('-', ' ', $component)));
         static::devPageOpen($title, 'component');
 
-        echo '<div class="dev-component-example">';
+        echo '<div class="dev-component-example flow">';
         echo '<div class="dev-page-header" data-dev-ui>';
         echo '<h1 class="dev-component-example__title">'.$title.'</h1>';
         echo '</div>';
-        echo '<div class="dev-component-example__content">'.$example_output.'</div>';
+        echo '<div class="dev-component-example__content flow">'.$example_output.'</div>';
         echo '</div>';
 
         static::devPageClose();
