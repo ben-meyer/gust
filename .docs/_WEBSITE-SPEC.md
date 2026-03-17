@@ -2,12 +2,15 @@
 
 ## Overview
 
-**Title**: <!-- e.g., Acme Corp -->
-**Live URL**: <!-- e.g., https://acme.com -->
-**Staging URL**: <!-- e.g., https://staging.acme.com -->
+**Title**: SwimQuest Swimming Holidays
+**Live URL**: https://swimquest.uk.com
+**Staging URL**: https://swimquest-4btr8.projectbeta.co.uk/
 **PHP Version**: 8.3+
 
 <!-- Brief description of the website's purpose and target audience -->
+SwimQuest provide quality, friendly, safe swimming holidays for people of all ages and abilities. The target audience
+is women in their early 60s, recently retired, solo travellers and swimming enthusiats from beginner to ex-olympian 
+standard.
 
 ---
 
@@ -45,20 +48,6 @@
   - **field_name** (type) - Description
 -->
 
-### news_article
-News articles and blog posts.
-
-- URL: /news/%postname%/
-- Dashicon: dashicons-admin-post
-- Supports: title, editor, thumbnail, excerpt
-- Taxonomies: category, post_tag
-
-**Archive** (/news/)
-- Template: Listing
-- Route: decorate:post_type:news_article
-
----
-
 ### page
 Static pages.
 
@@ -68,24 +57,94 @@ Static pages.
 - Taxonomies: none
 - Has archive: no
 
-<!-- Example custom content type:
+---
+
+### trip
+Core swim holiday product. Each post represents a trip that may run on multiple departure dates.
+
+- URL: /trips/%postname%/
+- Dashicon: dashicons-palmtree
+- Supports: title, thumbnail, excerpt
+- Taxonomies: trip_style, skill_level, country, city
+- Has archive: no (accessed via Destinations, Calendar, and Trip Style taxonomy archives)
+
+**Fields:**
+- **dates** (repeater) - One or more date windows; UI shows date range if single, "Multiple dates" if more than one
+  - **start_date** (date_picker)
+  - **end_date** (date_picker)
+  - **price** (number) - Price for this departure in GBP to two decimal places
+- **itinerary** (post_object, post_type: itinerary) - Linked reusable itinerary
+- **guides** (relationship, post_type: guide) - One or more assigned guides
+
+---
+
 ### event
-Events and workshops.
+Swimming events. Mirrors the trip post type in structure and purpose — events may also have multiple departures. The distinction is editorial/content rather than structural.
 
 - URL: /events/%postname%/
 - Dashicon: dashicons-calendar-alt
-- Supports: title, editor, thumbnail, excerpt
-- Taxonomies: location, event_type
+- Supports: title, thumbnail, excerpt
+- Taxonomies: trip_style, skill_level, country, city
 
 **Archive** (/events/)
 - Template: Listing
 - Route: decorate:post_type:event
 
 **Fields:**
-- **start_date** (date_picker) - Event start date
-- **end_date** (date_picker) - Event end date
-- **venue** (text) - Venue name
--->
+- **dates** (repeater) - Same as trip
+  - **start_date** (date_picker)
+  - **end_date** (date_picker)
+  - **price** (number)
+- **itinerary** (post_object, post_type: itinerary)
+- **guides** (relationship, post_type: guide)
+
+---
+
+### itinerary
+Reusable day-by-day itinerary documents. Assigned to trips via post_object field. One-to-one relationship with trip in practice, but designed to be reused across multiple trips with the same route.
+
+- URL: /itineraries/%postname%/
+- Dashicon: dashicons-list-view
+- Supports: title, thumbnail
+- Taxonomies: none
+- Has archive: no
+- Note: publicly accessible and print-friendly — print stylesheet is a future requirement, not needed for scaffolding
+
+**Fields:**
+- **days** (repeater)
+  - **label** (text) - e.g. "Day 1", "Arrival day"
+  - **description** (wysiwyg)
+  - **images** (gallery)
+
+---
+
+### story
+Guest stories and reviews. Used in the Stories & Reviews section under About Us.
+
+- URL: /stories/%postname%/
+- Dashicon: dashicons-format-quote
+- Supports: title, editor, thumbnail, excerpt
+- Taxonomies: none
+
+**Archive** (/stories/)
+- Template: Listing
+- Route: decorate:post_type:story
+
+---
+
+### guide
+Guide and coach biographies. Used in "Meet our team" section under About Us.
+
+- URL: /guides/%postname%/
+- Dashicon: dashicons-id-alt
+- Supports: title, thumbnail
+- Taxonomies: none
+- Has archive: no
+
+**Fields:**
+- **role** (text) - e.g. "Head Guide", "Swimming Coach"
+- **biography** (wysiwyg)
+- **gallery** (gallery)
 
 ---
 
@@ -95,52 +154,59 @@ Events and workshops.
   Each taxonomy includes:
   - Basic config (post types, hierarchical)
   - Archive routing (if applicable)
-
-  Format:
-  ### slug
-  Description.
-
-  - Post types: news_article, event
-  - Hierarchical: yes/no
-
-  **Archive** (/archive-url/%slug%/)
-  - Template: Listing
-  - Route: decorate:taxonomy:slug
 -->
 
-### category
-Post categories.
+### trip_style
+Trip style categories used in primary navigation. 
 
-- Post types: news_article
-- Hierarchical: yes
+- Post types: trip, event
+- Hierarchical: no
+- Rewrite slug: trip-styles
+- Terms:
+  - Short Swims & Dips
+  - Relax & Explore
+  - Technique & Improvement
+  - Challenge & Distance
+  - Groups & Bespoke
+  - Family
 
-**Archive** (/news/category/%slug%/)
+**Archive** (/trip-styles/%slug%/) — one archive per term, e.g. /trip-styles/family/, /trip-styles/short-swims-dips/. WordPress generates these automatically from taxonomy registration; the single route below handles all terms with the same template.
 - Template: Listing
-- Route: decorate:taxonomy:category
+- Route: decorate:taxonomy:trip_style
 
 ---
 
-### post_tag
-Post tags.
+### skill_level
+Swimmer ability level. Multi-select — a trip can suit more than one level.
 
-- Post types: news_article
+- Post types: trip, event
+- Hierarchical: no
+- Terms: Dipper, Beginner, Intermediate, Advanced, Challenger, All Abilities
+
+No archive (used as a filter only).
+
+---
+
+### country
+Country-level taxonomy. Flat — country names only. Labeled "Destinations" in navigation and archive pages; slug `country` is the internal term.
+
+- Post types: trip, event
+- Hierarchical: no
+- Rewrite slug: destinations
+
+**Archive** (/destinations/%slug%/) — per-country listing
+- Template: Listing
+- Route: decorate:taxonomy:country
+
+---
+
+### city
+City or location name. Used alongside `country` to form the display location string (e.g. "Mathraki, Greece").
+
+- Post types: trip, event
 - Hierarchical: no
 
-**Archive** (/news/tag/%slug%/)
-- Template: Listing
-- Route: decorate:taxonomy:post_tag
-
-<!-- Example custom taxonomy:
-### location
-Event locations.
-
-- Post types: event
-- Hierarchical: yes
-
-**Archive** (/events/location/%slug%/)
-- Template: Listing
-- Route: decorate:taxonomy:location
--->
+No archive (display/filter use only).
 
 ---
 
@@ -148,13 +214,6 @@ Event locations.
 
 <!--
   Pages and routes not tied to content type archives.
-
-  Format:
-  ### Page Name (URL)
-  - Template: Default | Article | Listing | etc.
-  - Route: decorate:search | decorate:404 | route (for owned routes)
-  - Fields:
-    - **field_name** (type) - Description
 -->
 
 ### Homepage (/)
@@ -168,21 +227,19 @@ Event locations.
 - Template: Default
 - Route: decorate:404
 
-<!-- Example standalone pages:
-### About (/about/)
-- Template: Article
-
-### Contact (/contact/)
+### Destinations (/destinations/)
+Index page listing all destination terms (countries) alphabetically with trip counts. Links into per-country taxonomy archives (/destinations/%slug%/).
 - Template: Default
-- Fields:
-  - **address** (textarea) - Physical address
-  - **phone** (text) - Contact phone number
-  - **email** (email) - Contact email
+- Route: owned
 
-### Account (/account/)
+### Trip Styles (/trip-styles/)
+Overview/wayfinding page linking into all Trip Style taxonomy archives. Not a taxonomy archive itself — a static editorial page.
 - Template: Default
-- Route: route (owned)
--->
+
+### Calendar (/calendar/)
+Chronological listing of all trips ordered by nearest departure date. Grouped first by year (e.g. 2026, 2027), then by month within each year (e.g. January, February). Queries the `dates` repeater field across all trip posts and renders cards.
+- Template: Default
+- Route: owned
 
 ---
 
@@ -272,15 +329,9 @@ Content card with image, title, excerpt, and link.
 
 <!-- Third-party services and APIs -->
 
-<!-- Example:
-- **Google Maps** - Embedded maps on contact page
-  - API Key location: Theme Options > API Keys
-- **Mailchimp** - Newsletter signup
-  - List ID: abc123
-  - Connected forms: Footer newsletter, Blog sidebar
-- **HubSpot** - CRM integration
-  - Forms submit to HubSpot via API
--->
+- **Feefo** - Customer reviews embedded on trip single pages
+  - Integrated via custom HTML snippet in site header (Settings > Theme Options)
+  - Review widgets dropped in as a Custom HTML block named "Feefo" within trip page content
 
 ---
 
