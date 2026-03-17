@@ -467,12 +467,13 @@ class DevRoutes
             'globals' => 'Globals',
             'utilities' => 'Utilities',
             'components' => 'Components',
+            'all-components' => 'All Components',
             'content' => 'Content',
         ];
         $nav_html = '<nav class="dev-topbar__nav">';
         foreach ($nav_items as $route => $label) {
             $url = \esc_url(\home_url("/_dev/{$route}/"));
-            $current = ($active_route === $route || ($route === 'components' && $active_route === 'component')) ? ' aria-current="page"' : '';
+            $current = ($active_route === $route || ($route === 'components' && $active_route === 'component') || ($route === 'all-components' && $active_route === 'all-components')) ? ' aria-current="page"' : '';
             $nav_html .= "<a href=\"{$url}\"{$current}>{$label}</a>";
         }
         $nav_html .= '</nav>';
@@ -550,6 +551,12 @@ class DevRoutes
             'index.php?dev_route=content',
             'top'
         );
+
+        \add_rewrite_rule(
+            '^_dev/all-components/?$',
+            'index.php?dev_route=all_components',
+            'top'
+        );
     }
 
     public static function addQueryVars(array $vars): array
@@ -608,6 +615,10 @@ class DevRoutes
 
             case 'content':
                 static::renderContent();
+                break;
+
+            case 'all_components':
+                static::renderAllComponents();
                 break;
         }
 
@@ -669,6 +680,7 @@ class DevRoutes
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/globals/')).'">Globals</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/utilities/')).'">Utilities</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/components/')).'">Components</a></li>';
+        $content .= '<li><a href="'.\esc_url(\home_url('/_dev/all-components/')).'">All Components</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/content/')).'">Content</a></li>';
         $content .= '</ul>';
         $content .= '</div>';
@@ -752,6 +764,40 @@ class DevRoutes
         $template_path = static::getTemplatePath('utilities.php');
         if ($template_path) {
             include $template_path;
+        }
+
+        static::devPageClose();
+    }
+
+    protected static function renderAllComponents(): void
+    {
+        $components = static::getComponentsWithExamples();
+        $faker = class_exists('\Faker\Factory') ? \Faker\Factory::create() : null;
+
+        static::devPageOpen('All Components', 'all-components');
+
+        echo '<div class="dev-page-header" data-dev-ui>';
+        echo '<h1 class="dev-page-title" data-dev-ui>All Components</h1>';
+        echo '</div>';
+
+        if (empty($components)) {
+            echo '<p data-dev-ui>No components with examples found. Add an <code>example.php</code> file to a component directory.</p>';
+        } else {
+            foreach ($components as $component) {
+                $example_path = \get_theme_file_path("components/{$component}/example.php");
+
+                if (file_exists($example_path)) {
+                    echo '<div class="dev-kit__section" id="component-'.\esc_attr($component).'">';
+                    echo '<h2 data-dev-ui>'.\esc_html(\ucwords(\str_replace('-', ' ', $component))).'</h2>';
+
+                    ob_start();
+                    include $example_path;
+                    $example_output = ob_get_clean();
+
+                    echo '<div class="component-example-section__content flow">'.$example_output.'</div>';
+                    echo '</div>';
+                }
+            }
         }
 
         static::devPageClose();
