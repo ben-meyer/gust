@@ -65,14 +65,14 @@ Core swim holiday product. Each post represents a trip that may run on multiple 
 - URL: /trips/%postname%/
 - Dashicon: dashicons-palmtree
 - Supports: title, editor, excerpt, thumbnail
-- Taxonomies: trip_style, skill_level, country, city
+- Taxonomies: trip_style, skill_level, swim_type, country, city
 
 **Fields:**
 - **dates** (repeater) - One or more date windows; UI shows date range if single, "Multiple dates" if more than one
-  - **start_date** (date_picker)
-  - **end_date** (date_picker)
-  - **price** (number) - Price for this departure in GBP to two decimal places
-- **itinerary** (post_object, post_type: itinerary) - Linked reusable itinerary
+  - **start_date** (date_picker, return: Y-m-d)
+  - **end_date** (date_picker, return: Y-m-d)
+  - **price** (number, min: 0, step: 0.01) - Price for this departure in GBP
+- **itinerary** (post_object, post_type: itinerary, allow_null: true) - Linked reusable itinerary
 - Guides are standalone pages linked editorially — no ACF relationship field on trip
 
 ---
@@ -83,18 +83,17 @@ Swimming events. Mirrors the trip post type in structure and purpose — events 
 - URL: /events/%postname%/
 - Dashicon: dashicons-calendar-alt
 - Supports: title, editor, excerpt, thumbnail
-- Taxonomies: trip_style, skill_level, country, city
+- Taxonomies: trip_style, skill_level, swim_type, country, city
 
 **Archive** (/events/)
 - Template: Listing
 - Route: decorate:post_type:event
 
 **Fields:**
-- **dates** (repeater) - Same as trip
-  - **start_date** (date_picker)
-  - **end_date** (date_picker)
-  - **price** (number)
-- **itinerary** (post_object, post_type: itinerary)
+- **dates** (repeater) - One or more date windows
+  - **start_date** (date_picker, return: Y-m-d)
+  - **end_date** (date_picker, return: Y-m-d)
+  - **price** (number, min: 0, step: 0.01) - Price in GBP
 - Guides are standalone pages linked editorially — no ACF relationship field on event
 
 ---
@@ -198,6 +197,18 @@ City or location name. Used alongside `country` to form the display location str
 - Hierarchical: no
 
 No archive (display/filter use only).
+
+---
+
+### swim_type
+Type of swimming environment. Used to filter trips and events by the water context.
+
+- Post types: trip, event
+- Hierarchical: no
+- Rewrite slug: swim-type
+- Terms: Sea, Pool, Open Water, Lake, River
+
+No archive (filter use only).
 
 ---
 
