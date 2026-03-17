@@ -9,6 +9,7 @@ class TripsModule
         PostType::init();
         TripStyleTaxonomy::init();
         SkillLevelTaxonomy::init();
+        SwimTypeTaxonomy::init();
         CountryTaxonomy::init();
         CityTaxonomy::init();
 

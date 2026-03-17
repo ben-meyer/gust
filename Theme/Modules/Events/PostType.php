@@ -36,12 +36,14 @@ class PostType
             ],
             'taxonomies' => [
                 'trip_style',
+                'swim_type',
                 'skill_level',
                 'country',
                 'city',
             ],
             'admin_filters' => [
                 'trip_style' => ['taxonomy' => 'trip_style'],
+                'swim_type' => ['taxonomy' => 'swim_type'],
                 'country' => ['taxonomy' => 'country'],
             ],
             'admin_cols' => [
@@ -55,6 +57,7 @@ class PostType
                 'country' => ['taxonomy' => 'country'],
                 'city' => ['taxonomy' => 'city'],
                 'trip_style' => ['taxonomy' => 'trip_style'],
+                'swim_type' => ['taxonomy' => 'swim_type'],
                 'updated' => [
                     'title' => 'Updated',
                     'post_field' => 'post_modified',

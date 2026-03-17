@@ -50,22 +50,6 @@
                     "step": 0.01
                 }
             ]
-        },
-        {
-            "key": "field_event_itinerary",
-            "label": "Itinerary",
-            "name": "itinerary",
-            "type": "post_object",
-            "instructions": "Select the reusable itinerary for this event.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {"width": "", "class": "", "id": ""},
-            "post_type": ["itinerary"],
-            "taxonomy": [],
-            "allow_null": 1,
-            "multiple": 0,
-            "return_format": "object",
-            "ui": 1
         }
     ],
     "location": [[{
