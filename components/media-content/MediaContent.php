@@ -35,7 +35,7 @@ class MediaContent extends ComponentBase
         ?string $heading = null,
         ?string $subheading = null,
         ?string $content = null,
-        array $video = [],
+        string|array $video = [],
         array $image = [],
         ?string $media_type = null,
         ?string $media_side = null,
