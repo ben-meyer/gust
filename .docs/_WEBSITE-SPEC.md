@@ -64,7 +64,7 @@ Core swim holiday product. Each post represents a trip that may run on multiple 
 
 - URL: /trips/%postname%/
 - Dashicon: dashicons-palmtree
-- Supports: title, thumbnail, excerpt
+- Supports: title, editor, excerpt, thumbnail
 - Taxonomies: trip_style, skill_level, country, city
 
 **Fields:**
@@ -73,7 +73,7 @@ Core swim holiday product. Each post represents a trip that may run on multiple 
   - **end_date** (date_picker)
   - **price** (number) - Price for this departure in GBP to two decimal places
 - **itinerary** (post_object, post_type: itinerary) - Linked reusable itinerary
-- **guides** (relationship, post_type: guide) - One or more assigned guides
+- Guides are standalone pages linked editorially — no ACF relationship field on trip
 
 ---
 
@@ -82,7 +82,7 @@ Swimming events. Mirrors the trip post type in structure and purpose — events 
 
 - URL: /events/%postname%/
 - Dashicon: dashicons-calendar-alt
-- Supports: title, thumbnail, excerpt
+- Supports: title, editor, excerpt, thumbnail
 - Taxonomies: trip_style, skill_level, country, city
 
 **Archive** (/events/)
@@ -95,7 +95,7 @@ Swimming events. Mirrors the trip post type in structure and purpose — events 
   - **end_date** (date_picker)
   - **price** (number)
 - **itinerary** (post_object, post_type: itinerary)
-- **guides** (relationship, post_type: guide)
+- Guides are standalone pages linked editorially — no ACF relationship field on event
 
 ---
 
@@ -104,14 +104,10 @@ Reusable day-by-day itinerary documents. Assigned to trips via post_object field
 
 - URL: /itineraries/%postname%/
 - Dashicon: dashicons-list-view
-- Supports: title, thumbnail
+- Supports: title, editor, thumbnail
 - Taxonomies: none
 
-**Fields:**
-- **days** (repeater)
-  - **label** (text) - e.g. "Day 1", "Arrival day"
-  - **description** (wysiwyg)
-  - **images** (gallery)
+Day-by-day content is authored via Gutenberg blocks in the editor — no ACF repeater fields.
 
 ---
 
@@ -134,12 +130,12 @@ Guide and coach biographies. Used in "Meet our team" section under About Us.
 
 - URL: /guides/%postname%/
 - Dashicon: dashicons-id-alt
-- Supports: title, thumbnail
+- Supports: title, editor, thumbnail
 - Taxonomies: none
 
 **Fields:**
 - **role** (text) - e.g. "Head Guide", "Swimming Coach"
-- **biography** (wysiwyg)
+- Full biography authored via Gutenberg editor
 
 ---
 

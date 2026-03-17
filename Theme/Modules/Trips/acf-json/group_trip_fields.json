@@ -59,30 +59,13 @@
             "instructions": "Select the reusable itinerary for this trip.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": {"width": "50", "class": "", "id": ""},
+            "wrapper": {"width": "", "class": "", "id": ""},
             "post_type": ["itinerary"],
             "taxonomy": [],
             "allow_null": 1,
             "multiple": 0,
             "return_format": "object",
             "ui": 1
-        },
-        {
-            "key": "field_trip_guides",
-            "label": "Guides",
-            "name": "guides",
-            "type": "relationship",
-            "instructions": "Assign one or more guides to this trip.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {"width": "50", "class": "", "id": ""},
-            "post_type": ["guide"],
-            "taxonomy": [],
-            "filters": ["search"],
-            "elements": ["featured_image"],
-            "min": 0,
-            "max": 0,
-            "return_format": "object"
         }
     ],
     "location": [[{
