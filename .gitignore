@@ -43,3 +43,4 @@ Thumbs.db
 
 # Other #
 .docs/FRAMEWORK_TODOS.md
+.claude/settings.json
