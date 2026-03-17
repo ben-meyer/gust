@@ -1,10 +1,10 @@
 <?php
 
-namespace Theme\Modules\Events;
+namespace Theme\Modules\Itineraries;
 
 class PostType
 {
-    protected const SLUG = 'event';
+    protected const SLUG = 'itinerary';
 
     public static function init(): void
     {
@@ -20,29 +20,18 @@ class PostType
 
         \register_extended_post_type(self::SLUG, [
             'public' => true,
-            'has_archive' => true,
+            'has_archive' => false,
             'hierarchical' => false,
             'show_in_rest' => true,
-            'menu_position' => 6,
-            'menu_icon' => 'dashicons-calendar-alt',
-            'enter_title_here' => 'Event Name',
+            'menu_position' => 8,
+            'menu_icon' => 'dashicons-list-view',
+            'enter_title_here' => 'Itinerary Name',
             'supports' => [
                 'title',
                 'editor',
-                'excerpt',
                 'thumbnail',
                 'revisions',
                 'custom-fields',
-            ],
-            'taxonomies' => [
-                'trip_style',
-                'skill_level',
-                'country',
-                'city',
-            ],
-            'admin_filters' => [
-                'trip_style' => ['taxonomy' => 'trip_style'],
-                'country' => ['taxonomy' => 'country'],
             ],
             'admin_cols' => [
                 'thumbnail' => [
@@ -52,9 +41,6 @@ class PostType
                     'height' => 80,
                 ],
                 'title' => ['title' => 'Title'],
-                'country' => ['taxonomy' => 'country'],
-                'city' => ['taxonomy' => 'city'],
-                'trip_style' => ['taxonomy' => 'trip_style'],
                 'updated' => [
                     'title' => 'Updated',
                     'post_field' => 'post_modified',
@@ -62,8 +48,8 @@ class PostType
                 ],
             ],
         ], [
-            'singular' => __('Event', 'gust'),
-            'plural' => __('Events', 'gust'),
+            'singular' => __('Itinerary', 'gust'),
+            'plural' => __('Itineraries', 'gust'),
             'slug' => self::SLUG,
         ]);
     }

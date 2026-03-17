@@ -1,18 +1,22 @@
 <?php
 
-namespace Theme\Modules\Events;
+namespace Theme\Modules\Stories;
 
 use Gust\Components\Cards;
 use Gust\Components\NoContent;
 use Gust\Components\Pagination;
-use Gust\Components\TaxonomyFilters;
+use Gust\Router;
 use Gust\WordPress\PageObject;
 
-class EventsModule
+class StoriesModule
 {
     public static function init(): void
     {
         PostType::init();
+
+        Router::decoratePostType('story', static::class)
+            ->withPage('stories')
+            ->withSlot('template-content', [static::class, 'renderArchive']);
 
         \add_filter('acf/settings/load_json', [__CLASS__, 'loadACFJson']);
     }
@@ -30,7 +34,6 @@ class EventsModule
         \ob_start();
 
         if (! empty($items)) {
-            echo TaxonomyFilters::make(object: $object);
             echo Cards::make(items: $items);
             echo Pagination::make();
         } else {

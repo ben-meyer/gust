@@ -1,0 +1,101 @@
+{
+    "key": "group_event_fields",
+    "title": "Event Fields",
+    "fields": [
+        {
+            "key": "field_event_dates",
+            "label": "Dates",
+            "name": "dates",
+            "type": "repeater",
+            "instructions": "Add one row per departure window.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "layout": "block",
+            "button_label": "Add Departure",
+            "sub_fields": [
+                {
+                    "key": "field_event_dates_start_date",
+                    "label": "Start Date",
+                    "name": "start_date",
+                    "type": "date_picker",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {"width": "33", "class": "", "id": ""},
+                    "display_format": "d/m/Y",
+                    "return_format": "Y-m-d",
+                    "first_day": 1
+                },
+                {
+                    "key": "field_event_dates_end_date",
+                    "label": "End Date",
+                    "name": "end_date",
+                    "type": "date_picker",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {"width": "33", "class": "", "id": ""},
+                    "display_format": "d/m/Y",
+                    "return_format": "Y-m-d",
+                    "first_day": 1
+                },
+                {
+                    "key": "field_event_dates_price",
+                    "label": "Price (GBP)",
+                    "name": "price",
+                    "type": "number",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {"width": "33", "class": "", "id": ""},
+                    "min": 0,
+                    "step": 0.01
+                }
+            ]
+        },
+        {
+            "key": "field_event_itinerary",
+            "label": "Itinerary",
+            "name": "itinerary",
+            "type": "post_object",
+            "instructions": "Select the reusable itinerary for this event.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {"width": "50", "class": "", "id": ""},
+            "post_type": ["itinerary"],
+            "taxonomy": [],
+            "allow_null": 1,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
+        },
+        {
+            "key": "field_event_guides",
+            "label": "Guides",
+            "name": "guides",
+            "type": "relationship",
+            "instructions": "Assign one or more guides to this event.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {"width": "50", "class": "", "id": ""},
+            "post_type": ["guide"],
+            "taxonomy": [],
+            "filters": ["search"],
+            "elements": ["featured_image"],
+            "min": 0,
+            "max": 0,
+            "return_format": "object"
+        }
+    ],
+    "location": [[{
+        "param": "post_type",
+        "operator": "==",
+        "value": "event"
+    }]],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}

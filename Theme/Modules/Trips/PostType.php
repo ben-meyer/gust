@@ -1,10 +1,10 @@
 <?php
 
-namespace Theme\Modules\Articles;
+namespace Theme\Modules\Trips;
 
 class PostType
 {
-    protected const SLUG = 'article';
+    protected const SLUG = 'trip';
 
     public static function init(): void
     {
@@ -20,35 +20,29 @@ class PostType
 
         \register_extended_post_type(self::SLUG, [
             'public' => true,
-            'has_archive' => true,
+            'has_archive' => false,
             'hierarchical' => false,
             'show_in_rest' => true,
             'menu_position' => 5,
-            'menu_icon' => 'dashicons-media-document',
-            'enter_title_here' => 'Article Title',
+            'menu_icon' => 'dashicons-palmtree',
+            'enter_title_here' => 'Trip Name',
             'supports' => [
                 'title',
                 'editor',
                 'excerpt',
-                'revisions',
                 'thumbnail',
-                'author',
+                'revisions',
                 'custom-fields',
             ],
             'taxonomies' => [
-                'category',
-                'post_tag',
-            ],
-            'template' => [
-                [
-                    'core/paragraph',
-                    ['placeholder' => 'Add content...'],
-                ],
+                'trip_style',
+                'skill_level',
+                'country',
+                'city',
             ],
             'admin_filters' => [
-                'category' => [
-                    'taxonomy' => 'category',
-                ],
+                'trip_style' => ['taxonomy' => 'trip_style'],
+                'country' => ['taxonomy' => 'country'],
             ],
             'admin_cols' => [
                 'thumbnail' => [
@@ -57,29 +51,24 @@ class PostType
                     'width' => 80,
                     'height' => 80,
                 ],
-                'title' => [
-                    'title' => 'Title',
-                ],
-                'author' => [
-                    'title' => 'Author',
-                ],
-                'category' => [
-                    'taxonomy' => 'category',
-                ],
+                'title' => ['title' => 'Title'],
+                'country' => ['taxonomy' => 'country'],
+                'city' => ['taxonomy' => 'city'],
+                'trip_style' => ['taxonomy' => 'trip_style'],
                 'updated' => [
                     'title' => 'Updated',
                     'post_field' => 'post_modified',
-                    'date_format' => 'Y/m/d \a\t H:i a',
+                    'date_format' => 'Y/m/d',
                 ],
             ],
         ], [
-            'singular' => __('Article', 'gust'),
-            'plural' => __('Articles', 'gust'),
-            'slug' => 'articles',
+            'singular' => __('Trip', 'gust'),
+            'plural' => __('Trips', 'gust'),
+            'slug' => self::SLUG,
         ]);
     }
 
-    public static function filterGustTemplatesPostTypes($postTypes)
+    public static function filterGustTemplatesPostTypes(array $postTypes): array
     {
         $postTypes[] = self::SLUG;
 

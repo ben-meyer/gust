@@ -1,10 +1,10 @@
 <?php
 
-namespace Theme\Modules\Events;
+namespace Theme\Modules\Trips;
 
-class LocationTaxonomy
+class TripStyleTaxonomy
 {
-    protected const SLUG = 'location';
+    protected const SLUG = 'trip_style';
 
     public static function init(): void
     {
@@ -20,27 +20,23 @@ class LocationTaxonomy
 
         \register_extended_taxonomy(
             self::SLUG,
+            ['trip', 'event'],
             [
-                'event',
-            ],
-            [
-                'hierarchical' => true,
+                'hierarchical' => false,
                 'show_admin_column' => true,
                 'show_in_rest' => true,
                 'meta_box' => 'simple',
-                'exclusive' => true,
-                'required' => true,
-                'dashboard_glance' => true,
+                'rewrite' => ['slug' => 'trip-styles'],
             ],
             [
-                'singular' => __('Location', 'gust'),
-                'plural' => __('Locations', 'gust'),
-                'slug' => self::SLUG,
+                'singular' => __('Trip Style', 'gust'),
+                'plural' => __('Trip Styles', 'gust'),
+                'slug' => 'trip-styles',
             ]
         );
     }
 
-    public static function filterGustTemplatesTaxonomies($taxonomies): array
+    public static function filterGustTemplatesTaxonomies(array $taxonomies): array
     {
         $taxonomies[] = self::SLUG;
 

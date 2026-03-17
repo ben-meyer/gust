@@ -1,10 +1,10 @@
 <?php
 
-namespace Theme\Modules\Events;
+namespace Theme\Modules\Stories;
 
 class PostType
 {
-    protected const SLUG = 'event';
+    protected const SLUG = 'story';
 
     public static function init(): void
     {
@@ -23,9 +23,9 @@ class PostType
             'has_archive' => true,
             'hierarchical' => false,
             'show_in_rest' => true,
-            'menu_position' => 6,
-            'menu_icon' => 'dashicons-calendar-alt',
-            'enter_title_here' => 'Event Name',
+            'menu_position' => 15,
+            'menu_icon' => 'dashicons-format-quote',
+            'enter_title_here' => 'Story Title',
             'supports' => [
                 'title',
                 'editor',
@@ -33,16 +33,6 @@ class PostType
                 'thumbnail',
                 'revisions',
                 'custom-fields',
-            ],
-            'taxonomies' => [
-                'trip_style',
-                'skill_level',
-                'country',
-                'city',
-            ],
-            'admin_filters' => [
-                'trip_style' => ['taxonomy' => 'trip_style'],
-                'country' => ['taxonomy' => 'country'],
             ],
             'admin_cols' => [
                 'thumbnail' => [
@@ -52,9 +42,6 @@ class PostType
                     'height' => 80,
                 ],
                 'title' => ['title' => 'Title'],
-                'country' => ['taxonomy' => 'country'],
-                'city' => ['taxonomy' => 'city'],
-                'trip_style' => ['taxonomy' => 'trip_style'],
                 'updated' => [
                     'title' => 'Updated',
                     'post_field' => 'post_modified',
@@ -62,8 +49,8 @@ class PostType
                 ],
             ],
         ], [
-            'singular' => __('Event', 'gust'),
-            'plural' => __('Events', 'gust'),
+            'singular' => __('Story', 'gust'),
+            'plural' => __('Stories', 'gust'),
             'slug' => self::SLUG,
         ]);
     }

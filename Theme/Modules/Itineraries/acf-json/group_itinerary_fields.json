@@ -1,0 +1,67 @@
+{
+    "key": "group_itinerary_fields",
+    "title": "Itinerary Fields",
+    "fields": [
+        {
+            "key": "field_itinerary_days",
+            "label": "Days",
+            "name": "days",
+            "type": "repeater",
+            "instructions": "Add one row per day of the itinerary.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "layout": "block",
+            "button_label": "Add Day",
+            "sub_fields": [
+                {
+                    "key": "field_itinerary_days_label",
+                    "label": "Label",
+                    "name": "label",
+                    "type": "text",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {"width": "", "class": "", "id": ""},
+                    "placeholder": "e.g. Day 1, Arrival day"
+                },
+                {
+                    "key": "field_itinerary_days_description",
+                    "label": "Description",
+                    "name": "description",
+                    "type": "wysiwyg",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {"width": "", "class": "", "id": ""},
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0
+                },
+                {
+                    "key": "field_itinerary_days_images",
+                    "label": "Images",
+                    "name": "images",
+                    "type": "gallery",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {"width": "", "class": "", "id": ""},
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "insert": "append"
+                }
+            ]
+        }
+    ],
+    "location": [[{
+        "param": "post_type",
+        "operator": "==",
+        "value": "itinerary"
+    }]],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}

@@ -1,14 +1,12 @@
 <?php
 
-namespace Theme\Modules\Articles;
+namespace Theme\Modules\Guides;
 
-class ArticlesModule
+class GuidesModule
 {
     public static function init(): void
     {
         PostType::init();
-        CategoryTaxonomy::init();
-        TagTaxonomy::init();
 
         \add_filter('acf/settings/load_json', [__CLASS__, 'loadACFJson']);
     }
