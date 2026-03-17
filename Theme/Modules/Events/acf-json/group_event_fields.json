@@ -12,7 +12,7 @@
             "conditional_logic": 0,
             "wrapper": {"width": "", "class": "", "id": ""},
             "layout": "block",
-            "button_label": "Add Departure",
+            "button_label": "Add Dates",
             "sub_fields": [
                 {
                     "key": "field_event_dates_start_date",

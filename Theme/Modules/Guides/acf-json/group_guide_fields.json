@@ -7,35 +7,11 @@
             "label": "Role",
             "name": "role",
             "type": "text",
-            "instructions": "e.g. Head Guide, Swimming Coach",
+            "instructions": "e.g. Swimming Coach",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {"width": "", "class": "", "id": ""},
-            "placeholder": "e.g. Head Guide"
-        },
-        {
-            "key": "field_guide_biography",
-            "label": "Biography",
-            "name": "biography",
-            "type": "wysiwyg",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {"width": "", "class": "", "id": ""},
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1
-        },
-        {
-            "key": "field_guide_gallery",
-            "label": "Gallery",
-            "name": "gallery",
-            "type": "gallery",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {"width": "", "class": "", "id": ""},
-            "return_format": "array",
-            "preview_size": "medium",
-            "insert": "append"
+            "placeholder": "e.g. Swimming Coach"
         }
     ],
     "location": [[{
