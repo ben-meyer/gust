@@ -20,6 +20,7 @@ standard.
 
 - **ACF Pro** - Custom fields and Gutenberg blocks
 - **Yoast SEO** - SEO management
+- **Gravity Forms** - Enquiry and contact forms
 
 ---
 
@@ -55,18 +56,16 @@ Static pages.
 - Dashicon: dashicons-admin-page
 - Supports: title, editor, thumbnail
 - Taxonomies: none
-- Has archive: no
 
 ---
 
 ### trip
-Core swim holiday product. Each post represents a trip that may run on multiple departure dates.
+Core swim holiday product. Each post represents a trip that may run on multiple departure dates. No standard archive — trips are accessed via Destinations, Calendar, and Trip Style taxonomy archives.
 
 - URL: /trips/%postname%/
 - Dashicon: dashicons-palmtree
 - Supports: title, thumbnail, excerpt
 - Taxonomies: trip_style, skill_level, country, city
-- Has archive: no (accessed via Destinations, Calendar, and Trip Style taxonomy archives)
 
 **Fields:**
 - **dates** (repeater) - One or more date windows; UI shows date range if single, "Multiple dates" if more than one
@@ -101,14 +100,12 @@ Swimming events. Mirrors the trip post type in structure and purpose — events 
 ---
 
 ### itinerary
-Reusable day-by-day itinerary documents. Assigned to trips via post_object field. One-to-one relationship with trip in practice, but designed to be reused across multiple trips with the same route.
+Reusable day-by-day itinerary documents. Assigned to trips via post_object field. One-to-one relationship with trip in practice, but designed to be reused across multiple trips with the same route. Publicly accessible and intended to be print-friendly — print stylesheet is a future requirement, not needed for scaffolding.
 
 - URL: /itineraries/%postname%/
 - Dashicon: dashicons-list-view
 - Supports: title, thumbnail
 - Taxonomies: none
-- Has archive: no
-- Note: publicly accessible and print-friendly — print stylesheet is a future requirement, not needed for scaffolding
 
 **Fields:**
 - **days** (repeater)
@@ -139,12 +136,10 @@ Guide and coach biographies. Used in "Meet our team" section under About Us.
 - Dashicon: dashicons-id-alt
 - Supports: title, thumbnail
 - Taxonomies: none
-- Has archive: no
 
 **Fields:**
 - **role** (text) - e.g. "Head Guide", "Swimming Coach"
 - **biography** (wysiwyg)
-- **gallery** (gallery)
 
 ---
 
