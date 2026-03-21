@@ -6,7 +6,7 @@ use Gust\Components\Image;
 <footer class="<?= classes('site-footer', $this->classes) ?>" <?= attributes($this->attributes) ?>>
     <div class="site-footer__inner content-width-fluid-lg">
         <div class="site-footer__top alignwide">
-            <div class="site-footer__logo">
+            <!-- <div class="site-footer__logo">
                 <?= \Gust\Components\Link::make(
                     url: home_url('/'),
                     content: \Gust\Image::get('logo-alt.svg', [
@@ -14,11 +14,15 @@ use Gust\Components\Image;
                     ]),
                     content_filter: false,
                 ); ?>
-            </div>
+            </div> -->
 
             <?php if ($top_text = get_field('footer_text_top', 'option')) { ?>
                 <div class="site-footer__top-text">
                     <?= wp_kses_post($top_text); ?>
+                    <?= \Gust\Components\SocialIcons::make(
+                        // translators: 1: Social network name.
+                        title: __('Visit our %s page', 'gust'),
+                    ); ?>
                 </div>
             <?php } ?>
 
@@ -43,11 +47,6 @@ use Gust\Components\Image;
             ); ?>
 
             <div class="site-footer__right">
-                <?= \Gust\Components\SocialIcons::make(
-                    // translators: 1: Social network name.
-                    title: __('Visit our %s page', 'gust'),
-                ); ?>
-
                 <?php if (! empty($this->content['images'])) { ?>
                     <div class="site-footer__images flex-grid">
                         <?php foreach ($this->content['images'] as $image) { ?>
