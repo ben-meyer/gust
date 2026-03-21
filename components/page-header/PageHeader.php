@@ -69,7 +69,8 @@ class PageHeader extends ComponentBase
                 $heading = __('404', 'gust');
             } elseif ($object instanceof \WP_Query && $object->is_search()) {
                 $heading = __('Search', 'gust');
-
+            } elseif ($object instanceof \WP_Query && $object->is_calendar()) {
+                $heading = __('Calendar', 'gust');
                 if (! empty($object->query['s'])) {
                     $args['subheading'] = sprintf(__("Showing results for '%s'", 'gust'), $object->query['s']);
                 }

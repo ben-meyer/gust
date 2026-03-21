@@ -29,11 +29,11 @@ class PostType
             'enter_title_here' => 'Trip Name',
             'supports' => [
                 'title',
-                'editor',
                 'excerpt',
                 'thumbnail',
                 'revisions',
                 'custom-fields',
+                'slug',
             ],
             'taxonomies' => [
                 'trip_style',
