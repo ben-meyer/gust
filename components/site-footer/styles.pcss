@@ -132,18 +132,50 @@
         }
 
         label {
+            @apply type-meta;
             display: block;
-            font-weight: 600;
+            text-align: left;
+            vertical-align: middle;
         }
 
         input[type="email"],
         input[type="text"] {
             @apply input;
             width: 100%;
+            text-align: left;
         }
 
         input[type="submit"] {
             @apply btn;
+        }
+
+        .wpcf7-response-output {
+            @apply type-small;
+            padding: space(8) space(12);
+            margin: space(4) 0 0;
+            border: none;
+        }
+
+        .wpcf7-form.sent .wpcf7-response-output {
+            @apply color-context-mid-blue;
+        }
+
+        .wpcf7-form.invalid .wpcf7-response-output,
+        .wpcf7-form.failed .wpcf7-response-output,
+        .wpcf7-form.spam .wpcf7-response-output,
+        .wpcf7-form.unaccepted .wpcf7-response-output,
+        .wpcf7-form.aborted .wpcf7-response-output {
+            @apply color-context-orange;
+        }
+
+        .wpcf7-not-valid-tip {
+            @apply type-small;
+            display: block;
+            margin-top: space(8);
+            padding: space(4) space(0);
+            color: var(--color-orange);
+            text-align: center;
+            background-color: var(--color-black);
         }
     }
 
