@@ -3,8 +3,9 @@
 }
 
 .site-footer {
-    --link--color: var(--color-foreground);
-    --link--color-hover: var(--color-foreground);
+    --link--color: var(--color-black);
+    --link--color-hover: var(--color-black);
+    color: var(--color-black);
     --site-footer--images--aspect-ratio: 28 / 13;
     margin-top: var(--site-footer--margin-top, var(--space-layout));
     padding-top: space(24);
@@ -112,7 +113,7 @@
 
     .site-footer__right {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-self: flex-start;
         gap: space(12);
     }
@@ -132,6 +133,7 @@
 
         label {
             display: block;
+            font-weight: 600;
         }
 
         input[type="email"],
@@ -200,6 +202,7 @@
 
     @media (max-width: 400px) {
         .site-footer__right {
+            flex-direction: column;
             border-top: var(--base--border);
             padding-top: var(--space-base);
         }

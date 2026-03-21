@@ -71,7 +71,7 @@
                 }
             },
             "black": {
-                "color": "#111118",
+                "color": "#24323E",
                 "foreground": "var(--color-white)",
                 "properties": {
                     "--link--color": "var(--color-bright-blue)",
