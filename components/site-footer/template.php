@@ -32,21 +32,18 @@ use Gust\Components\Image;
                 classes: [
                     'site-footer__menu',
                     'site-footer__menu-1',
-                ],
-                heading: true,
-            ); ?>
-
-            <?= \Gust\Components\Menu::make(
-                theme_location: 'footer-2',
-                max_depth: 1,
-                classes: [
-                    'site-footer__menu',
-                    'site-footer__menu-2',
+                    'type-small',
                 ],
                 heading: true,
             ); ?>
 
             <div class="site-footer__right">
+                <?php if ($footer_form = get_field('footer_form', 'option')) { ?>
+                    <div class="site-footer__form">
+                        <?= do_shortcode(wp_kses_post($footer_form)); ?>
+                    </div>
+                <?php } ?>
+
                 <?php if (! empty($this->content['images'])) { ?>
                     <div class="site-footer__images flex-grid">
                         <?php foreach ($this->content['images'] as $image) { ?>

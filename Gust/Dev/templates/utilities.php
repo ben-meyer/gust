@@ -13,9 +13,10 @@
     <!-- Buttons -->
     <div class="dev-kit__subsection">
         <h3 data-dev-ui>Buttons</h3>
-        <small><code class="dev-kit__code">.btn</code> and variants</small>
+        <small><code class="dev-kit__code">.btn</code> and variants — League Gothic 400, 18px, uppercase, 0.75px tracking</small>
         <div class="dev-kit__demo">
             <div class="flex-list">
+                <input type="submit" class="btn" value="Submit">
                 <button class="btn">.btn</button>
                 <button class="btn btn--small">.btn--small</button>
                 <button class="btn btn--label">.btn--label</button>
