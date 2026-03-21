@@ -123,7 +123,10 @@ Defined in `assets/styles/3-patterns/_type-styles.pcss`. Use `@apply` in compone
 |-------|-------|-----|
 | `var(--space-layout)` | 32px → 64px fluid | Between sections/blocks |
 | `var(--container-padding)` | 16px → 30px fluid | Page side padding |
+| `var(--content-grid--gap)` | 1.5rem (24px) | Content grid column gap |
 | `var(--space-base)` | 16px | Between inline text elements |
+
+**Mobile alignment:** At mobile, `--container-padding` (16px) < `--content-grid--gap` (24px), so the content-grid's wide area starts at `--content-grid--gap` from the viewport edge (not `--container-padding`). Components outside the grid (e.g. full-width footer) that need to align with grid content on mobile should constrain their inner wrapper with `max-width: calc(100% - 2 * var(--content-grid--gap))` rather than relying on `--container-padding`.
 
 ---
 
