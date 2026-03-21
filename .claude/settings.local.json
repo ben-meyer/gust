@@ -30,7 +30,9 @@
       "Bash(cp:*)",
       "Bash(cd /Users/benmeyer/Development/code/work/swimquest/wordpress && ddev wp plugin deactivate gravityforms && ddev wp plugin delete gravityforms 2>&1)",
       "Bash(composer require:*)",
-      "mcp__context7__resolve-library-id"
+      "mcp__context7__resolve-library-id",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__resize_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__emulate"
     ]
   },
   "enableAllProjectMcpServers": true,
