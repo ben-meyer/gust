@@ -40,7 +40,7 @@ Defined in `assets/theme-config.json`. Processed at build time into CSS custom p
 
 /* Raw colour variable — only for specific one-off values */
 .my-element {
-    border-color: var(--color-mid-blue);
+    border-color: var(--color-light);
 }
 
 /* Text colour only, no background */

@@ -52,7 +52,7 @@
                 }
             },
             "light": {
-                "color": "#f2f2f7",
+                "color": "#E5E5E5",
                 "name": "Light",
                 "block_editor": true,
                 "foreground": "var(--color-navy)",

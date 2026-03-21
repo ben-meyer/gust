@@ -5,7 +5,7 @@ use Gust\Components\Image;
 
 <footer class="<?= classes('site-footer', $this->classes) ?>" <?= attributes($this->attributes) ?>>
     <div class="site-footer__inner content-width-fluid-lg">
-        <div class="site-footer__top alignwide">
+        <div class="site-footer__top alignwide type-small">
             <!-- <div class="site-footer__logo">
                 <?= \Gust\Components\Link::make(
                     url: home_url('/'),
@@ -66,7 +66,7 @@ use Gust\Components\Image;
         <div class="site-footer__bottom">
             <div class="site-footer__bottom__inner alignwide">
                 <?php if ($bottom_text = get_field('footer_text_bottom', 'option')) { ?>
-                    <div class="site-footer__bottom-text">
+                    <div class="site-footer__bottom-text type-small">
                         <?= wp_kses_post($bottom_text); ?>
                     </div>
                 <?php } ?>
