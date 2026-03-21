@@ -194,6 +194,7 @@
         width: 100%;
         max-width: 17.5rem;
         justify-content: center;
+        padding-top: space(12);
 
         @media (min-width: theme('screens.md')) {
             max-width: none;
@@ -235,8 +236,15 @@
     @media (max-width: 400px) {
         .site-footer__right {
             flex-direction: column;
-            border-top: var(--base--border);
+            align-items: center;
             padding-top: var(--space-base);
+            margin-bottom: space(24);
         }
+
+        .site-footer__form {
+            padding-bottom: space(24);
+            border-bottom: var(--base--border);
+        }
+
     }
 }
