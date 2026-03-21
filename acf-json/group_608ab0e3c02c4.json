@@ -6,6 +6,7 @@
             "key": "field_60b8f00a4c619",
             "label": "Footer Text - Top",
             "name": "footer_text_top",
+            "aria-label": "",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -25,6 +26,7 @@
             "key": "field_608ab0eae9600",
             "label": "Footer Text - Bottom",
             "name": "footer_text_bottom",
+            "aria-label": "",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -44,6 +46,7 @@
             "key": "field_footer_form_sc01",
             "label": "Footer Form",
             "name": "footer_form",
+            "aria-label": "",
             "type": "text",
             "instructions": "Paste a shortcode, e.g. [contact-form-7 id=\"abc123\" title=\"Contact form 1\"]",
             "required": 0,
@@ -56,12 +59,14 @@
             "default_value": "",
             "placeholder": "[contact-form-7 id=\"...\" title=\"...\"]",
             "prepend": "",
-            "append": ""
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_619cd38d2deef",
             "label": "Footer Images",
             "name": "footer_images",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -76,11 +81,13 @@
             "max": 0,
             "layout": "table",
             "button_label": "Add Image",
+            "rows_per_page": 20,
             "sub_fields": [
                 {
                     "key": "field_619cd39c2def0",
                     "label": "Image",
                     "name": "image",
+                    "aria-label": "",
                     "type": "image",
                     "instructions": "",
                     "required": 1,
@@ -99,12 +106,14 @@
                     "max_width": "",
                     "max_height": "",
                     "max_size": "",
-                    "mime_types": ""
+                    "mime_types": "",
+                    "parent_repeater": "field_619cd38d2deef"
                 },
                 {
                     "key": "field_619cd3a52def1",
                     "label": "Link",
                     "name": "link",
+                    "aria-label": "",
                     "type": "link",
                     "instructions": "",
                     "required": 0,
@@ -114,7 +123,8 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "array"
+                    "return_format": "array",
+                    "parent_repeater": "field_619cd38d2deef"
                 }
             ]
         }
@@ -137,5 +147,6 @@
     "active": true,
     "description": "Options Page",
     "show_in_rest": 0,
-    "modified": 1659441122
+    "display_title": "",
+    "modified": 1774108580
 }
