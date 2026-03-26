@@ -4,7 +4,9 @@ get_header();
 
 $object = \Gust\WordPress\PageObject::get();
 
-site_main_open(object: $object);
+$site_main_classes = ['site-main', 'site-main--single'];
+
+site_main_open(classes: $site_main_classes, object: $object);
 
 if (! has_block('acf/page-header')) {
     echo \Gust\Components\PageHeader::make(object: $object);

@@ -43,3 +43,17 @@ use Gust\Components\PageHeader;
         ); ?>
     </div>
 </section>
+
+<section class="component-example-section">
+    <h2 class="component-example-section__title">Page Header with Background</h2>
+    <p class="component-example-section__description">Page header with brand background color.</p>
+    <div class="component-example-section__preview">
+        <?= PageHeader::make(
+            heading: 'Nick Ayers',
+            type: 'guide',
+            subheading: 'Meet the team',
+            background: 'color-context-white',
+            show_breadcrumbs: false,
+        ); ?>
+    </div>
+</section>

@@ -13,14 +13,24 @@
         <?php } ?>
 
         <div class="page-header__content">
+            <?php if (($this->type ?? '') === 'guide') { ?>
+                <?php if (! empty($this->subheading)) { ?>
+                    <div class="page-header__subheading">
+                        <?= wp_kses_post($this->subheading); ?>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+
             <?php if (! empty($this->heading)) { ?>
                 <?= \Gust\Components\Heading::make(...$this->heading); ?>
             <?php } ?>
 
-            <?php if (! empty($this->subheading)) { ?>
-                <div class="page-header__subheading">
-                    <?= wp_kses_post($this->subheading); ?>
-                </div>
+            <?php if (($this->type ?? '') !== 'guide') { ?>
+                <?php if (! empty($this->subheading)) { ?>
+                    <div class="page-header__subheading">
+                        <?= wp_kses_post($this->subheading); ?>
+                    </div>
+                <?php } ?>
             <?php } ?>
 
             <?php if (! empty($this->meta)) { ?>

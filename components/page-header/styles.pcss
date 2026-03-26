@@ -172,6 +172,31 @@
         }
     }
 
+    &:where(.page-header--type--guide) {
+        --page-header--grid-alignment-x: flex-start;
+        --page-header--text-align: left;
+        padding-inline: var(--content-gutter);
+        justify-content: flex-start;
+
+        .page-header__subheading {
+            @apply type-h5;
+            color: var(--color-mid-blue);
+        }
+
+        .page-header__heading {
+            color: var(--color-navy);
+        }
+
+        :where(.page-header__inner) {
+            padding-block: spaceFluid(24, 32) 0;
+            place-items: start;
+        }
+
+        :where(.page-header__content) {
+            max-width: 44rem;
+        }
+    }
+
     .content-grid & {
         + :where(.alignfull) {
             --flow-space: 0;
