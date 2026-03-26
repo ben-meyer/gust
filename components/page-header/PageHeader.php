@@ -168,7 +168,7 @@ class PageHeader extends ComponentBase
         if ($is_guide) {
             $args['background'] = 'none';
             $args['show_breadcrumbs'] = false;
-            $args['subheading'] = __('Meet the team', 'gust');
+            $args['subheading'] = __('Meet our team', 'gust');
             $args['type'] = 'guide';
         }
 

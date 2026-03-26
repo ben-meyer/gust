@@ -51,7 +51,7 @@ use Gust\Components\PageHeader;
         <?= PageHeader::make(
             heading: 'Nick Ayers',
             type: 'guide',
-            subheading: 'Meet the team',
+            subheading: 'Meet our team',
             background: 'color-context-white',
             show_breadcrumbs: false,
         ); ?>
