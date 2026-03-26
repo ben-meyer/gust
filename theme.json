@@ -4,6 +4,12 @@
     "settings": {
         "appearanceTools": false,
         "blocks": {
+            "core/paragraph": {
+                "color": {
+                    "background": false
+                },
+                "typography": {}
+            },
             "core/button": {
                 "appearanceTools": false,
                 "border": {

@@ -80,7 +80,7 @@ Defined in `assets/styles/3-patterns/_type-styles.pcss`. Use `@apply` in compone
 | `type-h5` | Inter | 18px | 24px | 700 | lh 1.33 |
 | `type-h6` | Inter | 16px | 18px | 700 | lh 1.44 |
 | `type-large` | Inter | 18px | 22px | 400 | body large, lh 1.32, ls -0.5px |
-| `type-base` | Inter | 18px | — | 400 | body regular, lh 1.39, ls -0.5px |
+| `type-regular` | Inter | 18px | — | 400 | body regular, lh 1.39, ls -0.5px |
 | `type-small` | Inter | 16px | — | 400 | body small, lh 1.375, ls -0.2px |
 | `type-meta` | Inter | 16px | — | 500 | small-medium, lh 1.375, ls -0.2px |
 | `type-button` | Inter | 18px | — | 700 | lh 1.33 |
@@ -94,7 +94,7 @@ Defined in `assets/styles/3-patterns/_type-styles.pcss`. Use `@apply` in compone
 }
 
 .component__body {
-    @apply type-base;
+    @apply type-regular;
 }
 ```
 
