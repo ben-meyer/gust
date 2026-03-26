@@ -10,6 +10,7 @@
         /* space(px) → rem, spaceFluid(min, max) → responsive calc() */
 
         --container-padding: 16px; /* Default inline padding for the page */
+        --content-gutter: 20px; /* Content layout gutter used by content-grid and fluid width utilities */
         --space-base: rem(16); /* Default vertical spacing between text elements */
 
         /* Default vertical spacing between larger components and blocks */
@@ -18,13 +19,18 @@
 
         @media (width >= theme("screens.sm")) {
             --container-padding: rem(30);
+            --content-gutter: var(--container-padding);
             --space-layout: space(64);
+        }
+
+        @media (width >= theme("screens.lg")) {
+            --content-gutter: rem(80);
         }
 
         /* --------------------------------------------------- */
         /* Widths */
         /* --------------------------------------------------- */
-        --width-fluid-container: calc(100% - (var(--container-padding) * 2));
+        --width-fluid-container: calc(100% - (var(--content-gutter) * 2));
 
         --width-fluid-2xs: min(var(--container-2xs), var(--width-fluid-container));
         --width-fluid-xs: min(var(--container-xs), var(--width-fluid-container));
