@@ -95,9 +95,13 @@ class Card extends ComponentBase
             } elseif ($args['object'] instanceof \WP_Term) {
                 $args['content'] = [
                     'heading' => $object->name,
-                    'url' => get_term_link($object->ID),
-                    'text' => $object->description,
+                    'url' => get_term_link($object->term_id),
+                    'text' => get_field('subheading', $object) ?: '',
                 ];
+
+                if ($image_id = get_field('image', $object)) {
+                    $args['content']['image'] = ['ID' => $image_id];
+                }
             }
 
             if (! empty($args['content']['url']) && empty($args['content']['read_more']['url'])) {
