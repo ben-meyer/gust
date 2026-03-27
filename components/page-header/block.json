@@ -9,7 +9,7 @@
     "align": "full",
     "acf": {
         "mode": "auto",
-        "postTypes": ["page", "gust-template"],
+        "postTypes": ["page", "gust-template", "trip"],
         "renderCallback": "Gust\\Components\\PageHeader::renderBlock"
     },
     "supports": {
