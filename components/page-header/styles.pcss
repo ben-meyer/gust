@@ -23,6 +23,8 @@
     grid-template-columns: var(--width-fluid-md);
     isolation: isolate; /* Create local stacking context */
     justify-items: var(--page-header--grid-alignment-x);
+    background-color: var(--color-white);
+    color: var(--color-navy);
 
     @media (min-width: theme('screens.md')) {
         --page-header--mini-image--size: 9.375rem; /* 150px */
@@ -93,6 +95,7 @@
 
     :where(.page-header__subheading) {
         @apply margin-trim;
+        @apply type-large;
 
         max-width: var(--page-header--subheading--max-width);
         margin-top: var(--page-header--content--spacing, var(--space-base));
