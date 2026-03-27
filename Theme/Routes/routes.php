@@ -15,6 +15,7 @@ use Theme\Controllers\CalendarController;
 use Theme\Controllers\DestinationsController;
 use Theme\Controllers\NotFoundController;
 use Theme\Controllers\SearchController;
+use Theme\Controllers\TripStylesController;
 use Theme\Modules\Events\EventsModule;
 
 // Search results
@@ -31,6 +32,11 @@ Router::decorate404(NotFoundController::class)
 Router::decoratePostType('event', EventsModule::class)
     ->withPage('events')
     ->withSlot('template-content', [EventsModule::class, 'renderArchive']);
+
+// Trip Styles index (/trip-styles/) — lists all trip style terms as tiles
+Router::route('/trip-styles', TripStylesController::class)
+    ->withPage('trip-styles')
+    ->withSlot('template-content', [TripStylesController::class, 'renderContent']);
 
 // Trip Styles taxonomy archives (/trip-styles/%slug%/)
 Router::decorateTaxonomy('trip_style', \Theme\Controllers\ArchiveController::class)
