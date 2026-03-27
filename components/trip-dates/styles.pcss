@@ -1,0 +1,61 @@
+.trip-dates {
+    /* Placeholder — styles to be developed with the design */
+}
+
+.trip-dates__inner {
+    /* inherits content-width-sm layout */
+}
+
+.trip-dates__heading {
+    /* Section heading: "Dates & book" */
+}
+
+.trip-dates__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.trip-dates__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    padding-block: var(--spacing-3);
+    border-bottom: 1px solid var(--color-neutral);
+
+    &:first-child {
+        border-top: 1px solid var(--color-neutral);
+    }
+
+    &.is-sold-out {
+        opacity: 0.6;
+    }
+}
+
+.trip-dates__item__label {
+    flex: 1;
+}
+
+.trip-dates__item__nights {
+    font-size: 0.875em;
+    color: var(--color-foreground-muted, currentColor);
+    margin-inline-start: 0.5em;
+}
+
+.trip-dates__item__price {
+    font-weight: 600;
+}
+
+.trip-dates__item__cta {
+    white-space: nowrap;
+
+    &--sold-out {
+        color: var(--color-foreground-muted, currentColor);
+        font-size: 0.875em;
+    }
+}
+
+.trip-dates__empty {
+    color: var(--color-foreground-muted, currentColor);
+    font-style: italic;
+}
