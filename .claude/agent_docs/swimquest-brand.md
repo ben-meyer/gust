@@ -133,6 +133,20 @@ Defined in `assets/styles/3-patterns/_type-styles.pcss`. Use `@apply` in compone
 
 ---
 
+## Component Patterns
+
+### Cards on taxonomy term pages
+
+Use the taxonomy-only cards treatment for term archives that list card links:
+
+- `cards--taxonomy-term-grid` on the `cards` block
+- 1 column on small, 2 columns on `md`, 3 columns on `lg`
+- cards should fill their grid cell, so remove the default card width cap for this context
+
+Keep the generic Gutenberg cards block unchanged elsewhere. It can continue using the standard 4-column desktop layout outside term pages.
+
+---
+
 ## Dev Kit
 
 Visual reference at `/_dev/` (development environment only).

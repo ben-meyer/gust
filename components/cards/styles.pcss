@@ -29,6 +29,27 @@
         justify-content: center;
     }
 
+    &:where(.cards--taxonomy-term-grid) {
+        .cards__items {
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-content: normal;
+
+            @media (min-width: theme('screens.md')) {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            @media (min-width: theme('screens.lg')) {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .g-card {
+            width: 100%;
+            max-width: none;
+        }
+    }
+
     :where(.cards__footer) {
         @apply margin-trim;
 

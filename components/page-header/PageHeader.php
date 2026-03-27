@@ -48,7 +48,7 @@ class PageHeader extends ComponentBase
     {
         if (isset($args['is_preview']) && $args['is_preview']) {
             $args['object'] = \get_post($args['post_id']);
-        } else {
+        } elseif (empty($args['object'])) {
             $args['object'] = \Gust\WordPress\PageObject::get() ?? null;
         }
 
@@ -64,6 +64,10 @@ class PageHeader extends ComponentBase
 
                 if ($subheading = \get_field('subheading', $object)) {
                     $args['subheading'] = $subheading;
+                }
+
+                if ($object->taxonomy === 'trip_style') {
+                    $args['image'] = null;
                 }
             } elseif ($object instanceof \WP_Post_Type) {
                 if ($routerPage = \Gust\Router::getPage()) {

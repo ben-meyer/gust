@@ -93,6 +93,10 @@ class Cards extends ComponentBase
             foreach ($args['items'] as $key => $card) {
                 $args['items'][$key] = array_merge(['type' => $args['card_type'] ?? ''], $args['items'][$key]);
 
+                if (\Gust\Helpers::isTaxonomy()) {
+                    $args['items'][$key]['classes'][] = 'align-none';
+                }
+
                 if (! empty($args['card_background_color']) && $args['card_background_color'] !== 'default') {
                     $args['items'][$key]['background'] = $args['card_background_color'];
                 }

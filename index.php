@@ -21,7 +21,9 @@ if ($routerPage) {
         $items[]['object'] = get_post();
     }
 
-    if (! has_block('acf/page-header')) {
+    if (\Gust\Helpers::isTaxonomy()) {
+        echo \Gust\Components\PageHeader::make(object: $object);
+    } elseif (! has_block('acf/page-header')) {
         echo \Gust\Components\PageHeader::make(object: $object);
     }
 
