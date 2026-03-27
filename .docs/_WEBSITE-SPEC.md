@@ -9,7 +9,7 @@
 
 <!-- Brief description of the website's purpose and target audience -->
 SwimQuest provide quality, friendly, safe swimming holidays for people of all ages and abilities. The target audience
-is women in their early 60s, recently retired, solo travellers and swimming enthusiats from beginner to ex-olympian 
+is women in their early 60s, recently retired, solo travellers and swimming enthusiasts from beginner to ex-olympian 
 standard.
 
 ---
@@ -19,6 +19,7 @@ standard.
 <!-- All plugins auto-update. Add/remove as needed. -->
 
 - **ACF Pro** - Custom fields and Gutenberg blocks
+- **Extended CPTs** - Custom post type and taxonomy registration helpers
 - **Yoast SEO** - SEO management
 - **Gravity Forms** - Enquiry and contact forms
 
@@ -72,8 +73,21 @@ Core swim holiday product. Each post represents a trip that may run on multiple 
   - **start_date** (date_picker, return: Y-m-d)
   - **end_date** (date_picker, return: Y-m-d)
   - **price** (number, min: 0, step: 0.01) - Price for this departure in GBP
+  - **status** (select) - Availability: bookable, sold_out, sold_out_private
+  - **booking_url** (url) - Booking link shown when status is bookable
 - **itinerary** (post_object, post_type: itinerary, allow_null: true) - Linked reusable itinerary
+- **accommodation** (post_object, post_type: accommodation, allow_null: true) - Linked accommodation post
 - Guides are standalone pages linked editorially — no ACF relationship field on trip
+
+---
+
+### accommodation
+Accommodation pages linked from trips.
+
+- URL: /accommodation/%postname%/
+- Dashicon: dashicons-building
+- Supports: title, editor, thumbnail
+- Taxonomies: none
 
 ---
 
@@ -94,6 +108,8 @@ Swimming events. Mirrors the trip post type in structure and purpose — events 
   - **start_date** (date_picker, return: Y-m-d)
   - **end_date** (date_picker, return: Y-m-d)
   - **price** (number, min: 0, step: 0.01) - Price in GBP
+- **status** (select) - Availability: bookable, sold_out, sold_out_private
+- **booking_url** (url) - Booking link shown when status is bookable
 - Guides are standalone pages linked editorially — no ACF relationship field on event
 
 ---
@@ -230,16 +246,17 @@ No archive (filter use only).
 - Route: decorate:404
 
 ### Destinations (/destinations/)
-Index page listing all destination terms (countries) alphabetically with trip counts. Links into per-country taxonomy archives (/destinations/%slug%/).
+Owned route scaffolded for a destination index page. Controller currently returns an empty string; intended output is an alphabetical index of country terms linking to /destinations/%slug%/.
 - Template: Default
 - Route: owned
 
 ### Trip Styles (/trip-styles/)
 Overview/wayfinding page linking into all Trip Style taxonomy archives. Not a taxonomy archive itself — a static editorial page.
 - Template: Default
+- Route: owned
 
 ### Calendar (/calendar/)
-Chronological listing of all trips ordered by nearest departure date. Grouped first by year (e.g. 2026, 2027), then by month within each year (e.g. January, February). Queries the `dates` repeater field across all trip posts and renders cards.
+Owned route scaffolded for a calendar page. Controller currently returns an empty string; intended output is a chronological listing of trips grouped by year and month.
 - Template: Default
 - Route: owned
 
@@ -300,30 +317,112 @@ Chronological listing of all trips ordered by nearest departure date. Grouped fi
 
 ### Page Header [Block]
 
-Full-width hero section with heading, optional background image, and CTA.
+Full-width hero that auto-populates from the current page, post, term, or router page, with optional custom heading, subheading, CTA, and image.
+
+**Fields:**
+- **heading** (text) - Overrides the default title
+- **subheading** (wysiwyg) - Supporting text
+- **primary_call_to_action** (link) - Primary button link
+- **image** (image, return: array) - Optional override image for the current object
+
+### Cards [Block]
+
+Responsive card grid that can render recent posts, selected posts, or fully custom cards.
+
+**Fields:**
+- **heading** (text) - Section heading
+- **subheading** (wysiwyg) - Supporting text
+- **button** (link) - Optional footer link
+- **card_source** (button_group: recent, selected, custom) - Source for the cards
+- **custom_cards** (repeater) - Manual card content shown when `card_source` is `custom`
+  - **heading** (text)
+  - **image** (image, return: array)
+  - **text** (wysiwyg)
+  - **meta** (wysiwyg)
+  - **link** (link)
+- **post_type** (button_group: post) - Post type used when `card_source` is `recent`
+- **limit** (button_group: 2, 3, 4, 6) - Number of recent posts to query
+- **selected** (relationship) - Selected posts when `card_source` is `selected`
+- **type** (button_group: default, icons) - Switches card style
+- **card_background_color** (select: default, none) - Background color for cards
+- **card_image_fit** (select: default, contain, cover) - Image fit mode
+- **columns** (select: default, 2, 3, 4, 5, 6) - Grid column count
+- **slider_on_mobile** (true_false) - Enable horizontal scroll on smaller screens
+
+### Card [Partial]
+
+Single card renderer used by the `Cards` block and archive grids.
+
+**Fields:**
+- No editor fields. Consumes either a `WP_Post`, a `WP_Term`, or a prepared `content` array at runtime.
+
+### Accordion [Block]
+
+Expandable content list for FAQs or rich text sections.
+
+**Fields:**
+- **heading** (text) - Optional section heading
+- **accordion_items** (repeater)
+  - **title** (text)
+  - **content** (wysiwyg)
+
+### Banner [Block]
+
+Compact banner with inline image and message.
+
+**Fields:**
+- **image** (image, return: array) - Icon, logo, or image displayed inline with the banner message
+- **message** (wysiwyg) - Required banner text
+- **image_height** (range) - Inline image height in pixels
+
+### Logo Grid [Block]
+
+Grid of logos with optional links and a selectable aspect ratio.
+
+**Fields:**
+- **heading** (text) - Optional section heading
+- **subheading** (wysiwyg) - Supporting text
+- **logos** (repeater)
+  - **image** (image, return: array)
+  - **link** (link)
+- **image_aspect_ratio** (button_group: default, square) - Logo image ratio
+
+### Media & Content [Block]
+
+Split layout combining text content with either an image or a video.
 
 **Fields:**
 - **heading** (text) - Main heading
-- **subheading** (textarea) - Supporting text
-- **background_image** (image, return: array)
-- **background_overlay** (true_false, default: true) - Dark overlay on image
-- **cta** (group)
-  - **link** (link) - Button link
-  - **style** (select: primary, secondary, default: primary)
-  - Conditional: show if `link` is not empty
+- **subheading** (text) - Secondary heading
+- **content** (wysiwyg) - Body content
+- **button_1** (link) - Optional CTA button
+- **media_type** (button_group: image, video) - Media source type
+- **video** (oembed) - Video embed URL when `media_type` is `video`
+- **image** (image, return: array) - Required cover image / fallback media image
+- **media_side** (button_group: left, right) - Which side the media appears on
 
-### Card [Block]
+### Quote [Block]
 
-Content card with image, title, excerpt, and link.
+Pull quote with optional credit and role.
 
 **Fields:**
-- **image** (image, return: array)
-- **title** (text)
-- **excerpt** (textarea)
-- **link** (link)
-- **style** (select: default, featured, minimal)
+- **quote** (textarea) - Quote text
+- **credit** (text) - Person or source name
+- **role** (text) - Role or title
 
-<!-- Add more components following the same format -->
+### Trip Dates [Block]
+
+Server-rendered departure list for the current trip.
+
+**Fields:**
+- No block fields. Reads the current trip's `dates` repeater field.
+
+### Taxonomy Filters [Partial]
+
+Derived filter bar that renders term links for the current taxonomy or object context.
+
+**Fields:**
+- No editor fields. Runtime inputs include `taxonomy`, `object`, `current_item`, `label`, and `show`.
 
 ---
 
