@@ -61,6 +61,14 @@ class PageHeader extends ComponentBase
 
             if ($object instanceof \WP_Term) {
                 $heading = $object->name;
+
+                if ($subheading = \get_field('subheading', $object)) {
+                    $args['subheading'] = $subheading;
+                }
+
+                if ($image_id = \get_field('image', $object)) {
+                    $args['image'] = $image_id;
+                }
             } elseif ($object instanceof \WP_Post_Type) {
                 if ($routerPage = \Gust\Router::getPage()) {
                     $object = $routerPage;
