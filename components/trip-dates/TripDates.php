@@ -24,6 +24,13 @@ class TripDates extends ComponentBase
         return static::createFromArgs(static::mergeArgs(get_defined_vars()));
     }
 
+    protected static function validate(array $args): bool
+    {
+        $postId = ! empty($args['post_id']) ? (int) $args['post_id'] : \get_the_ID();
+
+        return ! empty(\get_field('dates', $postId));
+    }
+
     protected static function transform(array $args): array
     {
         $post_id = ! empty($args['post_id']) ? (int) $args['post_id'] : \get_the_ID();
@@ -52,6 +59,7 @@ class TripDates extends ComponentBase
 
             $status      = $row['status'] ?? 'bookable';
             $booking_url = ! empty($row['booking_url']) ? $row['booking_url'] : null;
+            $enquiry_url = ! empty($row['enquiry_url']) ? $row['enquiry_url'] : null;
 
             return [
                 'label'         => $label,
@@ -59,6 +67,7 @@ class TripDates extends ComponentBase
                 'price_display' => $price_display,
                 'status'        => $status,
                 'booking_url'   => $booking_url,
+                'enquiry_url'   => $enquiry_url,
                 'is_bookable'   => $status === 'bookable' && ! empty($booking_url),
                 'is_sold_out'   => \in_array($status, ['sold_out', 'sold_out_private'], true),
                 'sold_out_label' => $status === 'sold_out_private' ? 'Sold Out — Private Group' : 'Sold Out',
