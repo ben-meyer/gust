@@ -24,7 +24,8 @@ class TripStylesController
 
         return (string) Cards::make(
             items: $items,
-            image_size: 'gust_card_square',
-        );
+            columns: 3,
+            type: 'trip-style');
+
     }
 }

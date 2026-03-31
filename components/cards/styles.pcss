@@ -86,7 +86,14 @@
 
     &[class*='cards--columns-'] {
         .cards__items {
+            display: grid;
             grid-template-columns: repeat(var(--grid--columns), minmax(0, 1fr));
+            justify-content: normal;
+        }
+
+        .g-card {
+            width: 100%;
+            max-width: none;
         }
     }
 
