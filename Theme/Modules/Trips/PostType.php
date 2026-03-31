@@ -10,6 +10,8 @@ class PostType
     {
         \add_action('init', [__CLASS__, 'register']);
         \add_filter('gust/templates/post-types', [__CLASS__, 'filterGustTemplatesPostTypes']);
+        \add_filter('use_block_editor_for_post_type', [__CLASS__, 'disableBlockEditor'], 10, 2);
+        \add_filter('gutenberg_can_edit_post_type', [__CLASS__, 'disableBlockEditor'], 10, 2);
     }
 
     public static function register(): void
@@ -28,7 +30,6 @@ class PostType
             'enter_title_here' => 'Trip Name',
             'supports' => [
                 'title',
-                'editor',
                 'excerpt',
                 'thumbnail',
                 'revisions',
@@ -42,19 +43,6 @@ class PostType
                 'country',
                 'city',
             ],
-            // Template is fully locked. Add new blocks here as they are built.
-            // The core/group in the middle is a free editing zone for body content.
-            // To add a new block to the template, append it to this array:
-            //   ['acf/your-block', []],
-            'template' => [
-                ['acf/page-header', []],
-                ['core/group', [
-                    'className' => 'trip-body',
-                    'layout' => ['type' => 'constrained'],
-                ], []],
-                ['acf/trip-dates', []],
-            ],
-            'template_lock' => 'all',
             'admin_filters' => [
                 'trip_style' => ['taxonomy' => 'trip_style'],
                 'country' => ['taxonomy' => 'country'],
@@ -72,6 +60,7 @@ class PostType
                 'city' => ['taxonomy' => 'city'],
                 'trip_style' => ['taxonomy' => 'trip_style'],
                 'swim_type' => ['taxonomy' => 'swim_type'],
+                'skill_level' => ['taxonomy' => 'skill_level'],
                 'updated' => [
                     'title' => 'Updated',
                     'post_field' => 'post_modified',
@@ -90,5 +79,14 @@ class PostType
         $postTypes[] = self::SLUG;
 
         return $postTypes;
+    }
+
+    public static function disableBlockEditor(bool $canEdit, string $postType): bool
+    {
+        if ($postType === self::SLUG) {
+            return false;
+        }
+
+        return $canEdit;
     }
 }

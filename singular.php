@@ -8,13 +8,17 @@ $site_main_classes = ['site-main', 'site-main--single'];
 
 site_main_open(classes: $site_main_classes, object: $object);
 
-if (! has_block('acf/page-header')) {
-    echo \Gust\Components\PageHeader::make(object: $object);
-}
+if ($object instanceof \WP_Post && $object->post_type === 'trip') {
+    echo \Gust\Components\TripSingle::make(object: $object);
+} else {
+    if (! has_block('acf/page-header')) {
+        echo \Gust\Components\PageHeader::make(object: $object);
+    }
 
-while (have_posts()) {
-    the_post();
-    the_content();
+    while (have_posts()) {
+        the_post();
+        the_content();
+    }
 }
 
 site_main_close();
