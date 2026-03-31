@@ -18,6 +18,7 @@ class TripDates extends ComponentBase
 
     public static function make(
         int $post_id = 0,
+        bool $is_preview = false,
         array $classes = [],
         ...$others
     ): ?static {
@@ -61,7 +62,7 @@ class TripDates extends ComponentBase
                 'booking_url'   => $booking_url,
                 'is_bookable'   => $status === 'bookable' && ! empty($booking_url),
                 'is_sold_out'   => \in_array($status, ['sold_out', 'sold_out_private'], true),
-                'sold_out_label' => $status === 'sold_out_private' ? 'Sold Out — Private Group' : 'Sold Out',
+                'sold_out_label' => $status === 'sold_out_private' ? __('Sold Out — Private Group', 'gust') : __('Sold Out', 'gust'),
             ];
         }, $rows);
 

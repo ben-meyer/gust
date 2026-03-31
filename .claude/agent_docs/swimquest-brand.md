@@ -17,9 +17,9 @@ Defined in `assets/theme-config.json`. Processed at build time into CSS custom p
 | `bright-blue` | `#46BAEB` | Bright Blue | black | black | white |
 | `orange` | `#FFBD59` | Orange | black | black | white |
 | `neutral` | `#FFF9F0` | Neutral | black | black | white |
-| `light` | `#f2f2f7` | Light | navy | mid-blue | navy |
+| `light` | `#E5E5E5` | Light | navy | mid-blue | navy |
 | `white` | `#ffffff` | White | navy | mid-blue | navy |
-| `black` | `#111118` | Near Black | white | bright-blue | white |
+| `black` | `#24323E` | Near Black | white | bright-blue | white |
 
 ### Named Aliases
 

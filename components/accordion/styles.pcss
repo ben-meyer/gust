@@ -40,7 +40,7 @@
             width: 100%;
             align-items: center;
             justify-content: space-between;
-            padding: var(--accordion--item--padding-y) 1rem;
+            padding: var(--accordion--item--padding-y) space(16);
             margin: 0;
             background: none;
             color: var(--color-foreground);
@@ -54,7 +54,7 @@
             }
 
             @media (min-width: theme('screens.md')) {
-                min-height: 80px;
+                min-height: space(80);
             }
 
             @media (hover: hover) {
@@ -117,7 +117,7 @@
                 @apply margin-trim;
 
                 background-color: var(--color-neutral);
-                padding: 0 1rem var(--accordion--item--panel--padding-y);
+                padding: 0 space(16) var(--accordion--item--panel--padding-y);
 
             }
         }

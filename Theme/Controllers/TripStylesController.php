@@ -22,12 +22,9 @@ class TripStylesController
 
         $items = array_map(fn ($term) => ['object' => $term], $terms);
 
-        \ob_start();
-        echo Cards::make(
+        return (string) Cards::make(
             items: $items,
             image_size: 'gust_card_square',
         );
-
-        return \ob_get_clean();
     }
 }

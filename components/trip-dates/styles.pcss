@@ -19,8 +19,8 @@
 .trip-dates__item {
     display: flex;
     align-items: center;
-    gap: var(--spacing-4);
-    padding-block: var(--spacing-3);
+    gap: space(16);
+    padding-block: space(12);
     border-bottom: 1px solid var(--color-neutral);
 
     &:first-child {
@@ -38,8 +38,8 @@
 
 .trip-dates__item__nights {
     font-size: 0.875em;
-    color: var(--color-foreground-muted, currentColor);
     margin-inline-start: 0.5em;
+    opacity: 0.6;
 }
 
 .trip-dates__item__price {
@@ -50,12 +50,11 @@
     white-space: nowrap;
 
     &--sold-out {
-        color: var(--color-foreground-muted, currentColor);
         font-size: 0.875em;
     }
 }
 
 .trip-dates__empty {
-    color: var(--color-foreground-muted, currentColor);
     font-style: italic;
+    opacity: 0.6;
 }
