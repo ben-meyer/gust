@@ -75,9 +75,33 @@ Core swim holiday product. Each post represents a trip that may run on multiple 
   - **price** (number, min: 0, step: 0.01) - Price for this departure in GBP
   - **status** (select) - Availability: bookable, sold_out, sold_out_private
   - **booking_url** (url) - Booking link shown when status is bookable
+  - **enquiry_url** (url) - Enquiry link for that departure
 - **itinerary** (post_object, post_type: itinerary, allow_null: true) - Linked reusable itinerary
 - **accommodation** (post_object, post_type: accommodation, allow_null: true) - Linked accommodation post
-- Guides are standalone pages linked editorially — no ACF relationship field on trip
+- **highlights** (repeater, max: 4) - Highlight cards used in the locked Highlights section
+  - **image** (image, return: array)
+  - **heading** (text)
+  - **description** (textarea)
+- **included_items** (repeater) - Single-line items for "What's included"
+  - **label** (text)
+- **not_included_items** (repeater) - Single-line items for "Not included"
+  - **label** (text)
+- **getting_there_stages** (repeater) - Structured travel stages
+  - **title** (text)
+  - **steps** (repeater)
+    - **icon** (select: plane, ferry, car, bus, train)
+    - **title** (text)
+    - **description** (wysiwyg)
+- **reviews_embed_code** (textarea) - Raw embed code for the Reviews section
+- **related_stories** (relationship, post_type: story, max: 2) - Manual story selection
+- **related_trips** (relationship, post_type: trip, max: 3) - Manual trip selection
+
+**Single Template**
+- Template: Hard-coded PHP single
+- Route: single:trip
+- Editor model: classic admin screen with Gutenberg disabled and no main content editor
+- Layout order: Trip Page Header, Section Nav, Highlights, Itinerary, Accommodation, What's Included, Getting There, Reviews, FAQs, Dates & Book, Related Stories, Related Trips
+- Render rule: any section with no content must not render on the front end, and its jump link must also be hidden
 
 ---
 
@@ -88,6 +112,14 @@ Accommodation pages linked from trips.
 - Dashicon: dashicons-building
 - Supports: title, editor, thumbnail
 - Taxonomies: none
+
+**Fields:**
+- **star_rating** (number, min: 1, max: 5) - Summary rating used on trip teaser and accommodation single
+- **tags** (repeater) - Short facility labels
+  - **label** (text)
+- **description** (wysiwyg) - Accommodation summary copy
+- **summary_gallery** (gallery, min: 1, max: 3) - Square-cropped gallery used in the trip teaser
+- **rooms_intro** (textarea) - Intro copy above the "View accommodation" CTA
 
 ---
 
@@ -122,7 +154,8 @@ Reusable day-by-day itinerary documents. Assigned to trips via post_object field
 - Supports: title, editor, thumbnail
 - Taxonomies: none
 
-Day-by-day content is authored via Gutenberg blocks in the editor — no ACF repeater fields.
+Current scaffold still uses Gutenberg editor content.
+Target model: locked structured day blocks, with day numbering derived from order and optional standalone gallery blocks inserted between day sections. Trip teaser should eventually pull the first 3 day entries only, without images.
 
 ---
 
@@ -324,6 +357,135 @@ Full-width hero that auto-populates from the current page, post, term, or router
 - **subheading** (wysiwyg) - Supporting text
 - **primary_call_to_action** (link) - Primary button link
 - **image** (image, return: array) - Optional override image for the current object
+
+### Trip Page Header [Partial]
+
+Hard-coded trip hero section. Replaces `Page Header` on `trip` singles and combines editorial trip fields with derived trip metadata.
+
+**Render rule:**
+- Always present in the hard-coded `trip` template
+
+**Auto-population logic:**
+- Heading defaults to post title
+- Date summary uses `Multiple dates` when more than one departure exists
+- Location is built from `city` + `country`
+- Price is derived from the cheapest `dates` row
+- Ability level and swim type come from taxonomies
+- Image falls back to featured image unless overridden
+
+**Data source:**
+- Post-level ACF and taxonomies on `trip`
+
+**Fields:**
+- **trip_heading** (text) - Optional title override
+- **trip_description** (textarea) - Hero summary paragraph
+- **trip_header_image** (image, return: array) - Optional hero image override
+- **duration_nights** (number)
+- **distance_min_km** (number)
+- **distance_max_km** (number)
+- **water_temp_min_c** (number)
+- **water_temp_max_c** (number)
+- **max_group_size** (number)
+- **welcome_text** (text)
+- **technique_coaching_text** (text)
+
+### Trip Section Nav [Partial]
+
+Sticky trip-only section navigation under the hero. Jump links are generated dynamically based on which hard-coded sections actually have content.
+
+**Render rule:**
+- Do not render if no eligible locked sections have content
+
+**Auto-population logic:**
+- Links appear only for populated sections
+- Primary CTA opens the first available departure `enquiry_url`
+- Secondary CTA links to `Dates & book` for multiple dates, or directly to the single departure `booking_url`
+
+**Fields:**
+- No block fields. Derived from trip data and relationships.
+
+### Trip Highlights [Partial]
+
+Locked Highlights section for the trip single page.
+
+**Render rule:**
+- Do not render if `highlights` is empty
+
+**Data source:**
+- Post-level ACF: `highlights`
+
+### Trip Itinerary Preview [Partial]
+
+Locked itinerary teaser on the trip page.
+
+**Render rule:**
+- Do not render if `itinerary` is not selected
+
+**Data source:**
+- Related post: `itinerary`
+- Current scaffold uses related post title/excerpt/content summary and a CTA
+- Target behaviour is a first-3-days teaser once the itinerary post type is restructured
+
+### Trip Accommodation Preview [Partial]
+
+Locked accommodation teaser on the trip page.
+
+**Render rule:**
+- Do not render if `accommodation` is not selected
+
+**Data source:**
+- Related post: `accommodation`
+- Pulls summary fields, tags, star rating, square gallery, rooms intro, and CTA
+
+### Trip Includes [Partial]
+
+Locked "What's included" section.
+
+**Render rule:**
+- Do not render if both `included_items` and `not_included_items` are empty
+
+**Data source:**
+- Post-level ACF: `included_items`, `not_included_items`
+
+### Trip Getting There [Partial]
+
+Locked structured travel-information section.
+
+**Render rule:**
+- Do not render if `getting_there_stages` is empty
+
+**Data source:**
+- Post-level ACF: `getting_there_stages`
+
+### Trip Reviews [Partial]
+
+Locked reviews embed section.
+
+**Render rule:**
+- Do not render if `reviews_embed_code` is empty
+
+**Data source:**
+- Post-level ACF: `reviews_embed_code`
+
+### Trip Related Stories [Partial]
+
+Manual related-story section at the end of the trip page.
+
+**Render rule:**
+- Do not render if `related_stories` is empty
+
+**Data source:**
+- Post-level ACF relationship: `related_stories`
+
+### Trip Related Trips [Partial]
+
+Manual related-trip section at the end of the trip page.
+
+**Render rule:**
+- Do not render if `related_trips` is empty
+
+**Data source:**
+- Post-level ACF relationship: `related_trips`
 
 ### Cards [Block]
 
