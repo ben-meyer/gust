@@ -109,7 +109,7 @@ class Card extends ComponentBase
             }
 
             if (empty($args['content']['read_more']['title'])) {
-                $args['content']['read_more']['title'] = __('Read more', 'gust');
+                $args['content']['read_more']['title'] = __('Find out more', 'gust');
             }
         } elseif (! empty($args['content'])) {
             $content = $args['content'];
@@ -130,7 +130,7 @@ class Card extends ComponentBase
 
         if (! empty($args['content']['read_more'])) {
             $args['content']['read_more'] = array_merge([
-                'classes' => ['btn', 'g-card__read-more'],
+                'classes' => ['btn', 'g-card__find-out-more', 'color-context-white'],
             ], $args['content']['read_more']);
         }
 

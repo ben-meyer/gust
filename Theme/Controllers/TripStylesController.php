@@ -24,7 +24,7 @@ class TripStylesController
 
         return (string) Cards::make(
             items: $items,
-            columns: 3,
+            columns: '3',
             type: 'trip-style');
 
     }
