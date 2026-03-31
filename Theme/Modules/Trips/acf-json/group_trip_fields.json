@@ -77,6 +77,16 @@
                     "conditional_logic": [[{"field": "field_trip_dates_status", "operator": "==", "value": "bookable"}]],
                     "wrapper": {"width": "100", "class": "", "id": ""},
                     "placeholder": "https://"
+                },
+                {
+                    "key": "field_trip_dates_enquiry_url",
+                    "label": "Enquiry URL",
+                    "name": "enquiry_url",
+                    "type": "url",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {"width": "100", "class": "", "id": ""},
+                    "placeholder": "https://"
                 }
             ]
         },
