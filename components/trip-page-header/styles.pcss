@@ -1,0 +1,50 @@
+.trip-page-header {
+    background-color: var(--color-navy);
+    color: var(--color-white);
+}
+
+.trip-page-header__media-inner {
+    aspect-ratio: 5 / 2;
+}
+
+.trip-page-header__content {
+    padding-block: spaceFluid(24, 40);
+}
+
+.trip-page-header__heading {
+    margin: 0;
+}
+
+.trip-page-header__summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: space(8);
+    padding: 0;
+    margin: space(8) 0 0;
+    list-style: none;
+}
+
+.trip-page-header__description {
+    max-width: 42rem;
+    margin-top: space(12);
+}
+
+.trip-page-header__stats {
+    display: grid;
+    gap: space(8);
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    margin-top: space(16);
+}
+
+.trip-page-header__stat {
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    padding-top: space(6);
+}
+
+.trip-page-header__stat-value {
+    @apply type-h6;
+}
+
+.trip-page-header__stat-label {
+    text-transform: uppercase;
+}
