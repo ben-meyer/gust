@@ -157,6 +157,10 @@ class Card extends ComponentBase
         }
 
         if (! empty($args['content']['image'])) {
+            if (($args['type'] ?? null) === 'trip-style' && empty($args['image_size'])) {
+                $args['image_size'] = 'gust_card_square';
+            }
+
             $args['content']['image']['size'] = $args['image_size'];
         }
 
