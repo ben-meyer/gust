@@ -15,6 +15,12 @@ class Stars extends ComponentBase
         return static::createFromArgs(static::mergeArgs(get_defined_vars()));
     }
 
+    protected static function validate(array $args): bool
+    {
+        $stars = $args['stars'] ?? 0;
+        return is_numeric($stars) && $stars >= 0 && $stars <= 5;
+    }
+
     protected static function transform(array $args): array
     {
         $args['classes'] = array_merge(['stars'], $args['classes'] ?? []);
