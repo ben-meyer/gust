@@ -8,6 +8,8 @@
 use Gust\Helpers;
 ?>
 
-<div <?= Helpers::buildAttributes($this->attributes); ?>>
-    <!-- Tags content -->
+<div class="<?= classes('tags', 'wp-block', $this->classes) ?>" <?= attributes($this->attributes) ?>>
+    <?php foreach ($this->tags as $tag) { ?>
+        <span class="<?= classes('tags__item') ?>"><?= esc_html($tag) ?></span>
+    <?php } ?>
 </div>
