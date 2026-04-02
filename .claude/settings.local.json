@@ -32,7 +32,8 @@
       "Bash(composer require:*)",
       "mcp__context7__resolve-library-id",
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__resize_page",
-      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__emulate"
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__emulate",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\(''mcpServers'', {}\\), indent=2\\)\\)\")"
     ]
   },
   "enableAllProjectMcpServers": true,

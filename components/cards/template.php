@@ -1,5 +1,11 @@
 <?php if (! empty($this->items)) { ?>
-    <section class="<?= classes('cards', 'wp-block', 'animate', $this->classes) ?>" <?= attributes($this->attributes) ?>>
+    <section class="<?= classes(
+        'cards',
+        'wp-block',
+        'animate',
+        \Gust\Helpers::isTaxonomy() ? 'cards--taxonomy-term-grid' : null,
+        $this->classes,
+    ) ?>" <?= attributes($this->attributes) ?>>
         <div class="cards__inner content-width-lg">
             <?php if (! empty($this->heading) || ! empty($this->subheading)) { ?>
                 <div class="cards__header">

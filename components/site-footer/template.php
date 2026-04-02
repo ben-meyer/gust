@@ -6,16 +6,6 @@ use Gust\Components\Image;
 <footer class="<?= classes('site-footer', $this->classes) ?>" <?= attributes($this->attributes) ?>>
     <div class="site-footer__inner content-width-fluid-lg">
         <div class="site-footer__top alignwide type-small">
-            <!-- <div class="site-footer__logo">
-                <?= \Gust\Components\Link::make(
-                    url: home_url('/'),
-                    content: \Gust\Image::get('logo-alt.svg', [
-                        'alt' => get_bloginfo('name'),
-                    ]),
-                    content_filter: false,
-                ); ?>
-            </div> -->
-
             <?php if ($top_text = get_field('footer_text_top', 'option')) { ?>
                 <div class="site-footer__top-text">
                     <?= wp_kses_post($top_text); ?>

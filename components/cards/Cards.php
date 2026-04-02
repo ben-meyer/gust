@@ -93,12 +93,24 @@ class Cards extends ComponentBase
             foreach ($args['items'] as $key => $card) {
                 $args['items'][$key] = array_merge(['type' => $args['card_type'] ?? ''], $args['items'][$key]);
 
+                if (\Gust\Helpers::isTaxonomy()) {
+                    $args['items'][$key]['classes'][] = 'align-none';
+                }
+
                 if (! empty($args['card_background_color']) && $args['card_background_color'] !== 'default') {
                     $args['items'][$key]['background'] = $args['card_background_color'];
                 }
 
                 if (! empty($args['card_image_fit']) && $args['card_image_fit'] !== 'default') {
                     $args['items'][$key]['image_fit'] = $args['card_image_fit'];
+                }
+
+                if (
+                    ($args['card_source'] ?? null) === 'custom'
+                    && ! empty($args['items'][$key]['content']['image'])
+                    && empty($args['items'][$key]['image_size'])
+                ) {
+                    $args['items'][$key]['image_size'] = 'gust_card_square';
                 }
             }
         }
@@ -112,6 +124,7 @@ class Cards extends ComponentBase
         }
 
         $args['classes'][] = 'cards--type--'.($args['type'] ?? 'default');
+        $args['classes'][] = ($args['card_source'] ?? null) === 'custom' ? 'cards--source--custom' : null;
         $args['classes'][] = ! empty($args['slider_on_mobile']) ? 'cards--slider-on-mobile' : null;
 
         return $args;

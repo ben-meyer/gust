@@ -43,7 +43,7 @@
     text-transform: uppercase;
 
     @media (width >= theme("screens.md")) {
-        line-height: 1.0;
+        line-height: 1;
     }
 }
 
@@ -61,6 +61,7 @@
     font-size: rfs(22, 32);
     line-height: 1.25;
     letter-spacing: -0.5px;
+    text-transform: capitalize;
 }
 
 @utility type-h5 {
@@ -128,14 +129,36 @@
 }
 
 /* WordPress Block Style Classes */
-.is-style-type-hero  { @apply type-hero; }
-.is-style-type-h1    { @apply type-h1; }
-.is-style-type-h2    { @apply type-h2; }
-.is-style-type-h3    { @apply type-h3; }
-.is-style-type-h4    { @apply type-h4; }
-.is-style-type-h5    { @apply type-h5; }
-.is-style-type-h6    { @apply type-h6; }
-.is-style-type-regular { @apply type-regular; }
-.is-style-type-small { @apply type-small; }
-.is-style-type-large { @apply type-large; }
-.is-style-type-meta  { @apply type-meta; }
+.is-style-type-hero {
+    @apply type-hero;
+}
+.is-style-type-h1 {
+    @apply type-h1;
+}
+.is-style-type-h2 {
+    @apply type-h2;
+}
+.is-style-type-h3 {
+    @apply type-h3;
+}
+.is-style-type-h4 {
+    @apply type-h4;
+}
+.is-style-type-h5 {
+    @apply type-h5;
+}
+.is-style-type-h6 {
+    @apply type-h6;
+}
+.is-style-type-regular {
+    @apply type-regular;
+}
+.is-style-type-small {
+    @apply type-small;
+}
+.is-style-type-large {
+    @apply type-large;
+}
+.is-style-type-meta {
+    @apply type-meta;
+}

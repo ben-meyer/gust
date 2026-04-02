@@ -48,7 +48,7 @@ class PageHeader extends ComponentBase
     {
         if (isset($args['is_preview']) && $args['is_preview']) {
             $args['object'] = \get_post($args['post_id']);
-        } else {
+        } elseif (empty($args['object'])) {
             $args['object'] = \Gust\WordPress\PageObject::get() ?? null;
         }
 
@@ -61,6 +61,14 @@ class PageHeader extends ComponentBase
 
             if ($object instanceof \WP_Term) {
                 $heading = $object->name;
+
+                if ($subheading = \get_field('subheading', $object)) {
+                    $args['subheading'] = $subheading;
+                }
+
+                if ($object->taxonomy === 'trip_style') {
+                    $args['image'] = null;
+                }
             } elseif ($object instanceof \WP_Post_Type) {
                 if ($routerPage = \Gust\Router::getPage()) {
                     $object = $routerPage;
@@ -71,11 +79,6 @@ class PageHeader extends ComponentBase
                 $heading = __('404', 'gust');
             } elseif ($object instanceof \WP_Query && $object->is_search()) {
                 $heading = __('Search', 'gust');
-            } elseif ($object instanceof \WP_Query && $object->is_calendar()) {
-                $heading = __('Calendar', 'gust');
-                if (! empty($object->query['s'])) {
-                    $args['subheading'] = sprintf(__("Showing results for '%s'", 'gust'), $object->query['s']);
-                }
             } elseif ($object instanceof \WP_User) {
                 $heading = sprintf(__('Posts by %s', 'gust'), $object->data->display_name);
             }

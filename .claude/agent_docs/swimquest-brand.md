@@ -17,9 +17,9 @@ Defined in `assets/theme-config.json`. Processed at build time into CSS custom p
 | `bright-blue` | `#46BAEB` | Bright Blue | black | black | white |
 | `orange` | `#FFBD59` | Orange | black | black | white |
 | `neutral` | `#FFF9F0` | Neutral | black | black | white |
-| `light` | `#f2f2f7` | Light | navy | mid-blue | navy |
+| `light` | `#E5E5E5` | Light | navy | mid-blue | navy |
 | `white` | `#ffffff` | White | navy | mid-blue | navy |
-| `black` | `#111118` | Near Black | white | bright-blue | white |
+| `black` | `#24323E` | Near Black | white | bright-blue | white |
 
 ### Named Aliases
 
@@ -130,6 +130,20 @@ Defined in `assets/styles/3-patterns/_type-styles.pcss`. Use `@apply` in compone
 **Mobile alignment:** At mobile, `--content-gutter` (20px) matches `--content-grid--gap` (20px), so the content-grid's wide area starts 20px from the viewport edge. Components outside the grid that need to align with grid content on mobile should constrain their inner wrapper with `max-width: calc(100% - 2 * var(--content-grid--gap))` when they are intentionally using the smaller mobile-only inset.
 
 **Desktop alignment:** At large screens, `--content-gutter` becomes 80px, and both `content-grid` and `content-width-fluid-*` utilities use that gutter for their side inset.
+
+---
+
+## Component Patterns
+
+### Cards on taxonomy term pages
+
+Use the taxonomy-only cards treatment for term archives that list card links:
+
+- `cards--taxonomy-term-grid` on the `cards` block
+- 1 column on small, 2 columns on `md`, 3 columns on `lg`
+- cards should fill their grid cell, so remove the default card width cap for this context
+
+Keep the generic Gutenberg cards block unchanged elsewhere. It can continue using the standard 4-column desktop layout outside term pages.
 
 ---
 
