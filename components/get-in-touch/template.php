@@ -19,7 +19,7 @@ use Gust\Helpers;
         <?php if (!empty($phones)): ?>
             <ul class="get-in-touch__contacts get-in-touch__phones">
                 <?php foreach ($phones as $contact): ?>
-                    <li><?= \Gust\SVG::get(get_theme_file_path('assets/images/icons/phone.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?> <strong><?php echo esc_html($contact['type']); ?>:</strong> <span><?php echo esc_html($contact['value']); ?></span></li>
+                    <li><?= \Gust\SVG::get(get_theme_file_path('assets/images/icons/phone.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?> <strong><?php echo esc_html($contact['type']); ?>:</strong><span>&nbsp;<?php echo esc_html($contact['value']); ?></span></li>
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
