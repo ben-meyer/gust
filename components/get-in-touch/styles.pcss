@@ -1,9 +1,9 @@
 .get-in-touch {
     display: grid;
     place-items: center start;
-    width: 350px;
-    height: 207px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 1280px;
+    height: auto;
     background-color: var(--color-navy);
     color: var(--color-white);
     text-align: left;
@@ -13,6 +13,7 @@
 
 @media (min-width: theme('screens.md')) {
     .get-in-touch {
+        height: 198px;
         padding: 40px;
     }
 }
@@ -24,16 +25,27 @@
 
 .get-in-touch__contacts {
     display: flex;
-    gap: 24px;
+    flex-direction: column;
+    gap: 12px;
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+@media (min-width: theme('screens.md')) {
+    .get-in-touch__contacts {
+        flex-direction: row;
+        column-gap: 24px;
+        row-gap: 12px;
+        flex-wrap: wrap;
+    }
 }
 
 .get-in-touch__contacts li {
     display: flex;
     align-items: center;
     gap: 2px;
+    white-space: nowrap;
 }
 
 .get-in-touch__contacts li svg {
@@ -55,11 +67,4 @@
     gap: 12px;
     border-left: 1px solid var(--color-orange);
     padding-left: 24px;
-}
-
-@media (min-width: theme('screens.md')) {
-    .get-in-touch {
-        width: 1280px;
-        height: 198px;
-    }
 }
