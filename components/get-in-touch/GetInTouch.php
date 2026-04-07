@@ -9,7 +9,9 @@ class GetInTouch extends ComponentBase
     protected static string $name = 'get-in-touch';
 
     public static function make(
+        array $contacts = [],
         array $classes = [],
+        array $attributes = [],
         ...$others
     ): ?static {
         return static::createFromArgs(static::mergeArgs(get_defined_vars()));
