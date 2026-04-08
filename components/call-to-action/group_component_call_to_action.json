@@ -1,0 +1,108 @@
+{
+    "key": "group_component_call_to_action",
+    "title": "Block - Call To Action",
+    "fields": [
+        {
+            "key": "field_component_call_to_action_heading",
+            "label": "Heading (H1)",
+            "name": "heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Main heading shown at the top.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Main Heading",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_component_call_to_action_subheading",
+            "label": "Subheading (H2)",
+            "name": "subheading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Secondary heading shown under the H1.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Supporting Subheading",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_component_call_to_action_cards",
+            "label": "Cards",
+            "name": "cards",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add up to 3 cards.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_component_call_to_action_card_title",
+            "min": 0,
+            "max": 3,
+            "layout": "block",
+            "button_label": "Add Card",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_component_call_to_action_card_title",
+                    "label": "Card Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Title displayed in the card.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Card title",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_component_call_to_action_cards"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/call-to-action"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

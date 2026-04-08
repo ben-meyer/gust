@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "acf/call-to-action",
+    "title": "Call To Action",
+    "description": "CTA block with H1, H2, and a row of 3 cards.",
+    "category": "theme-blocks",
+    "icon": "megaphone",
+    "keywords": ["cta", "cards", "heading"],
+    "acf": {
+        "mode": "auto",
+        "renderCallback": "Gust\\Components\\CallToAction::renderBlock"
+    },
+    "supports": {
+        "anchor": true,
+        "align": false,
+        "color": {
+            "background": false,
+            "text": false,
+            "gradients": false
+        }
+    }
+}
