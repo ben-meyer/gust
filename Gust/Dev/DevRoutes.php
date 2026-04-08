@@ -467,13 +467,12 @@ class DevRoutes
             'globals' => 'Globals',
             'utilities' => 'Utilities',
             'components' => 'Components',
-            'all-components' => 'All Components',
             'content' => 'Content',
         ];
         $nav_html = '<nav class="dev-topbar__nav">';
         foreach ($nav_items as $route => $label) {
             $url = \esc_url(\home_url("/_dev/{$route}/"));
-            $current = ($active_route === $route || ($route === 'components' && $active_route === 'component') || ($route === 'all-components' && $active_route === 'all-components')) ? ' aria-current="page"' : '';
+            $current = ($active_route === $route || ($route === 'components' && in_array($active_route, ['component', 'all-components']))) ? ' aria-current="page"' : '';
             $nav_html .= "<a href=\"{$url}\"{$current}>{$label}</a>";
         }
         $nav_html .= '</nav>';
@@ -491,7 +490,7 @@ class DevRoutes
             $crumbs .= '<a href="'.$dev_url.'">Dev Kit</a>';
             $crumbs .= '<span class="dev-breadcrumb__sep" aria-hidden="true">›</span>';
 
-            if ($active_route === 'component') {
+            if ($active_route === 'component' || $active_route === 'all-components') {
                 $comp_url = \esc_url(\home_url('/_dev/components/'));
                 $crumbs .= '<a href="'.$comp_url.'">Components</a>';
                 $crumbs .= '<span class="dev-breadcrumb__sep" aria-hidden="true">›</span>';
@@ -680,7 +679,6 @@ class DevRoutes
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/globals/')).'">Globals</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/utilities/')).'">Utilities</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/components/')).'">Components</a></li>';
-        $content .= '<li><a href="'.\esc_url(\home_url('/_dev/all-components/')).'">All Components</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/content/')).'">Content</a></li>';
         $content .= '</ul>';
         $content .= '</div>';
@@ -701,6 +699,8 @@ class DevRoutes
             $content .= '<p>No components with examples found. Add an <code>example.php</code> file to a component directory.</p>';
         } else {
             $content .= '<ul class="dev-link-list flex-list">';
+            $all_url = \esc_url(\home_url('/_dev/all-components/'));
+            $content .= "<li><a href=\"{$all_url}\"><strong>All</strong></a></li>";
             foreach ($components as $comp_name) {
                 $url = \esc_url(\home_url("/_dev/components/{$comp_name}/"));
                 $label = \esc_html(\ucwords(\str_replace('-', ' ', $comp_name)));
