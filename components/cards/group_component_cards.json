@@ -109,6 +109,7 @@
             "choices": {
                 "recent": "Recent Posts",
                 "selected": "Selected Posts",
+                "taxonomy": "Taxonomy Terms",
                 "custom": "Custom Content"
             },
             "allow_null": 0,
@@ -326,6 +327,37 @@
             "return_format": "object"
         },
         {
+            "key": "field_682ca1f0a0002",
+            "label": "Trip Styles",
+            "name": "selected_terms",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Leave empty to show all terms, or select specific terms.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5e691705dc321",
+                        "operator": "==",
+                        "value": "taxonomy"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "trip_style",
+            "field_type": "multi_select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "object",
+            "multiple": 1
+        },
+        {
             "key": "field_5e666ecfc8971",
             "label": "Options",
             "name": "",
@@ -364,32 +396,6 @@
             "default_value": "",
             "layout": "horizontal",
             "return_format": "value"
-        },
-        {
-            "key": "field_61a60e240606a",
-            "label": "Card Background Color",
-            "name": "card_background_color",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "default": "Default",
-                "none": "None"
-            },
-            "default_value": false,
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 1,
-            "ajax": 0,
-            "return_format": "value",
-            "placeholder": ""
         },
         {
             "key": "field_61a6151c59e10",

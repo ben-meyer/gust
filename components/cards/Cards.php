@@ -71,6 +71,15 @@ class Cards extends ComponentBase
                     $objects = $query->posts;
                 } elseif ($args['card_source'] === 'selected') {
                     $objects = $args['selected'];
+                } elseif ($args['card_source'] === 'taxonomy') {
+                    if (! empty($args['selected_terms'])) {
+                        $objects = $args['selected_terms'];
+                    } else {
+                        $objects = get_terms([
+                            'taxonomy' => 'trip_style',
+                            'hide_empty' => false,
+                        ]);
+                    }
                 }
 
                 if (! empty($objects)) {
