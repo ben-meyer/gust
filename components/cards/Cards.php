@@ -119,10 +119,6 @@ class Cards extends ComponentBase
             $args['classes'][] = 'cards--columns-'.$args['columns'];
         }
 
-        if ($args['align'] !== 'full') {
-            $args['slider_on_mobile'] = false;
-        }
-
         $args['classes'][] = 'cards--type--'.($args['type'] ?? 'default');
         $args['classes'][] = ($args['card_source'] ?? null) === 'custom' ? 'cards--source--custom' : null;
         $args['classes'][] = ! empty($args['slider_on_mobile']) ? 'cards--slider-on-mobile' : null;

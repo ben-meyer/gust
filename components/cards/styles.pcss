@@ -147,20 +147,21 @@
     }
 
     &:where(.cards--slider-on-mobile) {
-        @media (width < theme('screens.lg')) {
+        @media (max-width: 1023px) {
             --animate--translateY: 0;
 
             .cards__items {
-                position: relative;
-                display: flex;
-                flex-wrap: nowrap;
-                justify-content: flex-start;
+                position: relative !important;
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                justify-content: flex-start !important;
+                grid-template-columns: unset !important;
                 padding-bottom: space(8);
                 margin-right: calc(-1 * var(--container-padding));
                 margin-bottom: calc(space(8) * -1);
                 margin-left: calc(-1 * var(--container-padding));
                 column-gap: 0;
-                overflow-x: auto;
+                overflow-x: auto !important;
                 scroll-snap-type: x mandatory;
                 will-change: transform;
 
