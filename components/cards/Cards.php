@@ -99,8 +99,9 @@ class Cards extends ComponentBase
             }
         }
 
-        if (! empty($args['type']) && $args['type'] === 'icons') {
-            $args['card_type'] = 'icon';
+        if (! empty($args['type']) && $args['type'] === 'horizontal') {
+            $args['card_type'] = 'horizontal';
+            $args['columns'] = '2';
         }
 
         if (! empty($args['button'])) {
@@ -129,6 +130,10 @@ class Cards extends ComponentBase
                     && empty($args['items'][$key]['image_size'])
                 ) {
                     $args['items'][$key]['image_size'] = 'gust_card_square';
+                }
+
+                if ($args['type'] === 'horizontal') {
+                    $args['items'][$key]['show_read_more'] = false;
                 }
             }
         }

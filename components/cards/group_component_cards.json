@@ -387,7 +387,9 @@
             "save_terms": 0,
             "load_terms": 0,
             "return_format": "object",
-            "multiple": 1
+            "multiple": 1,
+            "min": "2",
+            "max": "6"
         },
         {
             "key": "field_5e666ecfc8971",
@@ -422,7 +424,7 @@
             },
             "choices": {
                 "default": "Default",
-                "icons": "Icons"
+                "horizontal": "Horizontal"
             },
             "allow_null": 0,
             "default_value": "",
