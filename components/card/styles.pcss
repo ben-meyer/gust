@@ -51,7 +51,7 @@
         flex-flow: column nowrap;
         padding: var(--g-card--inner-padding-y) var(--g-card--inner-padding-x);
         padding-left: 0;
-        padding-top: space(12);
+        padding-top: space(20);
 
         > *:not(.g-card__header) {
             z-index: 200; /* Above card link pseudo-element */
@@ -87,7 +87,7 @@
         @apply type-regular;
 
         flex: 1;
-        margin-top: space(4);
+        margin-top: space(12);
     }
 
     :where(.g-card__meta) {
@@ -126,7 +126,8 @@
 
     :where(.g-card__find-out-more) {
         align-self: start;
-        margin-top: space(8);
+        margin-top: space(20);
+        width: 100%;
     }
 
     &.has-embed {

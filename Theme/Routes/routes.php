@@ -29,7 +29,7 @@ Router::decorate404(NotFoundController::class)
     ->withSlot('template-content', fn () => NotFoundController::renderContent());
 
 // Events archive
-Router::decoratePostType('event', EventsModule::class)
+Router::decoratePostType('events', EventsModule::class)
     ->withPage('events')
     ->withSlot('template-content', [EventsModule::class, 'renderArchive']);
 
