@@ -472,7 +472,7 @@
             "name": "slider_on_mobile",
             "aria-label": "",
             "type": "true_false",
-            "instructions": "Only compatible with align full.",
+            "instructions": "Enable horizontal scrolling on mobile viewports.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
