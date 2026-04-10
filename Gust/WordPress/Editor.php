@@ -78,6 +78,9 @@ class Editor
             $allowed = array_merge($allowed, array_keys(\acf_get_block_types()));
         }
 
+        // Remove Columns and Group blocks to prevent transform options on Cards.
+        $allowed = array_diff($allowed, ['core/columns', 'core/group']);
+
         return $allowed;
     }
 
@@ -86,7 +89,6 @@ class Editor
      *
      * @param  array  $editorSettings  Default editor settings.
      * @param  \WP_Block_Editor_Context  $context  Editor context.
-     * @return array
      */
     public static function editorSettings(array $editorSettings, \WP_Block_Editor_Context $context): array
     {

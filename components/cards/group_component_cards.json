@@ -454,14 +454,11 @@
                 "id": ""
             },
             "choices": {
-                "default": "Default",
                 "2": "2",
                 "3": "3",
-                "4": "4",
-                "5": "5",
-                "6": "6"
+                "4": "4"
             },
-            "default_value": false,
+            "default_value": 3,
             "allow_null": 0,
             "multiple": 0,
             "ui": 0,
