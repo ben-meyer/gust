@@ -71,12 +71,21 @@ class Cards extends ComponentBase
                     $objects = $query->posts;
                 } elseif ($args['card_source'] === 'selected') {
                     $objects = $args['selected'];
-                } elseif ($args['card_source'] === 'taxonomy') {
-                    if (! empty($args['selected_terms'])) {
-                        $objects = $args['selected_terms'];
+                } elseif ($args['card_source'] === 'trip_styles') {
+                    if (! empty($args['selected_trip_styles'])) {
+                        $objects = $args['selected_trip_styles'];
                     } else {
                         $objects = get_terms([
                             'taxonomy' => 'trip_style',
+                            'hide_empty' => false,
+                        ]);
+                    }
+                } elseif ($args['card_source'] === 'destinations') {
+                    if (! empty($args['selected_destinations'])) {
+                        $objects = $args['selected_destinations'];
+                    } else {
+                        $objects = get_terms([
+                            'taxonomy' => 'country',
                             'hide_empty' => false,
                         ]);
                     }
@@ -95,7 +104,7 @@ class Cards extends ComponentBase
         }
 
         if (! empty($args['button'])) {
-            $args['button']['classes'] = ['btn'];
+            $args['button']['classes'] = ['btn', 'color-context-white'];
         }
 
         if (! empty($args['items'])) {

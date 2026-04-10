@@ -21,7 +21,7 @@ class Card extends ComponentBase
     {
         return [
             'background' => 'white',
-            'image_size' => 'medium_large',
+            'image_size' => 'gust_card_square',
             'show_read_more' => true,
             'heading_class' => 'is-style-type-h4',
         ];
