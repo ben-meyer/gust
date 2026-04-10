@@ -213,27 +213,6 @@
                     "parent_repeater": "field_5e29665057d3f"
                 },
                 {
-                    "key": "field_5e6919a792921",
-                    "label": "Meta",
-                    "name": "meta",
-                    "aria-label": "",
-                    "type": "wysiwyg",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "tabs": "all",
-                    "toolbar": "basic_formatting",
-                    "media_upload": 0,
-                    "delay": 0,
-                    "parent_repeater": "field_5e29665057d3f"
-                },
-                {
                     "key": "field_5e691dc59f7bd",
                     "label": "Link",
                     "name": "link",

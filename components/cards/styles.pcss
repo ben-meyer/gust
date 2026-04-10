@@ -13,14 +13,27 @@
     :where(.cards__heading) {
         max-width: var(--heading--max-width);
         margin-inline: auto;
-        text-align: center;
+        text-align: left;
     }
 
     :where(.cards__subheading) {
         @apply margin-trim;
-        @apply content-width-2xs;
+        @apply heading-attributes;
 
         margin: var(--space-base) auto;
+        text-align: left;
+        color: var(--color-mid-blue);
+        font-size: rfs(32, 44);
+        line-height: 1;
+        letter-spacing: -0.5px;
+        text-transform: uppercase;
+
+        & > * {
+            font-size: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            font-weight: inherit;
+        }
     }
 
     :where(.cards__items) {
