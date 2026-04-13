@@ -1,9 +1,14 @@
 import Swiper from 'swiper';
 import { Navigation, Keyboard, Mousewheel, FreeMode } from 'swiper/modules';
 
-class SqGallery extends HTMLElement {
-	connectedCallback() {
-		const swiperEl = this.querySelector('.gallery__swiper');
+class Gallery {
+	constructor(element) {
+		this.element = element;
+		if (this.element.dataset.galleryInitialized === 'true') {
+			return;
+		}
+
+		const swiperEl = this.element.querySelector('.gallery__swiper');
 		if (!swiperEl) return;
 
 		this.swiper = new Swiper(swiperEl, {
@@ -25,8 +30,8 @@ class SqGallery extends HTMLElement {
 				forceToAxis: true,
 			},
 			navigation: {
-				nextEl: this.querySelector('.gallery__next'),
-				prevEl: this.querySelector('.gallery__prev'),
+				nextEl: this.element.querySelector('.gallery__next'),
+				prevEl: this.element.querySelector('.gallery__prev'),
 			},
 			breakpoints: {
 				768: {
@@ -40,11 +45,19 @@ class SqGallery extends HTMLElement {
 				},
 			},
 		});
-	}
 
-	disconnectedCallback() {
-		this.swiper?.destroy();
+		this.element.dataset.galleryInitialized = 'true';
 	}
 }
 
-customElements.define('sq-gallery', SqGallery);
+function initGalleries(root = document) {
+	root.querySelectorAll('sq-gallery').forEach((element) => {
+		new Gallery(element);
+	});
+}
+
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', () => initGalleries(), { once: true });
+} else {
+	initGalleries();
+}

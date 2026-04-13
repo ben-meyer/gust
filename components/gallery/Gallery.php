@@ -38,6 +38,23 @@ class Gallery extends ComponentBase
                 'classes' => ['gallery__heading'],
             ];
         }
+
+        if (! empty($args['images'])) {
+            $args['images'] = array_values(array_filter(array_map(function ($item) {
+                if (! is_array($item)) {
+                    return null;
+                }
+
+                if (! empty($item['image'])) {
+                    return $item;
+                }
+
+                $image_id = $item['ID'] ?? $item['id'] ?? null;
+
+                return ! empty($image_id) ? ['image' => $item] : null;
+            }, $args['images'])));
+        }
+
         return $args;
     }
 }
