@@ -21,7 +21,7 @@ class Card extends ComponentBase
     {
         return [
             'background' => 'white',
-            'image_size' => 'medium_large',
+            'image_size' => 'gust_card_square',
             'show_read_more' => true,
             'heading_class' => 'is-style-type-h4',
         ];
@@ -109,7 +109,7 @@ class Card extends ComponentBase
             }
 
             if (empty($args['content']['read_more']['title'])) {
-                $args['content']['read_more']['title'] = __('Find out more', 'gust');
+                $args['content']['read_more']['title'] = __('Find your trip', 'gust');
             }
         } elseif (! empty($args['content'])) {
             $content = $args['content'];
@@ -157,7 +157,7 @@ class Card extends ComponentBase
         }
 
         if (! empty($args['content']['image'])) {
-            if (($args['type'] ?? null) === 'trip-style' && empty($args['image_size'])) {
+            if (($args['type'] ?? null) === 'trip-style' && ($args['image_size'] ?? null) === 'medium_large') {
                 $args['image_size'] = 'gust_card_square';
             }
 
