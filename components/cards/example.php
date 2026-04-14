@@ -144,6 +144,38 @@ $image_ids = array_map(fn ($a) => $a->ID, $attachments);
 </section>
 
 <section class="component-example-section">
+    <h2 class="component-example-section__title">Horizontal Cards</h2>
+    <p class="component-example-section__description">Horizontal card layout with image left, text right. Uses <code>type: 'horizontal'</code>.</p>
+    <div class="component-example-section__preview">
+        <?php if (count($image_ids) >= 2) { ?>
+            <?= Cards::make(
+                type: 'horizontal',
+                items: [
+                    [
+                        'content' => [
+                            'heading' => 'Horizontal Card One',
+                            'text' => 'Image on the left, text on the right.',
+                            'image' => ['id' => $image_ids[0]],
+                            'link' => ['url' => '#', 'title' => 'Explore'],
+                        ],
+                    ],
+                    [
+                        'content' => [
+                            'heading' => 'Horizontal Card Two',
+                            'text' => 'A two-column grid of horizontal cards.',
+                            'image' => ['id' => $image_ids[1]],
+                            'link' => ['url' => '#', 'title' => 'Explore'],
+                        ],
+                    ],
+                ],
+            ); ?>
+        <?php } else { ?>
+            <p><em>Upload at least 2 images to the media library to see this example.</em></p>
+        <?php } ?>
+    </div>
+</section>
+
+<section class="component-example-section">
     <h2 class="component-example-section__title">Two Column Cards</h2>
     <p class="component-example-section__description">Cards in a two-column layout.</p>
     <div class="component-example-section__preview">

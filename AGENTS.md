@@ -38,3 +38,4 @@ Key features include:
 - `.claude/skills/gust-dev/` — Dev workflows (components, CSS, testing, setup, build)
 - `.claude/skills/website-spec/` — Used for writing a WEBSITE_SPEC.md defining pages, routes, templates, and components for a project.
 - `.claude/skills/brand-expert/` — SwimQuest brand compliance: colour contexts, type utilities, spacing rules. Use when reviewing components for brand, applying brand values, or recording brand changes. **When brand values change, always invoke this skill to update swimquest-brand.md.**
+- `.claude/skills/gust-upstream-sync/` — Contributing core theme fixes back to [kite-co/gust](https://github.com/kite-co-code/gust). Use when you identify and fix bugs or improvements to core Gust functionality. Ensures fixes are documented agnostically (not project-specific) and properly contributed for Jerome to review and merge.

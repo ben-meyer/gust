@@ -20,7 +20,7 @@
                 classes: ['site-header__navigation'],
             ); ?>
 
-            <div class="site-header__search-desktop-wrapper">
+            <!-- <div class="site-header__search-desktop-wrapper">
                 <button
                     class="site-header__search-toggler js-search-toggle btn btn--ghost"
                     aria-expanded="false"
@@ -33,7 +33,7 @@
                 <div class="site-header__search-desktop" id="site-header-search-desktop" hidden>
                     <?= \Gust\Components\HeaderSearch::make(); ?>
                 </div>
-            </div>
+            </div> -->
 
             <?php if (! empty($this->content['call_to_action_1'])) { ?>
                 <?= \Gust\Components\Link::make(...$this->content['call_to_action_1']); ?>
@@ -41,7 +41,7 @@
         </nav>
 
         <div class="site-header__buttons">
-            <button
+            <!-- <button
                 class="site-header__search-toggler js-search-toggle btn btn--ghost"
                 aria-expanded="false"
                 aria-controls="site-header-search-panel"
@@ -54,7 +54,7 @@
                 <span class="sr-only"><?= __('Search', 'gust'); ?></span>
                 <span aria-hidden="true" data-show-collapsed>Search</span>
                 <span aria-hidden="true" data-hide-collapsed>Close</span>
-            </button>
+            </button> -->
 
             <button
                 class="site-header__burger js-site-header-toggle btn btn--ghost"
@@ -84,9 +84,9 @@
         </div>
     </div>
 
-    <div class="site-header__panel site-header__search-panel" id="site-header-search-panel" inert>
+    <!-- <div class="site-header__panel site-header__search-panel" id="site-header-search-panel" inert>
         <div class="site-header__panel-content">
             <?= \Gust\Components\HeaderSearch::make(); ?>
         </div>
-    </div>
+    </div> -->
 </header>
