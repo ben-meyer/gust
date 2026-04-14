@@ -4,7 +4,7 @@ namespace Theme\Modules\Events;
 
 class PostType
 {
-    protected const SLUG = 'event';
+    protected const SLUG = 'events';
 
     public static function init(): void
     {
@@ -23,33 +23,28 @@ class PostType
             'has_archive' => true,
             'hierarchical' => false,
             'show_in_rest' => true,
-            'menu_position' => 25,
-            'menu_icon' => 'dashicons-calendar',
+            'menu_position' => 6,
+            'menu_icon' => 'dashicons-calendar-alt',
             'enter_title_here' => 'Event Name',
             'supports' => [
                 'title',
                 'editor',
                 'excerpt',
-                'revisions',
                 'thumbnail',
-                'author',
+                'revisions',
                 'custom-fields',
             ],
             'taxonomies' => [
-                'location',
-            ],
-            'template' => [
-                [
-                    'core/paragraph',
-                    [
-                        'placeholder' => 'Add content...',
-                    ],
-                ],
+                'trip_style',
+                'swim_type',
+                'skill_level',
+                'country',
+                'city',
             ],
             'admin_filters' => [
-                'location' => [
-                    'taxonomy' => 'location',
-                ],
+                'trip_style' => ['taxonomy' => 'trip_style'],
+                'swim_type' => ['taxonomy' => 'swim_type'],
+                'country' => ['taxonomy' => 'country'],
             ],
             'admin_cols' => [
                 'thumbnail' => [
@@ -58,19 +53,15 @@ class PostType
                     'width' => 80,
                     'height' => 80,
                 ],
-                'title' => [
-                    'title' => 'Title',
-                ],
-                'author' => [
-                    'title' => 'Author',
-                ],
-                'location' => [
-                    'taxonomy' => 'location',
-                ],
+                'title' => ['title' => 'Title'],
+                'country' => ['taxonomy' => 'country'],
+                'city' => ['taxonomy' => 'city'],
+                'trip_style' => ['taxonomy' => 'trip_style'],
+                'swim_type' => ['taxonomy' => 'swim_type'],
                 'updated' => [
                     'title' => 'Updated',
                     'post_field' => 'post_modified',
-                    'date_format' => 'Y/m/d \a\t H:i a',
+                    'date_format' => 'Y/m/d',
                 ],
             ],
         ], [
@@ -80,7 +71,7 @@ class PostType
         ]);
     }
 
-    public static function filterGustTemplatesPostTypes($postTypes)
+    public static function filterGustTemplatesPostTypes(array $postTypes): array
     {
         $postTypes[] = self::SLUG;
 

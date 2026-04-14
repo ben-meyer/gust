@@ -38,3 +38,9 @@ vite.config.js
 webpack.config.js
 wp-sync.yml
 CLAUDE.md
+AGENTS.md
+.claude
+.claude/**
+vendor
+vendor/**
+auth.json

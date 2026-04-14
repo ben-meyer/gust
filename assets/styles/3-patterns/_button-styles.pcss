@@ -2,21 +2,24 @@
 
 @layer base {
     :root {
-        /* --btn--font-size: rfs(18, 22); */
+        --btn--font-size: 18px;
+        --btn--font-family: var(--font-display);
+        --btn--font-weight: 400;
+        --btn--text-transform: uppercase;
+        --btn--letter-spacing: 0.75px;
 
-        --btn--padding-y: 0.2em;
-        --btn--padding-x: 1em;
+        --btn--padding-y: space(8);
+        --btn--padding-x: space(16);
 
-        --btn--border-width: 2px;
-        --btn--border-radius: 999px;
+        --btn--border-width: 0.5px;
 
-        --btn--background-color: var(--color-brand-2);
-        --btn--border-color: var(--color-brand-2);
-        --btn--color: var(--color-accent);
+        --btn--background-color: var(--color-mid-blue);
+        --btn--border-color: var(--color-mid-blue);
+        --btn--color: var(--color-white);
 
-        --btn--background-color--hover: var(--color-accent);
-        --btn--border-color--hover: var(--color-accent);
-        --btn--color-hover: foreground-color("accent");
+        --btn--background-color--hover: var(--color-navy);
+        --btn--border-color--hover: var(--color-navy);
+        --btn--color-hover: var(--color-white);
 
         --btn--gap: 0.5em;
     }
@@ -36,12 +39,17 @@
     background-color: var(--btn--background-color);
     color: var(--btn--color);
     cursor: pointer;
+    font-family: var(--btn--font-family, inherit);
     font-size: var(--btn--font-size, inherit);
+    font-weight: var(--btn--font-weight, inherit);
+    letter-spacing: var(--btn--letter-spacing, normal);
+    text-transform: var(--btn--text-transform, none);
     gap: var(--btn--gap);
     line-height: inherit;
     text-align: center;
     text-decoration: none; /* [1] */
     transition: transition(color, background-color, border-color, box-shadow, transform);
+    transition-duration: 0.3s;
     user-select: none;
 
     @media (hover: hover) {

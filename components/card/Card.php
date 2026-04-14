@@ -21,7 +21,7 @@ class Card extends ComponentBase
     {
         return [
             'background' => 'white',
-            'image_size' => 'medium_large',
+            'image_size' => 'gust_card_square',
             'show_read_more' => true,
             'heading_class' => 'is-style-type-h4',
         ];
@@ -95,9 +95,13 @@ class Card extends ComponentBase
             } elseif ($args['object'] instanceof \WP_Term) {
                 $args['content'] = [
                     'heading' => $object->name,
-                    'url' => get_term_link($object->ID),
-                    'text' => $object->description,
+                    'url' => get_term_link($object->term_id),
+                    'text' => get_field('subheading', $object) ?: '',
                 ];
+
+                if ($image_id = get_field('image', $object)) {
+                    $args['content']['image'] = ['ID' => $image_id];
+                }
             }
 
             if (! empty($args['content']['url']) && empty($args['content']['read_more']['url'])) {
@@ -105,7 +109,7 @@ class Card extends ComponentBase
             }
 
             if (empty($args['content']['read_more']['title'])) {
-                $args['content']['read_more']['title'] = __('Read more', 'gust');
+                $args['content']['read_more']['title'] = __('Find your trip', 'gust');
             }
         } elseif (! empty($args['content'])) {
             $content = $args['content'];
@@ -126,7 +130,7 @@ class Card extends ComponentBase
 
         if (! empty($args['content']['read_more'])) {
             $args['content']['read_more'] = array_merge([
-                'classes' => ['btn', 'g-card__read-more'],
+                'classes' => ['btn', 'g-card__find-out-more', 'color-context-white'],
             ], $args['content']['read_more']);
         }
 
@@ -153,6 +157,10 @@ class Card extends ComponentBase
         }
 
         if (! empty($args['content']['image'])) {
+            if (($args['type'] ?? null) === 'trip-style' && ($args['image_size'] ?? null) === 'medium_large') {
+                $args['image_size'] = 'gust_card_square';
+            }
+
             $args['content']['image']['size'] = $args['image_size'];
         }
 

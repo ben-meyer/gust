@@ -10,7 +10,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 THEME_DIR="$(dirname "$SCRIPT_DIR")"
 CONFIG_FILE="$THEME_DIR/wp-sync.yml"
 ENV_FILE="$THEME_DIR/.env"
-THEME_NAME="sistermidnight-theme"
+THEME_NAME="gust"
 
 ENV="${1:-staging}"
 DRY_RUN=""

@@ -23,6 +23,8 @@
     grid-template-columns: var(--width-fluid-md);
     isolation: isolate; /* Create local stacking context */
     justify-items: var(--page-header--grid-alignment-x);
+    background-color: var(--color-white);
+    color: var(--color-navy);
 
     @media (min-width: theme('screens.md')) {
         --page-header--mini-image--size: 9.375rem; /* 150px */
@@ -93,6 +95,7 @@
 
     :where(.page-header__subheading) {
         @apply margin-trim;
+        @apply type-large;
 
         max-width: var(--page-header--subheading--max-width);
         margin-top: var(--page-header--content--spacing, var(--space-base));
@@ -169,6 +172,31 @@
     &:where(.page-header--type--article) {
         .page-header__heading {
             @apply type-h2;
+        }
+    }
+
+    &:where(.page-header--type--guide) {
+        --page-header--grid-alignment-x: flex-start;
+        --page-header--text-align: left;
+        padding-inline: var(--content-gutter);
+        justify-content: flex-start;
+
+        .page-header__subheading {
+            @apply type-large;
+            color: var(--color-mid-blue);
+        }
+
+        .page-header__heading {
+            color: var(--color-navy);
+        }
+
+        :where(.page-header__inner) {
+            padding-block: spaceFluid(24, 32) 0;
+            place-items: start;
+        }
+
+        :where(.page-header__content) {
+            max-width: 44rem;
         }
     }
 

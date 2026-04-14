@@ -57,19 +57,6 @@ class TaxonomyFilters extends ComponentBase
 
         if (! empty($args['object'])) {
             $object = $args['object'];
-
-            if ($object instanceof \WP_Term) {
-                $args['taxonomy'] = $object->taxonomy;
-                $args['current_item'] = $object->term_id;
-            } elseif ($object instanceof \WP_Post_Type) {
-                $args['taxonomy'] = 'category';
-
-                if ($object->name === 'post') {
-                    $args['taxonomy'] = 'category';
-                } elseif ($object->name === 'event') {
-                    $args['taxonomy'] = 'location';
-                }
-            }
         }
 
         if (! empty($args['taxonomy'])) {

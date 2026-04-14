@@ -1,5 +1,5 @@
 <section class="<?= classes('accordion', 'wp-block', $this->classes) ?>" <?= attributes($this->attributes) ?>>
-    <div class="accordion__inner content-width-sm">
+    <div class="accordion__inner content-width-sm align-left w-full">
         <?php if (! empty($this->heading)) { ?>
             <div class="accordion__header">
                 <?= \Gust\Components\Heading::make(...$this->heading); ?>

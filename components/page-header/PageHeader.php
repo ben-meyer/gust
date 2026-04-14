@@ -48,9 +48,11 @@ class PageHeader extends ComponentBase
     {
         if (isset($args['is_preview']) && $args['is_preview']) {
             $args['object'] = \get_post($args['post_id']);
-        } else {
+        } elseif (empty($args['object'])) {
             $args['object'] = \Gust\WordPress\PageObject::get() ?? null;
         }
+
+        $is_guide = ! empty($args['type']) && $args['type'] === 'guide';
 
         $heading = '';
 
@@ -59,6 +61,14 @@ class PageHeader extends ComponentBase
 
             if ($object instanceof \WP_Term) {
                 $heading = $object->name;
+
+                if ($subheading = \get_field('subheading', $object)) {
+                    $args['subheading'] = $subheading;
+                }
+
+                if ($object->taxonomy === 'trip_style') {
+                    $args['image'] = null;
+                }
             } elseif ($object instanceof \WP_Post_Type) {
                 if ($routerPage = \Gust\Router::getPage()) {
                     $object = $routerPage;
@@ -69,19 +79,15 @@ class PageHeader extends ComponentBase
                 $heading = __('404', 'gust');
             } elseif ($object instanceof \WP_Query && $object->is_search()) {
                 $heading = __('Search', 'gust');
-
-                if (! empty($object->query['s'])) {
-                    $args['subheading'] = sprintf(__("Showing results for '%s'", 'gust'), $object->query['s']);
-                }
             } elseif ($object instanceof \WP_User) {
                 $heading = sprintf(__('Posts by %s', 'gust'), $object->data->display_name);
             }
 
             if ($object instanceof \WP_Post) {
                 $heading = $object->post_title;
-                $args['image'] = \get_post_thumbnail_id($object);
 
                 if ($object->post_type === 'post') {
+                    $args['image'] = \get_post_thumbnail_id($object);
                     $args['meta'] = sprintf(__('Published on %s ', 'gust'), \get_the_date(\get_option('date_format'), $object->ID));
                     $args['labels'] = \Theme\Utils\ObjectMeta::getObjectLabels($object->ID, ['limit' => 3, 'taxonomies' => ['category']]);
                     $args['background'] = false;
@@ -100,6 +106,8 @@ class PageHeader extends ComponentBase
                     if (empty($object->post_parent)) {
                         $args['show_breadcrumbs'] = false;
                     }
+                } elseif ($object->post_type === 'guide') {
+                    $is_guide = true;
                 }
 
                 if ($heading === 'Auto Draft') {
@@ -158,6 +166,13 @@ class PageHeader extends ComponentBase
                 'el' => 'h1',
                 'classes' => ['page-header__heading', 'is-style-type-h1'],
             ];
+        }
+
+        if ($is_guide) {
+            $args['background'] = 'none';
+            $args['show_breadcrumbs'] = false;
+            $args['subheading'] = __('Meet our team', 'gust');
+            $args['type'] = 'guide';
         }
 
         if (! empty($args['background']) && $args['background'] !== 'none') {

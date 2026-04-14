@@ -8,6 +8,7 @@
         "wpackagist-plugin/query-monitor": "*",
         "wpackagist-plugin/safe-svg": "*",
         "wpackagist-plugin/wordpress-seo": "*",
+        "wpackagist-plugin/contact-form-7": "^6.1",
         "wpengine/advanced-custom-fields-pro": "*"
     },
     "require-dev": {
