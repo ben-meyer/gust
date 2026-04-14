@@ -55,7 +55,6 @@
 
         "image_sizes": {
             "gust_super": [2500, 2500, false],
-            "gust_card_square": [800, 800, true],
             "full_width": [2600, 600, true],
             "gust_card_square": [400, 400, true],
             "1536x1536": false
