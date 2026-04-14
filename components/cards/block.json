@@ -6,7 +6,6 @@
     "description": "A cards block",
     "category": "theme-blocks",
     "icon": "schedule",
-    "align": "wide",
     "acf": {
         "mode": "auto",
         "renderCallback": "Gust\\Components\\Cards::renderBlock"
