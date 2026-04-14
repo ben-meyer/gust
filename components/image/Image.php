@@ -51,6 +51,28 @@ class Image extends ComponentBase
             $args['attributes']['sizes'] = $args['sizes'];
         }
 
+        // Check if 'full_width' class is present or size is set to 'full_width'
+        $isFullWidth = isset($args['size']) && $args['size'] === 'full_width';
+        if (! $isFullWidth && ! empty($args['classes']) && in_array('full_width', $args['classes'])) {
+            $isFullWidth = true;
+            $args['size'] = 'full_width'; // Ensure WP uses the registered size
+        }
+
+        if ($isFullWidth) {
+            // Ensure registered image size and forced 600px height styling.
+            $args['size'] = 'full_width';
+
+            $existingClass = trim($args['attributes']['class'] ?? '');
+            $args['attributes']['class'] = trim(($existingClass ? $existingClass . ' ' : '') . 'h-[600px] object-cover block');
+
+            $existingStyle = trim($args['attributes']['style'] ?? '');
+            $args['attributes']['style'] = trim(($existingStyle ? $existingStyle . '; ' : '') . 'position:relative;left:50%;margin-left:-50vw;width:100vw;max-width:100vw;min-width:100vw;height:min(600px,100vw);object-fit:cover;display:block;');
+
+            if (empty($args['attributes']['sizes'])) {
+                $args['attributes']['sizes'] = '100vw';
+            }
+        }
+
         if (! empty($args['id'])) {
             $args['output'] = wp_get_attachment_image(
                 $args['id'],
