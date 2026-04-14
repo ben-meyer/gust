@@ -24,8 +24,6 @@ assets/**
 .prettierrc
 .stylelintrc
 biome.json
-composer.json
-composer.lock
 gulpfile.js
 LICENCE
 package-lock.json
@@ -41,6 +39,6 @@ CLAUDE.md
 AGENTS.md
 .claude
 .claude/**
-vendor
-vendor/**
 auth.json
+auth.json.example
+public/hot
