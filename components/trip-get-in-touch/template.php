@@ -14,7 +14,7 @@
             <ul class="trip-get-in-touch__contacts">
                 <?php foreach ($this->contacts as $contact): ?>
                     <li class="trip-get-in-touch__contact trip-get-in-touch__contact--<?= esc_attr($contact['icon']) ?>">
-                        <?= \Gust\SVG::get(get_theme_file_path('assets/images/icons/' . $contact['icon'] . '.svg'), ['asset' => false, 'width' => 16, 'height' => 16]) ?>
+                        <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/' . $contact['icon'] . '.svg'), ['asset' => false, 'width' => 16, 'height' => 16]) ?>
 
                         <?php if (! empty($contact['value'])): ?>
                             <strong><?= esc_html($contact['label']) ?>:</strong>&nbsp;<?php if (! empty($contact['url'])): ?>

@@ -19,14 +19,14 @@ use Gust\Helpers;
         <?php if (!empty($phones)): ?>
             <ul class="get-in-touch__contacts get-in-touch__phones">
                 <?php foreach ($phones as $contact): ?>
-                    <li><?= \Gust\SVG::get(get_theme_file_path('assets/images/icons/phone.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?> <strong><?php echo esc_html($contact['type']); ?>:</strong><span>&nbsp;<?php echo esc_html($contact['value']); ?></span></li>
+                    <li><?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/phone.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?> <strong><?php echo esc_html($contact['type']); ?>:</strong><span>&nbsp;<?php echo esc_html($contact['value']); ?></span></li>
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
         <?php if (!empty($emails)): ?>
             <ul class="get-in-touch__contacts get-in-touch__emails">
                 <?php foreach ($emails as $contact): ?>
-                    <li><?= \Gust\SVG::get(get_theme_file_path('assets/images/icons/email.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?> <?php echo esc_html($contact['value']); ?></li>
+                    <li><?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/email.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?> <?php echo esc_html($contact['value']); ?></li>
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
