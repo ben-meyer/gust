@@ -4,7 +4,9 @@ import { Navigation, Keyboard, Mousewheel, FreeMode } from 'swiper/modules';
 class Gallery {
 	constructor(element) {
 		this.element = element;
+		console.log('Creating Gallery instance for element:', this.element);
 		if (this.element.dataset.galleryInitialized === 'true') {
+			console.log('Gallery already initialized, skipping:', this.element);
 			return;
 		}
 
@@ -32,6 +34,7 @@ class Gallery {
 			navigation: {
 				nextEl: this.element.querySelector('.gallery__next'),
 				prevEl: this.element.querySelector('.gallery__prev'),
+				addIcons: true,
 			},
 			breakpoints: {
 				768: {
@@ -47,6 +50,7 @@ class Gallery {
 		});
 
 		this.element.dataset.galleryInitialized = 'true';
+		console.log('Initialized gallery:', this.element);
 	}
 }
 

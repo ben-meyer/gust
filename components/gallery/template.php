@@ -15,27 +15,26 @@ $image_count = count($this->images ?? []);
 <sq-gallery class="<?= classes('wp-block', 'alignfull', $this->classes) ?>"<?= Helpers::buildAttributes($this->attributes); ?>>
     <!-- Gallery content -->
     <div class="gallery__inner content-width-fluid-lg">
-        <div class="gallery__header">
-            <?php if (! empty($this->heading)) { ?>
+        <?php if (! empty($this->heading)) { ?>
+            <div class="gallery__header">
                 <?= Heading::make(...$this->heading); ?>
-            <?php } ?>
+            </div>
+        <?php } ?>
 
-            <?php if ($image_count > 1) { ?>
-                <div class="gallery__nav">
+        <?php if (! empty($this->images)) { ?>
+            <div class="gallery__swiper-wrap">
+                <?php if ($image_count > 1) { ?>
                     <button type="button" class="gallery__prev btn btn--ghost" aria-label="Previous slide">
-                        <span class="btn__icon" style="--btn--icon: url('<?= staticUrl('images/icons/quote.svg') ?>')"></span>
+                        <span class="btn__icon" style="--btn--icon: url('<?= staticUrl('images/icons/chevron-right.svg') ?>')"></span>
                     </button>
 
                     <button type="button" class="gallery__next btn btn--ghost" aria-label="Next slide">
-                        <span class="btn__icon" style="--btn--icon: url('<?= staticUrl('images/icons/quote.svg') ?>')"></span>
+                        <span class="btn__icon" style="--btn--icon: url('<?= staticUrl('images/icons/chevron-right.svg') ?>')"></span>
                     </button>
-                </div>
-            <?php } ?>
-        </div>
+                <?php } ?>
 
-        <?php if (! empty($this->images)) { ?>
-            <div class="gallery__swiper swiper">
-                <div class="swiper-wrapper">
+                <div class="gallery__swiper swiper">
+                    <div class="swiper-wrapper">
                     <?php foreach ($this->images as $item) { ?>
                         <?php if (! empty($item['image'])) {
                             $image_id = $item['image']['ID'] ?? $item['image']['id'] ?? null;
@@ -51,6 +50,8 @@ $image_count = count($this->images ?? []);
                             </div>
                         <?php } ?>
                     <?php } ?>
+                    </div>
+                </div>
                 </div>
             </div>
         <?php } ?>

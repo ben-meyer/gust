@@ -1,15 +1,13 @@
 @import 'swiper/css' layer(vendor);
 
 sq-gallery {
+    --gallery-image-height: clamp(350px, 60vh, 450px);
+
     display: block;
     padding-block: var(--space--layout);
     overflow: clip;
 
     .gallery__header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: space(4);
         margin-bottom: spaceFluid(24, 40);
     }
 
@@ -18,22 +16,28 @@ sq-gallery {
         margin: 0;
     }
 
-    .gallery__nav {
-        display: flex;
-        gap: spaceFluid(32, 40);
+    .gallery__swiper-wrap {
+        position: relative;
     }
 
     .gallery__prev,
     .gallery__next {
+        position: absolute;
+        top: calc(var(--gallery-image-height) / 2);
+        transform: translateY(-50%);
+        z-index: 10;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 45px;
+        height: 45px;
         padding: 0;
-        border: none;
-        background: transparent;
+        border: 1px solid var(--color-navy);
+        border-radius: 0;
+        background: var(--color-white);
         cursor: pointer;
         font-size: rem(25);
-        color: inherit;
+        color: var(--color-navy);
         transition: opacity 0.2s;
 
         &:hover {
@@ -45,9 +49,18 @@ sq-gallery {
             cursor: not-allowed;
         }
 
-        :where(.gallery__prev .btn__icon) {
-            rotate: 180deg;
-        }
+    }
+
+    .gallery__prev {
+        left: 0;
+    }
+
+    .gallery__next {
+        right: 0;
+    }
+
+    .gallery__prev .btn__icon {
+        rotate: 180deg;
     }
 
     .gallery__swiper {
@@ -69,7 +82,7 @@ sq-gallery {
         img {
             display: block;
             width: auto;
-            height: clamp(350px, 60vh, 450px);
+            height: var(--gallery-image-height);
         }
 
         .image--figure {
