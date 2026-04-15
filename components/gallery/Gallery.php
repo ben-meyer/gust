@@ -31,14 +31,6 @@ class Gallery extends ComponentBase
 
     protected static function transform(array $args): array
     {
-        if (! empty($args['heading'])) {
-            $args['heading'] = [
-                'heading' => $args['heading'],
-                'el' => 'h2',
-                'classes' => ['gallery__heading'],
-            ];
-        }
-
         if (! empty($args['images'])) {
             $args['images'] = array_values(array_filter(array_map(function ($item) {
                 if (! is_array($item)) {
