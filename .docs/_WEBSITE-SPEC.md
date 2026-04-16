@@ -489,26 +489,28 @@ Manual related-trip section at the end of the trip page.
 
 ### Cards [Block]
 
-Responsive card grid that can render recent posts, selected posts, or fully custom cards.
+Responsive card grid for taxonomy terms, editorial posts, and custom content. Does **not** handle Trip posts — use `TripCards` for those.
 
 **Fields:**
 - **heading** (text) - Section heading
 - **subheading** (wysiwyg) - Supporting text
 - **button** (link) - Optional footer link
-- **card_source** (button_group: recent, selected, custom) - Source for the cards
+- **card_source** (button_group: recent, selected, trip_styles, destinations, custom) - Source for the cards
 - **custom_cards** (repeater) - Manual card content shown when `card_source` is `custom`
   - **heading** (text)
   - **image** (image, return: array)
   - **text** (wysiwyg)
   - **meta** (wysiwyg)
   - **link** (link)
-- **post_type** (button_group: post) - Post type used when `card_source` is `recent`
+- **post_type** (button_group: story) - Post type used when `card_source` is `recent`
 - **limit** (button_group: 2, 3, 4, 6) - Number of recent posts to query
-- **selected** (relationship) - Selected posts when `card_source` is `selected`
-- **type** (button_group: default, icons) - Switches card style
+- **selected** (relationship, post_type: page, story, events, guide) - Selected posts when `card_source` is `selected` (excludes `trip`)
+- **selected_trip_styles** (taxonomy, trip_style, multi_select) - Specific trip styles when `card_source` is `trip_styles`; empty = all
+- **selected_destinations** (taxonomy, country, multi_select, min: 2, max: 6) - Specific destinations when `card_source` is `destinations`; empty = all
+- **type** (button_group: default, horizontal) - Switches card layout
 - **card_background_color** (select: default, none) - Background color for cards
 - **card_image_fit** (select: default, contain, cover) - Image fit mode
-- **columns** (select: default, 2, 3, 4, 5, 6) - Grid column count
+- **columns** (select: 2, 3, 4) - Grid column count
 - **slider_on_mobile** (true_false) - Enable horizontal scroll on smaller screens
 
 ### Card [Partial]
@@ -517,6 +519,38 @@ Single card renderer used by the `Cards` block and archive grids.
 
 **Fields:**
 - No editor fields. Consumes either a `WP_Post`, a `WP_Term`, or a prepared `content` array at runtime.
+
+### TripCards [Block]
+
+3-column grid of trip cards. Used as an editor block (with heading/subheading and source options) and also rendered programmatically on `trip_style` and `country` taxonomy archives.
+
+**Fields:**
+- **heading** (text) - Section heading
+- **subheading** (wysiwyg) - Supporting text
+- **card_source** (button_group: recent, selected) - Trip source
+- **limit** (button_group: 3, 6) - Number of recent trips to query (max 6)
+- **selected** (relationship, post_type: trip, max: 6) - Manual trip selection when `card_source` is `selected`
+- **button** (link) - Optional footer CTA
+
+**Archive usage:**
+- `trip_style` and `country` taxonomy archives render TripCards with the queried trips (no block fields, populated from the archive query)
+
+### TripCard [Partial]
+
+Single trip card renderer used by `TripCards`. Consumes a `WP_Post` of type `trip` and derives all display data from post-level ACF fields and taxonomies.
+
+**Layout (top to bottom):**
+1. Image (featured image, landscape crop)
+2. Title (trip name)
+3. Meta list with icons:
+   - Dates: single range or "Multiple dates"
+   - Location: `city` + `country` taxonomy terms
+   - Skill levels: `skill_level` taxonomy terms, comma-separated
+4. Price: "FROM £X,XXX" (cheapest departure from `dates` repeater)
+5. CTA button: "VIEW TRIP & BOOK" (filled gold style)
+
+**Fields:**
+- No editor fields. Runtime input is a `WP_Post` of type `trip`.
 
 ### Accordion [Block]
 
