@@ -117,7 +117,7 @@ class TripData
             }
         }
 
-        return empty($parts) ? null : implode(', ', $parts);
+        return empty($parts) ? null : implode(',&nbsp;', $parts);
     }
 
     public static function getTaxonomyLabel(int $postId, string $taxonomy): ?string

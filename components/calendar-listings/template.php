@@ -10,7 +10,7 @@ use Theme\Utils\TripData;
 
 <div class="<?= classes('calendar-listings', $this->classes) ?>" <?= attributes($this->attributes) ?>>
     <?php foreach ($this->groups as $group) { ?>
-        <section class="calendar-listings__group">
+        <section class="calendar-listings__group content-width-md">
             <?= \Gust\Components\Heading::make(
                 heading: $group['heading'],
                 classes: ['calendar-listings__heading', 'type-h4'],
@@ -22,7 +22,7 @@ use Theme\Utils\TripData;
                     $dateRow = $item['date_row'];
                     $locationHtml = TripData::getLocationHtml($post->ID);
                 ?>
-                    <div class="calendar-listings__item">
+                    <div class="calendar-listings__item content-width-full">
                         <div class="calendar-listings__item-date">
                             <span class="calendar-listings__item-icon">
                                 <?= \Gust\SVG::get('icons/calendar.svg'); ?>
