@@ -244,8 +244,13 @@ City or location name. Used alongside `country` to form the display location str
 
 - Post types: trip, event
 - Hierarchical: no
+- Rewrite slug: cities
 
-No archive (display/filter use only).
+> **TBD:** Should the public-facing slug be `/cities/`, `/locations/`, or something else? `country` uses "destinations" as its editorial label — does `city` need similar treatment? Current implementation uses `/cities/` pending a decision.
+
+**Archive** (/cities/%slug%/) — per-city listing
+- Template: Listing
+- Route: decorate:taxonomy:city
 
 ---
 
