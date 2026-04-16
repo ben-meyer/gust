@@ -138,6 +138,23 @@ class Cards extends ComponentBase
             }
         }
 
+        // Set read-more text based on card source or type.
+        // "Find Your Trip" for trip styles and destinations, "Read More" for everything else.
+        $default_read_more = 'Read More';
+        $cardSource = $args['card_source'] ?? null;
+        $cardType = $args['card_type'] ?? null;
+        if ($cardSource === 'trip_styles' || $cardSource === 'destinations' || $cardType === 'trip-style') {
+            $default_read_more = 'Find Your Trip';
+        }
+
+        if (! empty($args['items'])) {
+            foreach ($args['items'] as $key => $card) {
+                if (empty($args['items'][$key]['read_more_text'])) {
+                    $args['items'][$key]['read_more_text'] = $default_read_more;
+                }
+            }
+        }
+
         if (! empty($args['columns']) && $args['columns'] !== 'default') {
             $args['classes'][] = 'cards--columns-'.$args['columns'];
         }
