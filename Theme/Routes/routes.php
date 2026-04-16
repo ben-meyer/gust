@@ -46,6 +46,10 @@ Router::decorateTaxonomy('trip_style', \Theme\Controllers\ArchiveController::cla
 Router::decorateTaxonomy('country', \Theme\Controllers\ArchiveController::class)
     ->withSlot('template-content', [\Theme\Controllers\ArchiveController::class, 'renderLoop']);
 
+// City taxonomy archives (/cities/%slug%/)
+Router::decorateTaxonomy('city', \Theme\Controllers\ArchiveController::class)
+    ->withSlot('template-content', [\Theme\Controllers\ArchiveController::class, 'renderLoop']);
+
 // Destinations index (/destinations/)
 Router::route('/destinations', DestinationsController::class)
     ->withPage('destinations')
