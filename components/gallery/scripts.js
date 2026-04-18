@@ -36,17 +36,17 @@ class Gallery {
 				prevEl: this.element.querySelector('.gallery__prev'),
 				addIcons: true,
 			},
-			breakpoints: {
-				768: {
-					spaceBetween: 32,
-				},
-				1024: {
-					spaceBetween: 48,
-				},
-				1440: {
-					spaceBetween: 48,
-				},
-			},
+			// breakpoints: {
+			// 	768: {
+			// 		spaceBetween: 32,
+			// 	},
+			// 	1024: {
+			// 		spaceBetween: 48,
+			// 	},
+			// 	1440: {
+			// 		spaceBetween: 48,
+			// 	},
+			// },
 		});
 
 		this.element.dataset.galleryInitialized = 'true';
