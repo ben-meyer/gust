@@ -196,14 +196,22 @@ class TripData
 
     protected static function formatDateRange(string $start, string $end): string
     {
-        $fmtStart = $start ? \date_i18n('j M Y', \strtotime($start)) : '';
-        $fmtEnd = $end ? \date_i18n('j M Y', \strtotime($end)) : '';
-
-        if ($fmtEnd && $fmtEnd !== $fmtStart) {
-            return $fmtStart.' - '.$fmtEnd;
+        if (empty($start)) {
+            return '';
         }
 
-        return $fmtStart;
+        $startTs = \strtotime($start);
+        $endTs = $end ? \strtotime($end) : null;
+
+        if (! $endTs || \date('Y-m-d', $startTs) === \date('Y-m-d', $endTs)) {
+            return \date_i18n('j M Y', $startTs);
+        }
+
+        $sameYear = \date('Y', $startTs) === \date('Y', $endTs);
+        $fmtStart = \date_i18n($sameYear ? 'j M' : 'j M Y', $startTs);
+        $fmtEnd = \date_i18n('j M Y', $endTs);
+
+        return $fmtStart.' – '.$fmtEnd;
     }
 
     protected static function getStatusLabel(string $status): string

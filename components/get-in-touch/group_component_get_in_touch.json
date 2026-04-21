@@ -1,0 +1,89 @@
+{
+    "key": "group_component_get_in_touch",
+    "title": "Block - Get In Touch",
+    "fields": [
+        {
+            "key": "field_component_get_in_touch_contacts",
+            "label": "Contacts",
+            "name": "contacts",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add phone numbers and/or email entries.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_component_get_in_touch_contact_type",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Contact",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_component_get_in_touch_contact_type",
+                    "label": "Type",
+                    "name": "type",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Examples: Office, Person 1, Email.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Office",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_component_get_in_touch_contacts"
+                },
+                {
+                    "key": "field_component_get_in_touch_contact_value",
+                    "label": "Value",
+                    "name": "value",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Phone number or email address.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "example@swimquest.com",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_component_get_in_touch_contacts"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/get-in-touch"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

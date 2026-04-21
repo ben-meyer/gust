@@ -319,7 +319,7 @@
                 "class": "",
                 "id": ""
             },
-            "post_type": ["trip", "page", "story", "events", "guide"],
+            "post_type": ["page", "story", "events", "guide"],
             "taxonomy": "",
             "filters": ["search", "post_type", "taxonomy"],
             "elements": "",

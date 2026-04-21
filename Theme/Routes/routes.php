@@ -40,10 +40,17 @@ Router::route('/trip-styles', TripStylesController::class)
 
 // Trip Styles taxonomy archives (/trip-styles/%slug%/)
 Router::decorateTaxonomy('trip_style', \Theme\Controllers\ArchiveController::class)
+    ->withPage('trip-style-archive')
     ->withSlot('template-content', [\Theme\Controllers\ArchiveController::class, 'renderLoop']);
 
 // Destinations taxonomy archives (/destinations/%slug%/)
 Router::decorateTaxonomy('country', \Theme\Controllers\ArchiveController::class)
+    ->withPage('country-archive')
+    ->withSlot('template-content', [\Theme\Controllers\ArchiveController::class, 'renderLoop']);
+
+// City/location taxonomy archives (/locations/%slug%/)
+Router::decorateTaxonomy('city', \Theme\Controllers\ArchiveController::class)
+    ->withPage('city-archive')
     ->withSlot('template-content', [\Theme\Controllers\ArchiveController::class, 'renderLoop']);
 
 // Destinations index (/destinations/)

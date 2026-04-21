@@ -9,6 +9,7 @@ class CityTaxonomy
     public static function init(): void
     {
         \add_action('init', [__CLASS__, 'register']);
+        \add_filter('gust/templates/taxonomies', [__CLASS__, 'filterGustTemplatesTaxonomies']);
     }
 
     public static function register(): void
@@ -25,14 +26,20 @@ class CityTaxonomy
                 'show_admin_column' => true,
                 'show_in_rest' => true,
                 'meta_box' => 'simple',
-                'public' => false,
-                'rewrite' => false,
+                'rewrite' => ['slug' => 'cities'],
             ],
             [
                 'singular' => __('City', 'gust'),
                 'plural' => __('Cities', 'gust'),
-                'slug' => 'city',
+                'slug' => 'cities',
             ]
         );
+    }
+
+    public static function filterGustTemplatesTaxonomies(array $taxonomies): array
+    {
+        $taxonomies[] = self::SLUG;
+
+        return $taxonomies;
     }
 }
