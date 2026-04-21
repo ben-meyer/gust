@@ -19,11 +19,27 @@
                         <?php foreach ($stage['steps'] as $step) { ?>
                             <article class="trip-getting-there__step">
                                 <?php if (! empty($step['title'])) { ?>
-                                    <h6><?= esc_html($step['title']); ?></h6>
+                                    <?php
+                                        $icon = ! empty($step['icon']) ? strtolower((string) $step['icon']) : '';
+                                        $iconMap = [
+                                            'plane' => 'plane.svg',
+                                            'ferry' => 'ferry.svg',
+                                            'car' => 'car.svg',
+                                            'bus' => 'bus.svg',
+                                            'train' => 'quote.svg',
+                                        ];
+                                        $iconFile = $iconMap[$icon] ?? 'car.svg';
+                                    ?>
+                                    <h6 class="trip-getting-there__step-title">
+                                        <span class="trip-getting-there__step-title-icon" aria-hidden="true">
+                                            <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/' . $iconFile), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
+                                        </span>
+                                        <span><?= esc_html($step['title']); ?></span>
+                                    </h6>
                                 <?php } ?>
 
                                 <?php if (! empty($step['description'])) { ?>
-                                    <div><?= wp_kses_post($step['description']); ?></div>
+                                    <div class="trip-getting-there__step-description"><?= wp_kses_post($step['description']); ?></div>
                                 <?php } ?>
                             </article>
                         <?php } ?>
