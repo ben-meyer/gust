@@ -10,7 +10,7 @@
                 <?php if (! empty($stage['title'])) { ?>
                     <?= \Gust\Components\Heading::make(
                         heading: $stage['title'],
-                        el: 'h3',
+                        el: 'h5',
                     ); ?>
                 <?php } ?>
 
@@ -19,7 +19,7 @@
                         <?php foreach ($stage['steps'] as $step) { ?>
                             <article class="trip-getting-there__step">
                                 <?php if (! empty($step['title'])) { ?>
-                                    <h4><?= esc_html($step['title']); ?></h4>
+                                    <h6><?= esc_html($step['title']); ?></h6>
                                 <?php } ?>
 
                                 <?php if (! empty($step['description'])) { ?>
