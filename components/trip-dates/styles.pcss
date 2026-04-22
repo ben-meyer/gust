@@ -47,10 +47,23 @@
 }
 
 .trip-dates__item__cta {
+    --btn--background-color: var(--color-orange);
+    --btn--border-color: var(--color-orange);
+    --btn--color: var(--color-navy);
+    --btn--background-color--hover: var(--color-mid-blue);
+    --btn--border-color--hover: var(--color-mid-blue);
+
     white-space: nowrap;
 
     &--sold-out {
-        font-size: 0.875em;
+        --btn--background-color: var(--color-light);
+        --btn--border-color: var(--color-light);
+        --btn--color: var(--color-navy);
+        --btn--background-color--hover: var(--color-light);
+        --btn--border-color--hover: var(--color-light);
+
+        cursor: default;
+        opacity: 1;
     }
 }
 
