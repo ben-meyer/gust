@@ -15,7 +15,7 @@
     gap: space(8) space(16);
     align-items: center;
     border: solid 1px var(--color-bright-blue);
-    padding: space(16) space(20);
+    padding: space(16) space(16);
     margin: space(12) 0;
 
     @media (width >= theme('screens.md')) {
@@ -23,7 +23,6 @@
         grid-template-rows: 1fr;
         gap: space(4) space(16);
         padding: space(20) space(24);
-        height: 80px;
     }
 }
 
@@ -48,6 +47,14 @@
         &:hover {
             text-decoration: underline;
         }
+    }
+}
+
+.calendar-listings__item-location {
+    @media (width < theme('screens.md')) {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 

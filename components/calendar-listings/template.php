@@ -48,7 +48,7 @@ use Theme\Utils\TripData;
                         <div class="calendar-listings__item-action">
                             <?php if ($dateRow['status'] === 'bookable') { ?>
                                 <?= \Gust\Components\Link::make(
-                                    title: __('View Trip & Book', 'gust'),
+                                    title: __('View & Book', 'gust'),
                                     url: get_permalink($post),
                                     classes: ['btn', 'btn--sm', 'calendar-listings__btn', 'color-context-orange'],
                                 ); ?>
