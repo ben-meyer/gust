@@ -2,9 +2,9 @@
 
 namespace Theme\Controllers;
 
-use Gust\Components\Cards;
 use Gust\Components\NoContent;
 use Gust\Components\Pagination;
+use Gust\Components\TripCards;
 use Gust\WordPress\PageObject;
 
 class ArchiveController
@@ -32,7 +32,7 @@ class ArchiveController
         \ob_start();
 
         if (! empty($items)) {
-            echo Cards::make(items: $items);
+            echo TripCards::make(items: $items);
             echo Pagination::make();
         } else {
             echo NoContent::make(object: $object);

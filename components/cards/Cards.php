@@ -71,6 +71,24 @@ class Cards extends ComponentBase
                     $objects = $query->posts;
                 } elseif ($args['card_source'] === 'selected') {
                     $objects = $args['selected'];
+                } elseif ($args['card_source'] === 'trip_styles') {
+                    if (! empty($args['selected_trip_styles'])) {
+                        $objects = $args['selected_trip_styles'];
+                    } else {
+                        $objects = get_terms([
+                            'taxonomy' => 'trip_style',
+                            'hide_empty' => false,
+                        ]);
+                    }
+                } elseif ($args['card_source'] === 'destinations') {
+                    if (! empty($args['selected_destinations'])) {
+                        $objects = $args['selected_destinations'];
+                    } else {
+                        $objects = get_terms([
+                            'taxonomy' => 'country',
+                            'hide_empty' => false,
+                        ]);
+                    }
                 }
 
                 if (! empty($objects)) {
@@ -81,12 +99,13 @@ class Cards extends ComponentBase
             }
         }
 
-        if (! empty($args['type']) && $args['type'] === 'icons') {
-            $args['card_type'] = 'icon';
+        if (! empty($args['type']) && $args['type'] === 'horizontal') {
+            $args['card_type'] = 'horizontal';
+            $args['columns'] = '2';
         }
 
         if (! empty($args['button'])) {
-            $args['button']['classes'] = ['btn'];
+            $args['button']['classes'] = ['btn', 'color-context-white'];
         }
 
         if (! empty($args['items'])) {
@@ -112,15 +131,32 @@ class Cards extends ComponentBase
                 ) {
                     $args['items'][$key]['image_size'] = 'gust_card_square';
                 }
+
+                if ($args['type'] === 'horizontal') {
+                    $args['items'][$key]['show_read_more'] = false;
+                }
+            }
+        }
+
+        // Set read-more text based on card source or type.
+        // "Find Your Trip" for trip styles and destinations, "Read More" for everything else.
+        $default_read_more = 'Read More';
+        $cardSource = $args['card_source'] ?? null;
+        $cardType = $args['card_type'] ?? null;
+        if ($cardSource === 'trip_styles' || $cardSource === 'destinations' || $cardType === 'trip-style') {
+            $default_read_more = 'Find Your Trip';
+        }
+
+        if (! empty($args['items'])) {
+            foreach ($args['items'] as $key => $card) {
+                if (empty($args['items'][$key]['read_more_text'])) {
+                    $args['items'][$key]['read_more_text'] = $default_read_more;
+                }
             }
         }
 
         if (! empty($args['columns']) && $args['columns'] !== 'default') {
             $args['classes'][] = 'cards--columns-'.$args['columns'];
-        }
-
-        if ($args['align'] !== 'full') {
-            $args['slider_on_mobile'] = false;
         }
 
         $args['classes'][] = 'cards--type--'.($args['type'] ?? 'default');
