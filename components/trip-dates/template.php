@@ -1,17 +1,17 @@
 <section class="<?= classes('trip-dates', 'wp-block', $this->classes) ?>" <?= attributes($this->attributes) ?>>
     <div class="trip-dates__inner content-width-sm">
-        <h2 class="trip-dates__heading"><?= esc_html__('Dates & book', 'gust') ?></h2>
+        <h4 class="trip-dates__heading"><?= esc_html__('Dates & book', 'gust') ?></h4>
 
         <?php if (! empty($this->date_rows)) { ?>
             <ul class="trip-dates__list">
                 <?php foreach ($this->date_rows as $row) { ?>
                     <li class="trip-dates__item <?= $row['is_sold_out'] ? 'is-sold-out' : '' ?>">
-                        <span class="trip-dates__item__label">
+                        <h6 class="trip-dates__item__label">
                             <?= esc_html($row['label']) ?>
                             <!-- <?php if ($row['nights']) { ?>
                                 <span class="trip-dates__item__nights">(<?= esc_html($row['nights']) ?> nights)</span>
                             <?php } ?> -->
-                        </span>
+                        </h6>
 
                         <!-- <?php if ($row['price_display']) { ?>
                             <span class="trip-dates__item__price"><?= esc_html($row['price_display']) ?></span>
