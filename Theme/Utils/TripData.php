@@ -96,6 +96,30 @@ class TripData
         return empty($parts) ? null : implode(', ', $parts);
     }
 
+    public static function getLocationHtml(int $postId): ?string
+    {
+        $parts = [];
+
+        foreach (['city', 'country'] as $taxonomy) {
+            $terms = \wp_get_post_terms($postId, $taxonomy);
+
+            if (empty($terms) || \is_wp_error($terms)) {
+                continue;
+            }
+
+            $term = $terms[0];
+            $url = \get_term_link($term);
+
+            if (! \is_wp_error($url)) {
+                $parts[] = sprintf('<a href="%s">%s</a>', \esc_url($url), \esc_html($term->name));
+            } else {
+                $parts[] = \esc_html($term->name);
+            }
+        }
+
+        return empty($parts) ? null : implode(',&nbsp;', $parts);
+    }
+
     public static function getTaxonomyLabel(int $postId, string $taxonomy): ?string
     {
         $terms = \wp_get_post_terms($postId, $taxonomy);
@@ -196,14 +220,22 @@ class TripData
 
     protected static function formatDateRange(string $start, string $end): string
     {
-        $fmtStart = $start ? \date_i18n('j M Y', \strtotime($start)) : '';
-        $fmtEnd = $end ? \date_i18n('j M Y', \strtotime($end)) : '';
-
-        if ($fmtEnd && $fmtEnd !== $fmtStart) {
-            return $fmtStart.' - '.$fmtEnd;
+        if (empty($start)) {
+            return '';
         }
 
-        return $fmtStart;
+        $startTs = \strtotime($start);
+        $endTs = $end ? \strtotime($end) : null;
+
+        if (! $endTs || \date('Y-m-d', $startTs) === \date('Y-m-d', $endTs)) {
+            return \date_i18n('j M Y', $startTs);
+        }
+
+        $sameYear = \date('Y', $startTs) === \date('Y', $endTs);
+        $fmtStart = \date_i18n($sameYear ? 'j M' : 'j M Y', $startTs);
+        $fmtEnd = \date_i18n('j M Y', $endTs);
+
+        return $fmtStart.' – '.$fmtEnd;
     }
 
     protected static function getStatusLabel(string $status): string

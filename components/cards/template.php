@@ -12,7 +12,7 @@
                     <?php if (! empty($this->heading)) { ?>
                         <?= \Gust\Components\Heading::make(
                             heading: $this->heading,
-                            classes: ['cards__heading'],
+                            classes: ['cards__heading', 'type-h1'],
                         ); ?>
                     <?php } ?>
 
