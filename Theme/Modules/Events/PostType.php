@@ -4,7 +4,7 @@ namespace Theme\Modules\Events;
 
 class PostType
 {
-    protected const SLUG = 'event';
+    protected const SLUG = 'events';
 
     public static function init(): void
     {

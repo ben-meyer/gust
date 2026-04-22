@@ -11,7 +11,7 @@ use Gust\SVG;
 
 <figure class="<?= classes('quote', 'wp-block', $this->classes) ?>" <?= attributes($this->attributes); ?>>
     <div class="quote__mark" aria-hidden="true">
-        <?= SVG::get(get_theme_file_path('assets/images/icons/quote.svg'), ['asset' => false]); ?>
+        <?= SVG::get(get_theme_file_path('public/build/images/icons/quote.svg'), ['asset' => false]); ?>
     </div>
 
     <blockquote class="quote__content content-width-sm">

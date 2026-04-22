@@ -6,8 +6,8 @@ node_modules/**
 .docs/**
 dev-scripts
 dev-scripts/**
-assets
-assets/**
+/assets
+/assets/**
 .babelrc
 .browserslistrc
 .deployignore
@@ -24,8 +24,6 @@ assets/**
 .prettierrc
 .stylelintrc
 biome.json
-composer.json
-composer.lock
 gulpfile.js
 LICENCE
 package-lock.json
@@ -38,3 +36,9 @@ vite.config.js
 webpack.config.js
 wp-sync.yml
 CLAUDE.md
+AGENTS.md
+.claude
+.claude/**
+auth.json
+auth.json.example
+public/hot
