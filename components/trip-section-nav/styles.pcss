@@ -2,7 +2,7 @@
     position: sticky;
     z-index: 20;
     top: 0;
-    background-color: var(--color-neutral);
+    background-color: #FFE7C2;
 }
 
 .trip-section-nav__inner {
@@ -13,13 +13,20 @@
     padding-block: space(8);
 }
 
-.trip-section-nav__items {
+.trip-section-nav__items, .trip-section-nav__link {
+    @apply type-small;
     display: flex;
     flex-wrap: wrap;
     gap: space(6);
     padding: 0;
     margin: 0;
     list-style: none;
+    text-decoration: none;
+    color: var(--color-navy);
+}
+
+.trip-section-nav__items:hover, .trip-section-nav__link:hover {
+    text-decoration: underline;
 }
 
 .trip-section-nav__actions {
