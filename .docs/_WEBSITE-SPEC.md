@@ -300,7 +300,21 @@ Overview/wayfinding page linking into all Trip Style taxonomy archives. Not a ta
 - Route: owned
 
 ### Calendar (/calendar/)
-Owned route scaffolded for a calendar page. Controller currently returns an empty string; intended output is a chronological listing of trips grouped by year and month.
+Chronological listing of all upcoming trip departures, grouped by month. Shows one calendar entry per departure date for trips with multiple departures.
+
+**Display Logic:**
+- Lists all trips with at least one upcoming departure (start_date >= today)
+- Shows multiple entries per trip when multiple departures are available
+- Groups entries chronologically by month/year
+- De-lists individual departures once their start_date has passed
+- Completely removes trips once all departure start_dates are in the past
+
+**Example:** Trip with departures April 4-11, April 27-May 4, April 29-May 6:
+- Before April 4: Shows 3 entries
+- April 12-26: Shows 2 entries (April 27 & April 29 departures)
+- May 5-28: Shows 1 entry (April 29 departure only)
+- After May 6: Trip completely removed
+
 - Template: Default
 - Route: owned
 

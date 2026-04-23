@@ -34,17 +34,15 @@ class CalendarController
 
         foreach ($postIds as $postId) {
             $postId = (int) $postId;
-            $dateRow = static::getNearestUpcomingDateRow($postId, $today);
+            $dateRows = static::getUpcomingDateRows($postId, $today);
 
-            if ($dateRow === null) {
-                continue;
+            foreach ($dateRows as $dateRow) {
+                $items[] = [
+                    'object' => \get_post($postId),
+                    'date_row' => $dateRow,
+                    'timestamp' => (int) \strtotime($dateRow['start_date']),
+                ];
             }
-
-            $items[] = [
-                'object' => \get_post($postId),
-                'date_row' => $dateRow,
-                'timestamp' => (int) \strtotime($dateRow['start_date']),
-            ];
         }
 
         if (empty($items)) {
@@ -75,23 +73,21 @@ class CalendarController
     }
 
     /**
-     * Get the nearest upcoming date row for a trip.
+     * Get all upcoming date rows for a trip.
      */
-    protected static function getNearestUpcomingDateRow(int $postId, string $today): ?array
+    protected static function getUpcomingDateRows(int $postId, string $today): array
     {
         $rows = TripData::getDateRows($postId);
-        $nearest = null;
+        $upcoming = [];
 
         foreach ($rows as $row) {
             if (empty($row['start_date']) || $row['start_date'] < $today) {
                 continue;
             }
 
-            if ($nearest === null || $row['start_date'] < $nearest['start_date']) {
-                $nearest = $row;
-            }
+            $upcoming[] = $row;
         }
 
-        return $nearest;
+        return $upcoming;
     }
 }
