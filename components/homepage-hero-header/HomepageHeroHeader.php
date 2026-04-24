@@ -20,7 +20,7 @@ class HomepageHeroHeader extends ComponentBase
     protected static function getDefaults(): array
     {
         return [
-            'image_position' => 'inset',
+            'image_position' => 'background',
             'background' => 'accent',
             'show_breadcrumbs' => true,
         ];
@@ -150,6 +150,13 @@ class HomepageHeroHeader extends ComponentBase
                     sizes: '(min-width: 768px) 50vw, 100vw',
                 );
                 $args['classes'][] = 'has-mini-image';
+            } elseif (($args['image_position'] ?? '') === 'background') {
+                $args['image'] = Image::make(
+                    id: $args['image'],
+                    size: 'gust_super',
+                    sizes: '100vw',
+                );
+                $args['classes'][] = 'has-background-image';
             } else {
                 $args['image'] = Image::make(
                     id: $args['image'],

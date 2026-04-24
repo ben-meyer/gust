@@ -1,4 +1,9 @@
 <header class="<?= classes('homepage-hero-header', 'wp-block', 'alignfull', 'not-prose', $this->classes) ?>" <?= attributes($this->attributes) ?>>
+    <?php if (! empty($this->image) && $this->image_position === 'background') { ?>
+        <div class="homepage-hero-header__bg-image" aria-hidden="true">
+            <?= $this->image; ?>
+        </div>
+    <?php } ?>
     <?php if ($this->show_breadcrumbs) { ?>
         <?= \Gust\Components\Breadcrumbs::make(); ?>
     <?php } ?>
