@@ -5,7 +5,7 @@ use Gust\SVG;
 ?>
 
 <section id="trip-includes" class="<?= classes('trip-includes', 'wp-block', $this->classes) ?>" <?= attributes($this->attributes) ?>>
-    <div class="trip-includes__inner content-width-lg">
+    <div class="trip-includes__inner content-width-sm">
         <?= \Gust\Components\Heading::make(
             el: 'h4',
             heading: __("What's included", 'gust'),
