@@ -28,7 +28,7 @@
                         title: $this->booking_action['label'],
                         url: $this->booking_action['url'],
                         target: $this->booking_action['target'] ?? null,
-                        classes: ['btn'],
+                        classes: ['btn', 'color-context-orange'],
                     ); ?>
                 <?php } else { ?>
                     <span class="btn trip-section-nav__status"><?= esc_html($this->booking_action['label']); ?></span>

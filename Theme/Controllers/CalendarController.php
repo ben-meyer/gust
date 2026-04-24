@@ -2,6 +2,10 @@
 
 namespace Theme\Controllers;
 
+use Gust\Components\CalendarListings;
+use Gust\Components\NoContent;
+use Theme\Utils\TripData;
+
 class CalendarController
 {
     public static function renderContent(): string
@@ -15,12 +19,12 @@ class CalendarController
             'fields' => 'ids',
             'no_found_rows' => true,
             'update_post_meta_cache' => true,
-            'update_post_term_cache' => false,
+            'update_post_term_cache' => true,
             'suppress_filters' => false,
         ]);
 
         if (empty($postIds)) {
-            return '';
+            return (string) NoContent::make();
         }
 
         \update_meta_cache('post', $postIds);
@@ -29,88 +33,61 @@ class CalendarController
         $items = [];
 
         foreach ($postIds as $postId) {
-            $nearestDate = static::getNearestUpcomingDate((int) $postId, $today);
+            $postId = (int) $postId;
+            $dateRows = static::getUpcomingDateRows($postId, $today);
 
-            if ($nearestDate === null) {
-                continue;
+            foreach ($dateRows as $dateRow) {
+                $items[] = [
+                    'object' => \get_post($postId),
+                    'date_row' => $dateRow,
+                    'timestamp' => (int) \strtotime($dateRow['start_date']),
+                ];
             }
-
-            $items[] = [
-                'post_id' => (int) $postId,
-                'title' => \get_the_title($postId),
-                'url' => \get_permalink($postId),
-                'date' => $nearestDate,
-                'timestamp' => (int) \strtotime($nearestDate),
-            ];
         }
 
         if (empty($items)) {
-            return '';
+            return (string) NoContent::make();
         }
 
-        \usort($items, static function (array $left, array $right): int {
-            return [$left['timestamp'], $left['title']] <=> [$right['timestamp'], $right['title']];
-        });
+        \usort($items, static fn (array $a, array $b) => [$a['timestamp'], $a['object']->post_title] <=> [$b['timestamp'], $b['object']->post_title]);
 
-        $grouped = [];
+        // Group by month
+        $groups = [];
 
         foreach ($items as $item) {
-            $year = \gmdate('Y', $item['timestamp']);
-            $month = \gmdate('F', $item['timestamp']);
+            $key = \date_i18n("F 'y", $item['timestamp']);
 
-            $grouped[$year][$month][] = $item;
-        }
-
-        $html = '';
-
-        foreach ($grouped as $year => $months) {
-            $html .= '<section class="calendar-group">';
-            $html .= '<h2>'.\esc_html($year).'</h2>';
-
-            foreach ($months as $month => $monthItems) {
-                $html .= '<div class="calendar-group__month">';
-                $html .= '<h3>'.\esc_html($month).'</h3>';
-                $html .= '<ul>';
-
-                foreach ($monthItems as $item) {
-                    $html .= '<li>';
-                    $html .= '<a href="'.\esc_url($item['url']).'">'.\esc_html($item['title']).'</a>';
-                    $html .= ' <span>'.\esc_html(\wp_date('j M Y', $item['timestamp'])).'</span>';
-                    $html .= '</li>';
-                }
-
-                $html .= '</ul>';
-                $html .= '</div>';
+            if (! isset($groups[$key])) {
+                $groups[$key] = [
+                    'heading' => $key,
+                    'items' => [],
+                ];
             }
 
-            $html .= '</section>';
+            $groups[$key]['items'][] = $item;
         }
 
-        return $html;
+        return (string) CalendarListings::make(
+            groups: array_values($groups),
+        );
     }
 
-    protected static function getNearestUpcomingDate(int $postId, string $today): ?string
+    /**
+     * Get all upcoming date rows for a trip.
+     */
+    protected static function getUpcomingDateRows(int $postId, string $today): array
     {
-        $rowCount = (int) \get_post_meta($postId, 'dates', true);
+        $rows = TripData::getDateRows($postId);
+        $upcoming = [];
 
-        if ($rowCount < 1) {
-            return null;
-        }
-
-        $nearestDate = null;
-
-        for ($index = 0; $index < $rowCount; $index++) {
-            $startDate = (string) \get_post_meta($postId, "dates_{$index}_start_date", true);
-
-            if ($startDate === '' || $startDate < $today) {
+        foreach ($rows as $row) {
+            if (empty($row['start_date']) || $row['start_date'] < $today) {
                 continue;
             }
 
-            if ($nearestDate === null || $startDate < $nearestDate) {
-                $nearestDate = $startDate;
-            }
+            $upcoming[] = $row;
         }
 
-        return $nearestDate;
+        return $upcoming;
     }
 }

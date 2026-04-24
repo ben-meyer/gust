@@ -96,6 +96,30 @@ class TripData
         return empty($parts) ? null : implode(', ', $parts);
     }
 
+    public static function getLocationHtml(int $postId): ?string
+    {
+        $parts = [];
+
+        foreach (['city', 'country'] as $taxonomy) {
+            $terms = \wp_get_post_terms($postId, $taxonomy);
+
+            if (empty($terms) || \is_wp_error($terms)) {
+                continue;
+            }
+
+            $term = $terms[0];
+            $url = \get_term_link($term);
+
+            if (! \is_wp_error($url)) {
+                $parts[] = sprintf('<a href="%s">%s</a>', \esc_url($url), \esc_html($term->name));
+            } else {
+                $parts[] = \esc_html($term->name);
+            }
+        }
+
+        return empty($parts) ? null : implode(',&nbsp;', $parts);
+    }
+
     public static function getTaxonomyLabel(int $postId, string $taxonomy): ?string
     {
         $terms = \wp_get_post_terms($postId, $taxonomy);
