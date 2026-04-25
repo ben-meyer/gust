@@ -55,7 +55,11 @@
             <div class="trip-accommodation-preview__rooms content-width-sm align-left">
                 <?php if (! empty($this->rooms_intro)) { ?>
                     <div class="trip-accommodation-preview__rooms-copy">
-                        <h3><?= esc_html__('Rooms', 'gust'); ?></h3>
+                        <?= \Gust\Components\Heading::make(
+                            heading: __('Rooms', 'gust'),
+                            el: 'h6',
+                            classes: ['trip-accommodation-preview__rooms-heading', 'color-mid-blue'],
+                        ); ?>
                         <div><?= wp_kses_post($this->rooms_intro); ?></div>
                     </div>
                 <?php } ?>
