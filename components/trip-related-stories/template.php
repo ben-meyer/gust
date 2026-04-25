@@ -1,6 +1,7 @@
 <?= \Gust\Components\Cards::make(
     heading: __('Related stories', 'gust'),
     items: $this->items,
-    columns: '2',
-    classes: ['trip-related-stories'],
+    type: 'horizontal',
+    card_background_color: 'none',
+    classes: ['trip-related-stories', 'color-context-neutral'],
 ); ?>
