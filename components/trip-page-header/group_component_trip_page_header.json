@@ -81,9 +81,9 @@
             "step": 1
         },
         {
-            "key": "field_trip_page_header_welcome",
-            "label": "Welcome",
-            "name": "welcome_text",
+            "key": "field_trip_page_header_non_swimmers",
+            "label": "Non-swimmers",
+            "name": "non_swimmers_text",
             "type": "text",
             "required": 0
         },
