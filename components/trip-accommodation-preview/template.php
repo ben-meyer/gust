@@ -73,5 +73,4 @@
                 <?php } ?>
             </div>
         <?php } ?>
-    </div>
 </section>
