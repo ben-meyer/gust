@@ -5,10 +5,16 @@ namespace Gust\Components;
 use Gust\Component;
 use Gust\ComponentBase;
 
-// <?php
-// echo Button::make(content: 'Book Now', variant: 'primary');
-// echo Button::make(content: 'Learn More', variant: 'secondary');
-// echo Button::make(content: 'Unavailable', variant: 'inactive');
+/**
+ * Usage:
+ *
+ * If no variant is specified, the button will use the primary style by default.
+ * 
+ *   <?php
+ *   echo Button::make(content: 'Book Now', variant: 'primary');
+ *   echo Button::make(content: 'Learn More', variant: 'secondary');
+ *   echo Button::make(content: 'Unavailable', variant: 'inactive');
+ */
 
 /**
  * Button Component
