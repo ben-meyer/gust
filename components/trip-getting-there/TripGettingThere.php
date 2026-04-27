@@ -27,8 +27,7 @@ class TripGettingThere extends ComponentBase
     {
         $postId = ! empty($args['post_id']) ? (int) $args['post_id'] : \get_the_ID();
 
-        $args['stages']     = \get_field('getting_there_stages', $postId) ?: [];
-        $args['start_time'] = \get_field('trip_start_time', $postId) ?: '';
+        $args['stages'] = \get_field('getting_there_stages', $postId) ?: [];
 
         return $args;
     }

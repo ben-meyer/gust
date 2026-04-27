@@ -5,13 +5,6 @@
             classes: ['trip-getting-there__heading'],
         ); ?>
 
-        <?php if ($this->start_time): ?>
-            <p class="trip-getting-there__start-time">
-                <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
-                <?= esc_html($this->start_time); ?>
-            </p>
-        <?php endif; ?>
-
         <?php foreach ($this->stages as $stage) { ?>
             <div class="trip-getting-there__stage">
                 <?php if (! empty($stage['title'])) { ?>
@@ -20,6 +13,13 @@
                         el: 'h5',
                     ); ?>
                 <?php } ?>
+
+                <?php if (! empty($stage['start_time'])): ?>
+                    <p class="trip-getting-there__start-time">
+                        <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
+                        <?= esc_html($stage['start_time']); ?>
+                    </p>
+                <?php endif; ?>
 
                 <?php if (! empty($stage['steps'])) { ?>
                     <div class="trip-getting-there__steps">
