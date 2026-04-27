@@ -5,6 +5,11 @@ namespace Gust\Components;
 use Gust\Component;
 use Gust\ComponentBase;
 
+// <?php
+// echo Button::make(content: 'Book Now', variant: 'primary');
+// echo Button::make(content: 'Learn More', variant: 'secondary');
+// echo Button::make(content: 'Unavailable', variant: 'inactive');
+
 /**
  * Button Component
  *
@@ -27,6 +32,7 @@ class Button extends ComponentBase
         array $classes = [],
         bool $screen_reader_text = false,
         string $type = 'button',
+        string $variant = 'primary',
         ...$others
     ): ?static {
         return static::createFromArgs(static::mergeArgs(get_defined_vars()));
@@ -48,6 +54,11 @@ class Button extends ComponentBase
         }
 
         $args['attributes']['type'] = $args['type'];
+
+        $allowed_variants = ['primary', 'secondary', 'inactive'];
+        if (in_array($args['variant'], $allowed_variants, true)) {
+            $args['classes'][] = 'button--' . $args['variant'];
+        }
 
         return $args;
     }

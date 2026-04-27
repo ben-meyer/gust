@@ -9,6 +9,30 @@ use Gust\Components\Button;
 ?>
 
 <section class="component-example-section">
+    <h2 class="component-example-section__title">Primary Button</h2>
+    <p class="component-example-section__description">Primary button with text content.</p>
+    <div class="component-example-section__preview">
+        <?= Button::make(content: 'Primary Button'); ?>
+    </div>
+</section>
+
+<section class="component-example-section">
+    <h2 class="component-example-section__title">Secondary Button</h2>
+    <p class="component-example-section__description">Secondary button with text content.</p>
+    <div class="component-example-section__preview">
+        <?= Button::make(content: 'Secondary Button', variant: 'secondary'); ?>
+    </div>
+</section>
+
+<section class="component-example-section">
+    <h2 class="component-example-section__title">Inactive Button</h2>
+    <p class="component-example-section__description">Inactive button with text content.</p>
+    <div class="component-example-section__preview">
+        <?= Button::make(content: 'Inactive Button', variant: 'inactive'); ?>
+    </div>
+</section>
+
+<section class="component-example-section">
     <h2 class="component-example-section__title">Basic Button</h2>
     <p class="component-example-section__description">Simple button with text content.</p>
     <div class="component-example-section__preview">
