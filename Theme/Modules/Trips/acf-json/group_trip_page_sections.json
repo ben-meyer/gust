@@ -122,7 +122,8 @@
                                 "ferry": "Ferry",
                                 "car": "Car",
                                 "bus": "Bus",
-                                "train": "Train"
+                                "train": "Train",
+                                "walk": "Walk"
                             },
                             "return_format": "value",
                             "ui": 1
