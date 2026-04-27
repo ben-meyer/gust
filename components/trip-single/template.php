@@ -19,6 +19,7 @@ if (! empty($this->faqs)) {
 }
 
 echo \Gust\Components\TripDates::make(post_id: $this->post_id);
+echo \Gust\Components\Promo::make(post_id: $this->post_id);
 echo \Gust\Components\TripGetInTouch::make(post_id: $this->post_id);
 echo \Gust\Components\TripRelatedStories::make(post_id: $this->post_id);
 echo \Gust\Components\TripRelatedTrips::make(post_id: $this->post_id);
