@@ -1,4 +1,4 @@
-<?= \Gust\Components\Cards::make(
+<?= \Gust\Components\TripCards::make(
     heading: __('Related trips', 'gust'),
     items: $this->items,
     columns: '3',

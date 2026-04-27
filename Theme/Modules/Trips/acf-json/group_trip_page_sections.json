@@ -198,6 +198,37 @@
             ]
         },
         {
+            "key": "field_trip_promo_tab",
+            "label": "Promo Block",
+            "name": "promo_tab",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_trip_promo_title",
+            "label": "Title",
+            "name": "promo_title",
+            "type": "text",
+            "instructions": "Heading for the promotional block below the dates section.",
+            "required": 0
+        },
+        {
+            "key": "field_trip_promo_subheading",
+            "label": "Subheading",
+            "name": "promo_subheading",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_trip_promo_link",
+            "label": "Button",
+            "name": "promo_link",
+            "type": "link",
+            "required": 0,
+            "return_format": "array"
+        },
+        {
             "key": "field_trip_related_stories",
             "label": "Related Stories",
             "name": "related_stories",
