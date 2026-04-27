@@ -84,6 +84,14 @@
             ]
         },
         {
+            "key": "field_trip_start_time",
+            "label": "Trip Start Time",
+            "name": "trip_start_time",
+            "type": "text",
+            "instructions": "Displayed below the Getting There heading. E.g. \"Trip begins at 4pm\".",
+            "required": 0
+        },
+        {
             "key": "field_trip_getting_there_stages",
             "label": "Getting There Stages",
             "name": "getting_there_stages",
