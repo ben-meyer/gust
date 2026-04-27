@@ -52,6 +52,13 @@
                         <?php } ?>
                     </div>
                 <?php } ?>
+
+                <?php if (! empty($stage['finish_time'])): ?>
+                    <p class="trip-getting-there__finish-time">
+                        <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
+                        <?= esc_html($stage['finish_time']); ?>
+                    </p>
+                <?php endif; ?>
             </div>
         <?php } ?>
     </div>

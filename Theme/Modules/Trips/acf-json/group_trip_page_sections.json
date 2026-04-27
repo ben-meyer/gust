@@ -110,6 +110,14 @@
                     "required": 0
                 },
                 {
+                    "key": "field_trip_getting_there_stage_finish_time",
+                    "label": "Trip Finish Time",
+                    "name": "finish_time",
+                    "type": "text",
+                    "instructions": "E.g. \"Trip ends at 6pm\"",
+                    "required": 0
+                },
+                {
                     "key": "field_trip_getting_there_steps",
                     "label": "Steps",
                     "name": "steps",
