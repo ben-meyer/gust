@@ -1,9 +1,9 @@
 {
-    "key": "group_component_page_header",
-    "title": "Block - Page Header",
+    "key": "group_component_homepage_hero_header",
+    "title": "Block - Homepage Hero Header",
     "fields": [
         {
-            "key": "field_6081b528ad15a",
+            "key": "field_hhh_tab_content",
             "label": "Header Content",
             "name": "",
             "aria-label": "",
@@ -20,7 +20,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_63ef6ed7be236",
+            "key": "field_hhh_heading",
             "label": "Heading",
             "name": "heading",
             "aria-label": "",
@@ -40,7 +40,7 @@
             "append": ""
         },
         {
-            "key": "field_6081b547ad15b",
+            "key": "field_hhh_subheading",
             "label": "Subheading",
             "name": "subheading",
             "aria-label": "",
@@ -61,7 +61,7 @@
             "strip_html_tags": 0
         },
         {
-            "key": "field_6081b581ad15c",
+            "key": "field_hhh_primary_call_to_action",
             "label": "Call to Action",
             "name": "primary_call_to_action",
             "aria-label": "",
@@ -77,7 +77,7 @@
             "return_format": "array"
         },
         {
-            "key": "field_63ef6ef8071ff",
+            "key": "field_hhh_tab_media",
             "label": "Media",
             "name": "",
             "aria-label": "",
@@ -94,7 +94,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_63ef6f1307200",
+            "key": "field_hhh_image",
             "label": "Image",
             "name": "image",
             "aria-label": "",
@@ -124,7 +124,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/page-header"
+                "value": "acf\/homepage-hero-header"
             }
         ]
     ],
