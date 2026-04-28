@@ -5,26 +5,30 @@
             classes: ['trip-accommodation-preview__heading'],
         ); ?>
 
-        <div class="trip-accommodation-preview__summary">
+        <div class="trip-accommodation-preview__summary content-width-sm align-left">
             <div class="trip-accommodation-preview__header">
                 <?php if (! empty($this->title)) { ?>
                     <?= \Gust\Components\Heading::make(
                         heading: $this->title,
-                        el: 'h3',
+                        el: 'h5',
                         classes: ['trip-accommodation-preview__title'],
                     ); ?>
                 <?php } ?>
 
                 <?php if ($this->star_rating) { ?>
-                    <div class="trip-accommodation-preview__rating"><?= str_repeat('★', (int) $this->star_rating); ?></div>
+                    <?= \Gust\Components\Stars::make(
+                        stars: $this->star_rating,
+                        classes: ['trip-accommodation-preview__star-rating'],
+                    ); ?>
                 <?php } ?>
             </div>
 
             <?php if (! empty($this->tags)) { ?>
                 <ul class="trip-accommodation-preview__tags">
-                    <?php foreach ($this->tags as $tag) { ?>
-                        <li><?= esc_html($tag); ?></li>
-                    <?php } ?>
+                    <?= \Gust\Components\Tags::make(
+                        tags: $this->tags,
+                        classes: ['trip-accommodation-preview__tag-list'],
+                    ); ?>
                 </ul>
             <?php } ?>
 
@@ -45,11 +49,17 @@
             <?php } ?>
         </div>
 
+</div>
+
         <?php if (! empty($this->rooms_intro) || ! empty($this->url)) { ?>
-            <div class="trip-accommodation-preview__rooms">
+            <div class="trip-accommodation-preview__rooms content-width-sm align-left">
                 <?php if (! empty($this->rooms_intro)) { ?>
                     <div class="trip-accommodation-preview__rooms-copy">
-                        <h3><?= esc_html__('Rooms', 'gust'); ?></h3>
+                        <?= \Gust\Components\Heading::make(
+                            heading: __('Rooms', 'gust'),
+                            el: 'h6',
+                            classes: ['trip-accommodation-preview__rooms-heading', 'color-mid-blue'],
+                        ); ?>
                         <div><?= wp_kses_post($this->rooms_intro); ?></div>
                     </div>
                 <?php } ?>
@@ -63,5 +73,4 @@
                 <?php } ?>
             </div>
         <?php } ?>
-    </div>
 </section>

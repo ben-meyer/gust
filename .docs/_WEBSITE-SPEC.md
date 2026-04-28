@@ -65,8 +65,9 @@ Core swim holiday product. Each post represents a trip that may run on multiple 
 
 - URL: /trips/%postname%/
 - Dashicon: dashicons-palmtree
-- Supports: title, editor, excerpt, thumbnail
+- Supports: title, excerpt, thumbnail, revisions, custom-fields, slug
 - Taxonomies: trip_style, skill_level, swim_type, country, city
+- Editor: Gutenberg disabled — all content is managed via ACF fields and locked template sections
 
 **Fields:**
 - **dates** (repeater) - One or more date windows; UI shows date range if single, "Multiple dates" if more than one
@@ -95,12 +96,15 @@ Core swim holiday product. Each post represents a trip that may run on multiple 
 - **reviews_embed_code** (textarea) - Raw embed code for the Reviews section
 - **related_stories** (relationship, post_type: story, max: 2) - Manual story selection
 - **related_trips** (relationship, post_type: trip, max: 3) - Manual trip selection
+- **faqs** (repeater) - FAQ section rendered via the Accordion component
+  - **question** (text)
+  - **answer** (wysiwyg)
 
 **Single Template**
-- Template: Hard-coded PHP single
+- Template: Hard-coded PHP single via `TripSingle` orchestrator component
 - Route: single:trip
 - Editor model: classic admin screen with Gutenberg disabled and no main content editor
-- Layout order: Trip Page Header, Section Nav, Highlights, Itinerary, Accommodation, What's Included, Getting There, Reviews, FAQs, Dates & Book, Related Stories, Related Trips
+- Layout order: Trip Page Header, Section Nav, Highlights, Itinerary, Accommodation, What's Included, Getting There, Reviews, FAQs, Dates & Book, Get In Touch, Related Stories, Related Trips
 - Render rule: any section with no content must not render on the front end, and its jump link must also be hidden
 
 ---
@@ -110,7 +114,7 @@ Accommodation pages linked from trips.
 
 - URL: /accommodation/%postname%/
 - Dashicon: dashicons-building
-- Supports: title, editor, thumbnail
+- Supports: title, editor, thumbnail, revisions, custom-fields
 - Taxonomies: none
 
 **Fields:**
@@ -123,17 +127,18 @@ Accommodation pages linked from trips.
 
 ---
 
-### event
+### events
 Swimming events. Mirrors the trip post type in structure and purpose — events may also have multiple departures. The distinction is editorial/content rather than structural.
 
+- Slug: events (plural)
 - URL: /events/%postname%/
 - Dashicon: dashicons-calendar-alt
-- Supports: title, editor, excerpt, thumbnail
+- Supports: title, editor, excerpt, thumbnail, revisions, custom-fields
 - Taxonomies: trip_style, skill_level, swim_type, country, city
 
 **Archive** (/events/)
 - Template: Listing
-- Route: decorate:post_type:event
+- Route: decorate:post_type:events
 
 **Fields:**
 - **dates** (repeater) - One or more date windows
@@ -142,7 +147,7 @@ Swimming events. Mirrors the trip post type in structure and purpose — events 
   - **price** (number, min: 0, step: 0.01) - Price in GBP
 - **status** (select) - Availability: bookable, sold_out, sold_out_private
 - **booking_url** (url) - Booking link shown when status is bookable
-- Guides are standalone pages linked editorially — no ACF relationship field on event
+- Guides are standalone pages linked editorially — no ACF relationship field on events
 
 ---
 
@@ -151,7 +156,7 @@ Reusable day-by-day itinerary documents. Assigned to trips via post_object field
 
 - URL: /itineraries/%postname%/
 - Dashicon: dashicons-list-view
-- Supports: title, editor, thumbnail
+- Supports: title, editor, thumbnail, revisions, custom-fields
 - Taxonomies: none
 
 Current scaffold still uses Gutenberg editor content.
@@ -164,12 +169,12 @@ Guest stories and reviews. Used in the Stories & Reviews section under About Us.
 
 - URL: /stories/%postname%/
 - Dashicon: dashicons-format-quote
-- Supports: title, editor, thumbnail, excerpt
+- Supports: title, editor, thumbnail, excerpt, revisions, custom-fields
 - Taxonomies: none
 
 **Archive** (/stories/)
 - Template: Listing
-- Route: decorate:post_type:story
+- Route: native WordPress archive (no router decoration)
 
 ---
 
@@ -178,7 +183,7 @@ Guide and coach biographies. Used in "Meet our team" section under About Us.
 
 - URL: /guides/%postname%/
 - Dashicon: dashicons-id-alt
-- Supports: title, editor, thumbnail
+- Supports: title, editor, thumbnail, revisions, custom-fields
 - Taxonomies: none
 
 **Fields:**
@@ -198,7 +203,7 @@ Guide and coach biographies. Used in "Meet our team" section under About Us.
 ### trip_style
 Trip style categories used in primary navigation. 
 
-- Post types: trip, event
+- Post types: trip, events
 - Hierarchical: no
 - Rewrite slug: trip-styles
 - Terms:
@@ -218,8 +223,9 @@ Trip style categories used in primary navigation.
 ### skill_level
 Swimmer ability level. Multi-select — a trip can suit more than one level.
 
-- Post types: trip, event
+- Post types: trip, events
 - Hierarchical: no
+- Public: false (no REST API exposure, no front-end archives)
 - Terms: Dipper, Beginner, Intermediate, Advanced, Challenger, All Abilities
 
 No archive (used as a filter only).
@@ -229,7 +235,7 @@ No archive (used as a filter only).
 ### country
 Country-level taxonomy. Flat — country names only. Labeled "Destinations" in navigation and archive pages; slug `country` is the internal term.
 
-- Post types: trip, event
+- Post types: trip, events
 - Hierarchical: no
 - Rewrite slug: destinations
 
@@ -242,7 +248,7 @@ Country-level taxonomy. Flat — country names only. Labeled "Destinations" in n
 ### city
 City or location name. Used alongside `country` to form the display location string (e.g. "Mathraki, Greece").
 
-- Post types: trip, event
+- Post types: trip, events
 - Hierarchical: no
 - Rewrite slug: cities
 
@@ -257,12 +263,12 @@ City or location name. Used alongside `country` to form the display location str
 ### swim_type
 Type of swimming environment. Used to filter trips and events by the water context.
 
-- Post types: trip, event
+- Post types: trip, events
 - Hierarchical: no
 - Rewrite slug: swim-type
 - Terms: Sea, Pool, Open Water, Lake, River
 
-No archive (filter use only).
+Registered as public with rewrite enabled — WordPress generates archives at `/swim-type/%slug%/` but these are not linked from the front end. Used primarily as a filter.
 
 ---
 
@@ -294,7 +300,21 @@ Overview/wayfinding page linking into all Trip Style taxonomy archives. Not a ta
 - Route: owned
 
 ### Calendar (/calendar/)
-Owned route scaffolded for a calendar page. Controller currently returns an empty string; intended output is a chronological listing of trips grouped by year and month.
+Chronological listing of all upcoming trip departures, grouped by month. Shows one calendar entry per departure date for trips with multiple departures.
+
+**Display Logic:**
+- Lists all trips with at least one upcoming departure (start_date >= today)
+- Shows multiple entries per trip when multiple departures are available
+- Groups entries chronologically by month/year
+- De-lists individual departures once their start_date has passed
+- Completely removes trips once all departure start_dates are in the past
+
+**Example:** Trip with departures April 4-11, April 27-May 4, April 29-May 6:
+- Before April 4: Shows 3 entries
+- April 12-26: Shows 2 entries (April 27 & April 29 departures)
+- May 5-28: Shows 1 entry (April 29 departure only)
+- After May 6: Trip completely removed
+
 - Template: Default
 - Route: owned
 
@@ -303,7 +323,7 @@ Owned route scaffolded for a calendar page. Controller currently returns an empt
 ## Site Settings
 
 <!--
-  Global settings stored in ACF options page.
+  Global settings stored in ACF options pages.
 
   Format:
   - **field_name** (type) - Description
@@ -316,12 +336,31 @@ Owned route scaffolded for a calendar page. Controller currently returns an empt
   taxonomy, user, google_map, date_picker, color_picker, group, repeater
 -->
 
-- **logo** (image, return: array) - Site logo
-- **logo_alt** (image, return: array) - Alternative logo (e.g., white version)
-- **footer_text** (textarea) - Footer copyright text
-- **social_links** (repeater)
-  - **platform** (select: facebook, twitter, instagram, linkedin, youtube)
+Logo is a static SVG file (`logo-alt.svg`) rendered via `Gust\Image::get()` — not managed via ACF.
+
+### General (acf-options-general)
+
+- **social_networks** (repeater)
+  - **network** (select: facebook, twitter, youtube, instagram, linkedin, tiktok)
   - **url** (url)
+- **get_in_touch_contacts** (repeater) - Contact items shown in the "Get in touch" section on trip pages
+  - **icon** (select: whatsapp, email, phone)
+  - **label** (text)
+  - **value** (text)
+  - **url** (text)
+
+### Header (acf-options-header)
+
+- **header_call_to_action_1** (link) - Primary CTA button in the site header
+
+### Footer (acf-options-footer)
+
+- **footer_text_top** (wysiwyg) - Footer text above the copyright line
+- **footer_text_bottom** (wysiwyg) - Footer copyright text (default: "Company Name © [year]")
+- **footer_form** (text) - Gravity Forms shortcode
+- **footer_images** (repeater) - Logo/partner image row in the footer
+  - **image** (image, return: array)
+  - **link** (link)
 
 ---
 
@@ -332,13 +371,9 @@ Owned route scaffolded for a calendar page. Controller currently returns an empt
   - **menu_location** - Description of where it appears
 -->
 
-- **primary** - Main navigation in site header
-- **footer** - Footer navigation links
-
-<!-- Example:
-- **mobile** - Mobile-specific navigation menu
-- **social** - Social media links in footer
--->
+- **header** - Main navigation in site header
+- **footer-1** - Primary footer navigation links
+- **footer-2** - Secondary footer navigation links
 
 ---
 
@@ -363,9 +398,15 @@ Full-width hero that auto-populates from the current page, post, term, or router
 - **primary_call_to_action** (link) - Primary button link
 - **image** (image, return: array) - Optional override image for the current object
 
-### Trip Page Header [Partial]
+**Auto-population by context:**
+- `post` (blog): sets mini image position, adds publication date and author as meta, applies article type
+- `guide`: suppresses breadcrumbs, forces subheading to "Meet our team", removes background image
+- `trip_style` term: pulls `subheading` and `image` from term-level ACF fields (`group_trip_style_taxonomy`); suppresses hero image on archives
+- General `WP_Term`: reads `subheading` and `image` from term ACF fields if available
 
-Hard-coded trip hero section. Replaces `Page Header` on `trip` singles and combines editorial trip fields with derived trip metadata.
+### Trip Page Header [Block]
+
+Trip hero section registered as `acf/trip-page-header`, restricted to the `trip` post type. Replaces `Page Header` on `trip` singles and combines editorial trip fields with derived trip metadata. Renders two zones: summary items (calendar, location, price) and stat items (duration, distance, etc.).
 
 **Render rule:**
 - Always present in the hard-coded `trip` template
@@ -382,9 +423,9 @@ Hard-coded trip hero section. Replaces `Page Header` on `trip` singles and combi
 - Post-level ACF and taxonomies on `trip`
 
 **Fields:**
-- **trip_heading** (text) - Optional title override
-- **trip_description** (textarea) - Hero summary paragraph
-- **trip_header_image** (image, return: array) - Optional hero image override
+- **heading** (text) - Optional title override
+- **description** (textarea) - Hero summary paragraph
+- **image** (image, return: array) - Optional hero image override
 - **duration_nights** (number)
 - **distance_min_km** (number)
 - **distance_max_km** (number)
@@ -394,22 +435,25 @@ Hard-coded trip hero section. Replaces `Page Header` on `trip` singles and combi
 - **welcome_text** (text)
 - **technique_coaching_text** (text)
 
-### Trip Section Nav [Partial]
+### Trip Section Nav [Block]
 
-Sticky trip-only section navigation under the hero. Jump links are generated dynamically based on which hard-coded sections actually have content.
+Sticky trip-only section navigation under the hero, registered as `acf/trip-section-nav`. Jump links are generated dynamically based on which hard-coded sections actually have content.
 
 **Render rule:**
 - Do not render if no eligible locked sections have content
 
 **Auto-population logic:**
-- Links appear only for populated sections
+- Links appear only for populated sections (including FAQs when `faqs` field is non-empty)
 - Primary CTA opens the first available departure `enquiry_url`
-- Secondary CTA links to `Dates & book` for multiple dates, or directly to the single departure `booking_url`
+- Secondary CTA has three states:
+  - Multiple dates (or zero): "View dates & book" anchor link to `#trip-dates`
+  - Single bookable date with `booking_url`: "Book" linking to the external booking URL
+  - Single sold-out date: non-linked status label (e.g. "Sold Out")
 
 **Fields:**
 - No block fields. Derived from trip data and relationships.
 
-### Trip Highlights [Partial]
+### Trip Highlights [Block]
 
 Locked Highlights section for the trip single page.
 
@@ -419,7 +463,7 @@ Locked Highlights section for the trip single page.
 **Data source:**
 - Post-level ACF: `highlights`
 
-### Trip Itinerary Preview [Partial]
+### Trip Itinerary Preview [Block]
 
 Locked itinerary teaser on the trip page.
 
@@ -431,7 +475,7 @@ Locked itinerary teaser on the trip page.
 - Current scaffold uses related post title/excerpt/content summary and a CTA
 - Target behaviour is a first-3-days teaser once the itinerary post type is restructured
 
-### Trip Accommodation Preview [Partial]
+### Trip Accommodation Preview [Block]
 
 Locked accommodation teaser on the trip page.
 
@@ -442,7 +486,7 @@ Locked accommodation teaser on the trip page.
 - Related post: `accommodation`
 - Pulls summary fields, tags, star rating, square gallery, rooms intro, and CTA
 
-### Trip Includes [Partial]
+### Trip Includes [Block]
 
 Locked "What's included" section.
 
@@ -452,7 +496,7 @@ Locked "What's included" section.
 **Data source:**
 - Post-level ACF: `included_items`, `not_included_items`
 
-### Trip Getting There [Partial]
+### Trip Getting There [Block]
 
 Locked structured travel-information section.
 
@@ -462,7 +506,7 @@ Locked structured travel-information section.
 **Data source:**
 - Post-level ACF: `getting_there_stages`
 
-### Trip Reviews [Partial]
+### Trip Reviews [Block]
 
 Locked reviews embed section.
 
@@ -472,7 +516,7 @@ Locked reviews embed section.
 **Data source:**
 - Post-level ACF: `reviews_embed_code`
 
-### Trip Related Stories [Partial]
+### Trip Related Stories [Block]
 
 Manual related-story section at the end of the trip page.
 
@@ -482,9 +526,9 @@ Manual related-story section at the end of the trip page.
 **Data source:**
 - Post-level ACF relationship: `related_stories`
 
-### Trip Related Trips [Partial]
+### Trip Related Trips [Block]
 
-Manual related-trip section at the end of the trip page.
+Manual related-trip section at the end of the trip page. Renders using the generic `Cards` component (3-column layout) rather than `TripCards`.
 
 **Render rule:**
 - Do not render if `related_trips` is empty
@@ -492,9 +536,46 @@ Manual related-trip section at the end of the trip page.
 **Data source:**
 - Post-level ACF relationship: `related_trips`
 
+### Trip Single [Partial]
+
+Top-level orchestrator for the entire trip single template. Validates the current post is a `trip`, reads the `faqs` ACF field, and delegates rendering to all locked trip components in layout order.
+
+**Render rule:**
+- Only renders when the current post is of type `trip`
+
+**Data source:**
+- Post-level ACF: `faqs` (repeater with `question` and `answer` sub-fields) — mapped into Accordion items
+
+### Trip Get In Touch [Partial]
+
+Global "Get in touch" contact bar rendered on trip singles between Dates & Book and Related Stories. Driven by site-wide options, not per-trip fields. No section nav jump link is generated for this section.
+
+**Render rule:**
+- Do not render if `get_in_touch_contacts` option is empty
+
+**Data source:**
+- ACF options page (`acf-options-general`): `get_in_touch_contacts` repeater
+- Sub-fields: `icon` (select: whatsapp, email, phone), `label` (text), `value` (text), `url` (text)
+
+### Get In Touch [Block]
+
+Generic contact block (`acf/get-in-touch`) for use on any page. Distinct from `Trip Get In Touch` which reads from global options.
+
+**Fields:**
+- **contacts** (repeater)
+  - **type** (text) - Contact method type
+  - **value** (text) - Contact value or display text
+
+### Image Full Width [Block]
+
+Full-viewport-width image block (`acf/image-full-width`). Uses CSS breakout pattern (100vw, 600px height, object-cover).
+
+**Fields:**
+- **image** (image, return: id)
+
 ### Cards [Block]
 
-Responsive card grid for taxonomy terms, editorial posts, and custom content. Does **not** handle Trip posts — use `TripCards` for those.
+Responsive card grid for taxonomy terms, editorial posts, and custom content. Does **not** handle Trip posts — use `TripCards` for those (exception: `TripRelatedTrips` uses `Cards` for related trip rendering).
 
 **Fields:**
 - **heading** (text) - Section heading
@@ -505,18 +586,20 @@ Responsive card grid for taxonomy terms, editorial posts, and custom content. Do
   - **heading** (text)
   - **image** (image, return: array)
   - **text** (wysiwyg)
-  - **meta** (wysiwyg)
   - **link** (link)
 - **post_type** (button_group: story) - Post type used when `card_source` is `recent`
 - **limit** (button_group: 2, 3, 4, 6) - Number of recent posts to query
-- **selected** (relationship, post_type: page, story, events, guide) - Selected posts when `card_source` is `selected` (excludes `trip`)
+- **selected** (relationship, post_type: page, story, events, guide, max: 9) - Selected posts when `card_source` is `selected` (excludes `trip`)
 - **selected_trip_styles** (taxonomy, trip_style, multi_select) - Specific trip styles when `card_source` is `trip_styles`; empty = all
 - **selected_destinations** (taxonomy, country, multi_select, min: 2, max: 6) - Specific destinations when `card_source` is `destinations`; empty = all
 - **type** (button_group: default, horizontal) - Switches card layout
-- **card_background_color** (select: default, none) - Background color for cards
 - **card_image_fit** (select: default, contain, cover) - Image fit mode
 - **columns** (select: 2, 3, 4) - Grid column count
 - **slider_on_mobile** (true_false) - Enable horizontal scroll on smaller screens
+
+**Runtime behaviour:**
+- When `card_source` is `trip_styles` or `destinations`, read-more button auto-sets to "Find Your Trip"; otherwise "Read More"
+- On taxonomy archives, applies `cards--taxonomy-term-grid` CSS class
 
 ### Card [Partial]
 
@@ -538,21 +621,21 @@ Single card renderer used by the `Cards` block and archive grids.
 - **button** (link) - Optional footer CTA
 
 **Archive usage:**
-- `trip_style` and `country` taxonomy archives render TripCards with the queried trips (no block fields, populated from the archive query)
+- `trip_style`, `country`, and `city` taxonomy archives render TripCards with the queried trips (no block fields, populated from the archive query)
 
 ### TripCard [Partial]
 
 Single trip card renderer used by `TripCards`. Consumes a `WP_Post` of type `trip` and derives all display data from post-level ACF fields and taxonomies.
 
 **Layout (top to bottom):**
-1. Image (featured image, landscape crop)
+1. Image (featured image, `medium_large` size)
 2. Title (trip name)
 3. Meta list with icons:
    - Dates: single range or "Multiple dates"
    - Location: `city` + `country` taxonomy terms
    - Skill levels: `skill_level` taxonomy terms, comma-separated
-4. Price: "FROM £X,XXX" (cheapest departure from `dates` repeater)
-5. CTA button: "VIEW TRIP & BOOK" (filled gold style)
+4. Price: "From" on first line, "£X,XXX" on second line (cheapest departure from `dates` repeater)
+5. CTA button: "View Trip & Book" (`color-context-orange` style)
 
 **Fields:**
 - No editor fields. Runtime input is a `WP_Post` of type `trip`.
@@ -632,8 +715,8 @@ Derived filter bar that renders term links for the current taxonomy or object co
 <!-- Third-party services and APIs -->
 
 - **Feefo** - Customer reviews embedded on trip single pages
-  - Integrated via custom HTML snippet in site header (Settings > Theme Options)
-  - Review widgets dropped in as a Custom HTML block named "Feefo" within trip page content
+  - Integrated via the `Trip Reviews` block component which reads the `reviews_embed_code` ACF field on each trip
+  - Embed code is output raw (unescaped) to support Feefo's widget scripts
 
 ---
 
