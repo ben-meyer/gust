@@ -23,7 +23,6 @@
     transition: box-shadow var(--g-card--transition-duration) var(--g-card--transition-ease);
 
     &[class*='has-background'] {
-        border-radius: var(--g-card--border-radius);
         background-color: var(--color-background);
         box-shadow: var(--g-card--box-shadow);
     }
@@ -146,6 +145,22 @@
 
         .g-card__find-out-more {
             align-self: flex-start;
+        }
+    }
+
+    &:where(.g-card--type--story) {
+        .g-card__meta {
+            @apply type-meta;
+
+            margin-top: space(4);
+            color: var(--color-mid-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .g-card__content {
+            margin-top: space(8);
         }
     }
 
