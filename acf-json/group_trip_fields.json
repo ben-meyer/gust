@@ -314,8 +314,7 @@
                     "wrapper": {"width": "25", "class": "", "id": ""},
                     "choices": {
                         "bookable": "Bookable",
-                        "sold_out": "Sold Out",
-                        "sold_out_private": "Sold Out \u2013 Private Group"
+                        "sold_out": "Sold Out"
                     },
                     "default_value": "bookable",
                     "allow_null": 0,
