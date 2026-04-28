@@ -1,14 +1,14 @@
 {
-    "key": "group_trip_style_taxonomy",
-    "title": "Trip Style",
+    "key": "group_swim_type_taxonomy",
+    "title": "Swim Type",
     "fields": [
         {
-            "key": "field_trip_style_subheading",
+            "key": "field_swim_type_subheading",
             "label": "Subheading",
             "name": "subheading",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "Short description shown below the title on the Trip Style's archive page.",
+            "instructions": "Short description shown below the title on the Swim Type's archive page.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -22,12 +22,12 @@
             "new_lines": "br"
         },
         {
-            "key": "field_trip_style_image",
+            "key": "field_swim_type_image",
             "label": "Image",
             "name": "image",
             "aria-label": "",
             "type": "image",
-            "instructions": "Featured image shown on the Trip Styles' index tile and archive page header.",
+            "instructions": "Featured image shown on the Swim Types' index tile and archive page header.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -52,7 +52,7 @@
             {
                 "param": "taxonomy",
                 "operator": "==",
-                "value": "trip_style"
+                "value": "swim_type"
             }
         ]
     ],
