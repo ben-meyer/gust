@@ -35,7 +35,7 @@ class Button extends ComponentBase
      */
     public static function make(
         string $content = '',
-        array $classes = [],
+        array $classes = ['btn'],
         bool $screen_reader_text = false,
         string $type = 'button',
         string $variant = 'primary',
@@ -61,9 +61,12 @@ class Button extends ComponentBase
 
         $args['attributes']['type'] = $args['type'];
 
-        $allowed_variants = ['primary', 'secondary', 'inactive'];
-        if (in_array($args['variant'], $allowed_variants, true)) {
-            $args['classes'][] = 'button--' . $args['variant'];
+        $variant_classes = [
+            'secondary' => 'btn--theme-2',
+            'inactive' => 'btn--ghost',
+        ];
+        if (isset($variant_classes[$args['variant']])) {
+            $args['classes'][] = $variant_classes[$args['variant']];
         }
 
         return $args;
