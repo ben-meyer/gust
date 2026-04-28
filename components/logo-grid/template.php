@@ -5,7 +5,10 @@ use Gust\Components\Image;
 
 <?php if (! empty($this->items)) { ?>
     <section class="<?= classes('logo-grid', 'cards', 'wp-block', 'animate', $this->classes) ?>" <?= attributes($this->attributes) ?>>
-        <div class="logo-grid__inner content-width-fluid-lg">
+        <div class="logo-grid__inner">
+            <div class="logo-grid__featured_text">
+                <h6>Featured in</h6>
+            </div>
             <?php if (! empty($this->heading) || ! empty($this->subheading)) { ?>
                 <div class="logo-grid__header">
                     <?php if (! empty($this->heading)) { ?>
