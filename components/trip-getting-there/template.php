@@ -5,7 +5,21 @@
             classes: ['trip-getting-there__heading'],
         ); ?>
 
-        <?php foreach ($this->stages as $stage) { ?>
+        <?php
+            $tripFinishTime = '';
+
+            foreach (array_reverse($this->stages) as $stageWithFinishTime) {
+                if (! empty($stageWithFinishTime['finish_time'])) {
+                    $tripFinishTime = (string) $stageWithFinishTime['finish_time'];
+                    break;
+                }
+            }
+        ?>
+
+        <?php foreach ($this->stages as $stageIndex => $stage) {
+            $isLastStage = $stageIndex === array_key_last($this->stages);
+            $hasSteps = ! empty($stage['steps']) && is_array($stage['steps']);
+        ?>
             <div class="trip-getting-there__stage">
                 <?php if (! empty($stage['title'])) { ?>
                     <?= \Gust\Components\Heading::make(
@@ -21,9 +35,11 @@
                     </p>
                 <?php endif; ?>
 
-                <?php if (! empty($stage['steps'])) { ?>
+                <?php if ($hasSteps) { ?>
                     <div class="trip-getting-there__steps">
-                        <?php foreach ($stage['steps'] as $step) { ?>
+                        <?php foreach ($stage['steps'] as $stepIndex => $step) {
+                            $isLastStep = $stepIndex === array_key_last($stage['steps']);
+                        ?>
                             <article class="trip-getting-there__step">
                                 <?php if (! empty($step['title'])) { ?>
                                     <?php
@@ -48,15 +64,22 @@
                                 <?php if (! empty($step['description'])) { ?>
                                     <div class="trip-getting-there__step-description"><?= wp_kses_post($step['description']); ?></div>
                                 <?php } ?>
+
+                                <?php if ($isLastStage && $isLastStep && ! empty($tripFinishTime)): ?>
+                                    <p class="trip-getting-there__finish-time">
+                                        <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
+                                        <?= esc_html($tripFinishTime); ?>
+                                    </p>
+                                <?php endif; ?>
                             </article>
                         <?php } ?>
                     </div>
                 <?php } ?>
 
-                <?php if (! empty($stage['finish_time'])): ?>
+                <?php if ($isLastStage && ! $hasSteps && ! empty($tripFinishTime)): ?>
                     <p class="trip-getting-there__finish-time">
                         <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
-                        <?= esc_html($stage['finish_time']); ?>
+                        <?= esc_html($tripFinishTime); ?>
                     </p>
                 <?php endif; ?>
             </div>
