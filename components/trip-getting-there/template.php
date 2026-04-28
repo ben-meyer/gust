@@ -29,10 +29,10 @@
                 <?php } ?>
 
                 <?php if (! empty($stage['start_time'])): ?>
-                    <p class="trip-getting-there__start-time">
+                    <h6 class="trip-getting-there__start-time">
                         <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
                         <?= esc_html($stage['start_time']); ?>
-                    </p>
+                    </h6>
                 <?php endif; ?>
 
                 <?php if ($hasSteps) { ?>
@@ -66,10 +66,10 @@
                                 <?php } ?>
 
                                 <?php if ($isLastStage && $isLastStep && ! empty($tripFinishTime)): ?>
-                                    <p class="trip-getting-there__finish-time">
+                                    <h6 class="trip-getting-there__finish-time">
                                         <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
                                         <?= esc_html($tripFinishTime); ?>
-                                    </p>
+                                    </h6>
                                 <?php endif; ?>
                             </article>
                         <?php } ?>
@@ -77,10 +77,10 @@
                 <?php } ?>
 
                 <?php if ($isLastStage && ! $hasSteps && ! empty($tripFinishTime)): ?>
-                    <p class="trip-getting-there__finish-time">
+                    <h6 class="trip-getting-there__finish-time">
                         <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
                         <?= esc_html($tripFinishTime); ?>
-                    </p>
+                    </h6>
                 <?php endif; ?>
             </div>
         <?php } ?>
