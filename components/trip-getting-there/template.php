@@ -1,5 +1,5 @@
 <section id="trip-getting-there" class="<?= classes('trip-getting-there', 'wp-block', $this->classes) ?>" <?= attributes($this->attributes) ?>>
-    <div class="trip-getting-there__inner content-width-lg">
+    <div class="trip-getting-there__inner content-width-sm align-left w-full">
         <?= \Gust\Components\Heading::make(
             heading: __('Getting there', 'gust'),
             classes: ['trip-getting-there__heading'],
