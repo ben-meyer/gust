@@ -15,14 +15,21 @@
 
 .trip-getting-there__steps {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: space(24);
 }
 
 .trip-getting-there__step h6 {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: space(8);
     margin-bottom: 8px;
+}
+
+.trip-getting-there__step-title > span:last-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .trip-getting-there__start-time,
@@ -41,20 +48,6 @@
     flex: 0 0 16px;
 }
 
-.trip-getting-there__step-content {
-    display: flex;
-    align-items: flex-start;
-    gap: space(16);
-
-    @media (width < theme('screens.sm')) {
-        gap: space(10);
-    }
-}
-
-.trip-getting-there__step-title {
-    flex-shrink: 0;
-}
-
 .trip-getting-there__step-title-icon {
     display: inline-flex;
     flex-shrink: 0;
@@ -64,12 +57,11 @@
 .trip-getting-there__start-time-icon svg,
 .trip-getting-there__finish-time-icon svg {
     display: block;
-    margin-right: spaceFluid(12, 10);
 }
 
 .trip-getting-there__step-description {
     margin-left: 36px;
-    flex: 1;
+    overflow-wrap: anywhere;
 }
 
 .trip-getting-there__step-description > :first-child {
