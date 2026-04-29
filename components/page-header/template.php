@@ -1,6 +1,14 @@
 <header class="<?= classes('page-header', 'wp-block', 'alignfull', 'not-prose', $this->classes) ?>" <?= attributes($this->attributes) ?>>
     <?php if ($this->show_breadcrumbs) { ?>
-        <?= \Gust\Components\Breadcrumbs::make(); ?>
+        <?= \Gust\Components\Breadcrumbs::make(back_link: $this->back_link); ?>
+    <?php } ?>
+
+    <?php if (! empty($this->image) && $this->image_position === 'hero') { ?>
+        <div class="page-header__hero-image">
+            <div class="page-header__hero-image-inner img-fit">
+                <?= $this->image; ?>
+            </div>
+        </div>
     <?php } ?>
 
     <div class="page-header__inner">

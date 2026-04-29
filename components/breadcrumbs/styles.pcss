@@ -46,4 +46,24 @@
     a {
         @apply link--2;
     }
+
+    &.breadcrumbs--back :where(.breadcrumbs__back-link) {
+        @apply type-quote-credit;
+
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6ch;
+        color: var(--color-mid-blue);
+    }
+
+    &.breadcrumbs--back :where(.breadcrumbs__back-chevron) {
+        @apply mask-icon;
+
+        display: inline-block;
+        width: 1.1ch;
+        height: 1.1ch;
+        background-color: currentColor;
+        mask-image: url('/images/icons/chevron-right.svg');
+        transform: scaleX(-1);
+    }
 }

@@ -57,3 +57,47 @@ use Gust\Components\PageHeader;
         ); ?>
     </div>
 </section>
+
+<section class="component-example-section">
+    <h2 class="component-example-section__title">Page Header with Back Link</h2>
+    <p class="component-example-section__description">Replaces breadcrumbs with a "Back to {label}" link. Used on accommodation/itinerary pages to return to the parent trip.</p>
+    <div class="component-example-section__preview">
+        <?= PageHeader::make(
+            heading: 'Hotel Paradise',
+            subheading: 'A boutique stay in the heart of the village.',
+            back_link: [
+                'url' => '#',
+                'label' => 'Mathraki Island',
+            ],
+        ); ?>
+    </div>
+</section>
+
+<?php
+$hero_image_id = (int) (\get_option('page_on_front')
+    ? \get_post_thumbnail_id(\get_option('page_on_front'))
+    : 0);
+if (! $hero_image_id) {
+    $attachments = \get_posts([
+        'post_type' => 'attachment',
+        'post_mime_type' => 'image',
+        'posts_per_page' => 1,
+        'fields' => 'ids',
+    ]);
+    $hero_image_id = $attachments[0] ?? 0;
+}
+?>
+
+<section class="component-example-section">
+    <h2 class="component-example-section__title">Page Header with Hero Image</h2>
+    <p class="component-example-section__description">Full-bleed featured image variant. Heading and subheading overlay the image with a bottom gradient.</p>
+    <div class="component-example-section__preview">
+        <?= PageHeader::make(
+            heading: 'Mathraki Island',
+            subheading: 'Seven days of guided swimming in the Ionian.',
+            image: $hero_image_id ?: null,
+            image_position: 'hero',
+            show_breadcrumbs: false,
+        ); ?>
+    </div>
+</section>
