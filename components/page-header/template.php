@@ -12,6 +12,14 @@
             </div>
         <?php } ?>
 
+        <?php if (! empty($this->image) && $this->image_position === 'square') { ?>
+            <div class="page-header__square-image">
+                <div class="page-header__square-image-inner img-fit">
+                    <?= $this->image; ?>
+                </div>
+            </div>
+        <?php } ?>
+
         <div class="page-header__content">
             <?php if (($this->type ?? '') === 'guide') { ?>
                 <?php if (! empty($this->subheading)) { ?>

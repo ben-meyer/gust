@@ -108,6 +108,11 @@ class PageHeader extends ComponentBase
                     }
                 } elseif ($object->post_type === 'guide') {
                     $is_guide = true;
+
+                    if (empty($args['image']) && ($thumbnail_id = \get_post_thumbnail_id($object))) {
+                        $args['image'] = $thumbnail_id;
+                        $args['image_position'] = 'square';
+                    }
                 }
 
                 if ($heading === 'Auto Draft') {
@@ -150,6 +155,13 @@ class PageHeader extends ComponentBase
                     sizes: '(min-width: 768px) 50vw, 100vw',
                 );
                 $args['classes'][] = 'has-mini-image';
+            } elseif (($args['image_position'] ?? '') === 'square') {
+                $args['image'] = Image::make(
+                    id: $args['image'],
+                    size: 'gust_card_square',
+                    sizes: '300px',
+                );
+                $args['classes'][] = 'has-square-image';
             } else {
                 $args['image'] = Image::make(
                     id: $args['image'],
