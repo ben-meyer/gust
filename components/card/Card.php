@@ -50,6 +50,8 @@ class Card extends ComponentBase
     {
         $args['classes'] ??= [];
 
+        $incoming_type = $args['type'] ?? null;
+
         if (! empty($args['object'])) {
             $object = $args['object'];
 
@@ -90,6 +92,17 @@ class Card extends ComponentBase
                     if (! empty($metaAuthor)) {
                         $metaAuthor = Link::make(...$metaAuthor);
                         $args['content']['meta'] .= sprintf(__('by %s', 'gust'), $metaAuthor);
+                    }
+                } elseif ($object->post_type === 'story') {
+                    $args['type'] = 'story';
+                    $args['show_read_more'] = false;
+                    $args['heading_class'] = 'is-style-type-h4';
+
+                    $metaAuthor = \Theme\Utils\ObjectMeta::getObjectAuthor($object);
+
+                    if (! empty($metaAuthor)) {
+                        $metaAuthor = Link::make(...$metaAuthor);
+                        $args['content']['meta'] = sprintf(__('by %s', 'gust'), $metaAuthor);
                     }
                 }
             } elseif ($args['object'] instanceof \WP_Term) {
@@ -171,6 +184,10 @@ class Card extends ComponentBase
 
         if (! empty($args['type'])) {
             $args['classes'][] = 'g-card--type--'.$args['type'];
+        }
+
+        if (! empty($incoming_type) && $incoming_type !== ($args['type'] ?? null)) {
+            $args['classes'][] = 'g-card--type--'.$incoming_type;
         }
 
         return $args;
