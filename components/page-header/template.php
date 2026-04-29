@@ -1,8 +1,4 @@
 <header class="<?= classes('page-header', 'wp-block', 'alignfull', 'not-prose', $this->classes) ?>" <?= attributes($this->attributes) ?>>
-    <?php if ($this->show_breadcrumbs) { ?>
-        <?= \Gust\Components\Breadcrumbs::make(back_link: $this->back_link); ?>
-    <?php } ?>
-
     <?php if (! empty($this->image) && $this->image_position === 'hero') { ?>
         <div class="page-header__hero-image">
             <div class="page-header__hero-image-inner img-fit">
@@ -29,6 +25,15 @@
         <?php } ?>
 
         <div class="page-header__content">
+            <?php if (! empty($this->back_link)) { ?>
+                <a class="page-header__back-link" href="<?= esc_url($this->back_link['url']) ?>">
+                    <span class="page-header__back-link__icon" aria-hidden="true"></span>
+                    <span class="page-header__back-link__label"><?= esc_html($this->back_link['label']) ?></span>
+                </a>
+            <?php } elseif ($this->show_breadcrumbs) { ?>
+                <?= \Gust\Components\Breadcrumbs::make(); ?>
+            <?php } ?>
+
             <?php if (($this->type ?? '') === 'guide') { ?>
                 <?php if (! empty($this->subheading)) { ?>
                     <div class="page-header__subheading">
@@ -84,13 +89,5 @@
                 </div>
             <?php } ?>
         </div>
-
-        <?php if (! empty($this->image) && $this->image_position === 'inset') { ?>
-            <div class="page-header__inset-image">
-                <div class="page-header__inset-image-inner img-fit">
-                    <?= $this->image; ?>
-                </div>
-            </div>
-        <?php } ?>
     </div>
 </header>

@@ -59,16 +59,14 @@ use Gust\Components\PageHeader;
 </section>
 
 <section class="component-example-section">
-    <h2 class="component-example-section__title">Page Header with Back Link</h2>
-    <p class="component-example-section__description">Replaces breadcrumbs with a "Back to {label}" link. Used on accommodation/itinerary pages to return to the parent trip.</p>
+    <h2 class="component-example-section__title">Page Header — Left Aligned</h2>
+    <p class="component-example-section__description">White background, breadcrumb and heading flush left. Applied automatically to accommodation and itinerary single posts.</p>
     <div class="component-example-section__preview">
         <?= PageHeader::make(
             heading: 'Hotel Paradise',
             subheading: 'A boutique stay in the heart of the village.',
-            back_link: [
-                'url' => '#',
-                'label' => 'Mathraki Island',
-            ],
+            background: 'none',
+            classes: ['page-header--align-left'],
         ); ?>
     </div>
 </section>

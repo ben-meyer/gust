@@ -8,7 +8,6 @@
 
     --page-header--content--spacing: space(12);
     --page-header--mini-image--size: 6.25rem; /* 100px */
-    --page-header--inset-image--aspect-ratio: 5/4;
     --page-header--heading--max-width: 16em;
     --page-header--subheading--max-width: 40em;
 
@@ -28,30 +27,6 @@
 
     @media (min-width: theme('screens.md')) {
         --page-header--mini-image--size: 9.375rem; /* 150px */
-        --page-header--inset-image--aspect-ratio: 10/9;
-    }
-
-    &.has-inset-image {
-        --page-header--text-align: left;
-        --page-header--grid-alignment-x: flex-start;
-        --page-header--grid-template-areas: 'content' 'media';
-        --page-header--padding-block: spaceFluid(16, 24);
-
-        @media (min-width: theme('screens.md')) {
-            --page-header--grid-template-areas: 'content media';
-            --page-header--grid-template-columns: 1fr 50%;
-        }
-
-        @media (min-width: theme('screens.lg')) {
-            --page-header--padding-block: space(32);
-        }
-
-        &.has-breadcrumbs {
-            @media (width < theme('screens.md')) {
-                --page-header--padding-block: calc(spaceFluid(16, 24) + spaceFluid(8, 12))
-                    spaceFluid(16, 24);
-            }
-        }
     }
 
     &.has-mini-image {
@@ -65,6 +40,9 @@
 
         min-height: var(--page-header--hero--height);
         align-items: end;
+        padding-inline: var(--content-gutter);
+        grid-template-columns: 1fr;
+        justify-content: flex-start;
         color: var(--color-white);
 
         :where(.page-header__inner) {
@@ -73,6 +51,12 @@
 
         :where(.page-header__heading),
         :where(.page-header__subheading) {
+            color: var(--color-white);
+        }
+
+        .breadcrumbs {
+            --link--color: var(--color-white);
+            --link--color-hover: var(--color-white);
             color: var(--color-white);
         }
     }
@@ -114,13 +98,49 @@
         --page-header--grid-template-areas: 'media' 'content';
     }
 
+    &.page-header--align-left {
+        --page-header--grid-alignment-x: flex-start;
+        --page-header--text-align: left;
+
+        padding-inline: var(--content-gutter);
+        grid-template-columns: 1fr;
+        justify-content: flex-start;
+
+        .page-header__buttons .flex-list,
+        .page-header__labels .flex-list {
+            justify-content: flex-start;
+        }
+    }
+
+    .page-header__back-link {
+        --link--color: var(--color-mid-blue);
+        --link--color-hover: var(--color-mid-blue);
+        @apply type-quote-credit;
+
+        display: inline-flex;
+        align-items: center;
+        gap: space(16);
+        color: var(--color-mid-blue);
+
+        :where(.page-header__back-link__icon) {
+            @apply mask-icon;
+
+            display: inline-block;
+            flex-shrink: 0;
+            width: 6px;
+            height: 12px;
+            mask-image: url('/images/icons/chevron-left.svg');
+        }
+
+        @media (hover: hover) {
+            &:hover :where(.page-header__back-link__label) {
+                text-decoration: underline;
+            }
+        }
+    }
+
     &:where(.page-header--type--article) {
         --page-header--padding-block: spaceFluid(16, 24);
-
-        &.has-breadcrumbs {
-            --page-header--padding-block: calc(spaceFluid(16, 24) + spaceFluid(4, 8))
-                spaceFluid(16, 24);
-        }
     }
 
     :where(.page-header__inner) {
@@ -195,19 +215,6 @@
         }
     }
 
-    :where(.page-header__inset-image) {
-        overflow: var(--rounded-overflow, visible);
-        border-radius: var(--rounded-border-radius);
-        width: 100%;
-        grid-area: media;
-
-        :where(.page-header__inset-image-inner) {
-            position: relative;
-            width: 100%;
-            aspect-ratio: var(--page-header--inset-image--aspect-ratio);
-        }
-    }
-
     :where(.page-header__square-image) {
         overflow: var(--rounded-overflow, visible);
         border-radius: var(--rounded-border-radius);
@@ -221,15 +228,9 @@
         }
     }
 
-    .breadcrumbs {
-        @apply content-width-md;
-
-        position: absolute;
-        z-index: 101; /* Above background image and header */
-        top: 0;
-        width: 100%;
-        padding-top: spaceFluid(4, 8);
-        inset-inline: 0;
+    .breadcrumbs,
+    .page-header__back-link {
+        margin-bottom: space(8);
         text-align: left;
     }
 

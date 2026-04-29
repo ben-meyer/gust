@@ -20,7 +20,7 @@ class PageHeader extends ComponentBase
     protected static function getDefaults(): array
     {
         return [
-            'image_position' => 'inset',
+            'image_position' => 'hero',
             'background' => 'accent',
             'show_breadcrumbs' => true,
         ];
@@ -115,9 +115,15 @@ class PageHeader extends ComponentBase
                         $args['image_position'] = 'square';
                     }
                 } elseif (in_array($object->post_type, ['accommodation', 'itinerary'], true)) {
-                    if (empty($args['back_link'])) {
-                        $args['back_link'] = self::resolveTripBackLink($object);
-                    }
+                    $args['background'] = 'none';
+                    $args['image'] = null;
+                    $args['classes'][] = 'page-header--align-left';
+                    $args['type'] = $object->post_type;
+                    $args['show_breadcrumbs'] = false;
+                    $args['back_link'] = [
+                        'url' => \get_post_type_archive_link($object->post_type) ?: \home_url('/'),
+                        'label' => __('Back', 'gust'),
+                    ];
                 }
 
                 if ($heading === 'Auto Draft') {
@@ -160,13 +166,6 @@ class PageHeader extends ComponentBase
                     sizes: '(min-width: 768px) 50vw, 100vw',
                 );
                 $args['classes'][] = 'has-mini-image';
-            } elseif (($args['image_position'] ?? '') === 'hero') {
-                $args['image'] = Image::make(
-                    id: $args['image'],
-                    size: 'gust_super',
-                    sizes: '100vw',
-                );
-                $args['classes'][] = 'has-hero-image';
             } elseif (($args['image_position'] ?? '') === 'square') {
                 $args['image'] = Image::make(
                     id: $args['image'],
@@ -178,9 +177,9 @@ class PageHeader extends ComponentBase
                 $args['image'] = Image::make(
                     id: $args['image'],
                     size: 'gust_super',
-                    sizes: '(min-width: 768px) 50vw, 100vw',
+                    sizes: '100vw',
                 );
-                $args['classes'][] = 'has-inset-image';
+                $args['classes'][] = 'has-hero-image';
             }
         }
 
@@ -217,42 +216,5 @@ class PageHeader extends ComponentBase
         }
 
         return $args;
-    }
-
-    /**
-     * Build a back-link target for an accommodation or itinerary post.
-     *
-     * Single linking trip → "Back to {Trip Name}".
-     * Multiple linking trips → "Back to Trips" if the post-type archive
-     * exists; otherwise the most recently published linking trip wins.
-     * No linking trips → no back-link.
-     */
-    protected static function resolveTripBackLink(\WP_Post $object): ?array
-    {
-        $trips = \Theme\Modules\Trips\TripLookup::findTripsByRelation($object->ID, $object->post_type);
-
-        if (empty($trips)) {
-            return null;
-        }
-
-        if (count($trips) > 1) {
-            $archive = \get_post_type_archive_link('trip');
-
-            if ($archive) {
-                return [
-                    'url' => $archive,
-                    'label' => __('Trips', 'gust'),
-                ];
-            }
-
-            usort($trips, fn ($a, $b) => strcmp($b->post_date, $a->post_date));
-        }
-
-        $trip = $trips[0];
-
-        return [
-            'url' => \get_permalink($trip),
-            'label' => \get_the_title($trip),
-        ];
     }
 }
