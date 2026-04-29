@@ -30,8 +30,11 @@
 
                 <?php if (! empty($stage['start_time'])): ?>
                     <h6 class="trip-getting-there__start-time">
-                        <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
-                        <?= esc_html($stage['start_time']); ?>
+                        <span 
+                        class="trip-getting-there__start-time-icon" aria-hidden="true">
+                            <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
+                        </span>
+                        <span><?= esc_html($stage['start_time']); ?></span>
                     </h6>
                 <?php endif; ?>
 
@@ -49,7 +52,8 @@
                                             'ferry' => 'ferry.svg',
                                             'car' => 'car.svg',
                                             'bus' => 'bus.svg',
-                                            'train' => 'quote.svg',
+                                            'train' => 'train.svg',
+                                            'walk' => 'walking.svg',
                                         ];
                                         $iconFile = $iconMap[$icon] ?? 'car.svg';
                                     ?>
@@ -67,8 +71,10 @@
 
                                 <?php if ($isLastStage && $isLastStep && ! empty($tripFinishTime)): ?>
                                     <h6 class="trip-getting-there__finish-time">
-                                        <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
-                                        <?= esc_html($tripFinishTime); ?>
+                                        <span class="trip-getting-there__finish-time-icon" aria-hidden="true">
+                                            <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/clock.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?>
+                                        </span>
+                                        <span><?= esc_html($tripFinishTime); ?></span>
                                     </h6>
                                 <?php endif; ?>
                             </article>
