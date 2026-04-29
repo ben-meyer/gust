@@ -101,3 +101,30 @@ if (! $hero_image_id) {
         ); ?>
     </div>
 </section>
+
+<?php
+$square_image_id = 0;
+$attachments = \get_posts([
+    'post_type' => 'attachment',
+    'post_mime_type' => 'image',
+    'posts_per_page' => 1,
+    'fields' => 'ids',
+]);
+$square_image_id = $attachments[0] ?? 0;
+?>
+
+<section class="component-example-section">
+    <h2 class="component-example-section__title">Guide Page Header with Square Image</h2>
+    <p class="component-example-section__description">Guide layout with a 300px square featured image rendered alongside the heading.</p>
+    <div class="component-example-section__preview">
+        <?= PageHeader::make(
+            heading: 'Nick Ayers',
+            type: 'guide',
+            subheading: 'Meet our team',
+            image: $square_image_id ?: null,
+            image_position: 'square',
+            background: 'color-context-white',
+            show_breadcrumbs: false,
+        ); ?>
+    </div>
+</section>

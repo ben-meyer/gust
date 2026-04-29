@@ -109,6 +109,11 @@ class PageHeader extends ComponentBase
                     }
                 } elseif ($object->post_type === 'guide') {
                     $is_guide = true;
+
+                    if (empty($args['image']) && ($thumbnail_id = \get_post_thumbnail_id($object))) {
+                        $args['image'] = $thumbnail_id;
+                        $args['image_position'] = 'square';
+                    }
                 } elseif (in_array($object->post_type, ['accommodation', 'itinerary'], true)) {
                     if (empty($args['back_link'])) {
                         $args['back_link'] = self::resolveTripBackLink($object);
@@ -162,6 +167,13 @@ class PageHeader extends ComponentBase
                     sizes: '100vw',
                 );
                 $args['classes'][] = 'has-hero-image';
+            } elseif (($args['image_position'] ?? '') === 'square') {
+                $args['image'] = Image::make(
+                    id: $args['image'],
+                    size: 'gust_card_square',
+                    sizes: '300px',
+                );
+                $args['classes'][] = 'has-square-image';
             } else {
                 $args['image'] = Image::make(
                     id: $args['image'],
