@@ -61,11 +61,6 @@
     &.has-square-image {
         --page-header--square-image--size: 18.75rem; /* 300px */
         --page-header--grid-template-areas: 'media' 'content';
-
-        @media (min-width: theme('screens.md')) {
-            --page-header--grid-template-areas: 'media content';
-            --page-header--grid-template-columns: var(--page-header--square-image--size) 1fr;
-        }
     }
 
     &:where(.page-header--type--article) {
