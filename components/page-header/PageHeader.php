@@ -62,6 +62,7 @@ class PageHeader extends ComponentBase
 
             if ($object instanceof \WP_Term) {
                 $heading = $object->name;
+                $args['show_breadcrumbs'] = false;
 
                 if ($subheading = \get_field('subheading', $object)) {
                     $args['subheading'] = $subheading;
