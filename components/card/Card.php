@@ -90,7 +90,9 @@ class Card extends ComponentBase
                     $args['content']['meta'] .= $metaDate && $metaAuthor ? ' ' : null;
 
                     if (! empty($metaAuthor)) {
-                        $metaAuthor = Link::make(...$metaAuthor);
+                        $metaAuthor = ! empty($metaAuthor['url'])
+                            ? Link::make(...$metaAuthor)
+                            : esc_html($metaAuthor['title']);
                         $args['content']['meta'] .= sprintf(__('by %s', 'gust'), $metaAuthor);
                     }
                 } elseif ($object->post_type === 'story') {
@@ -101,7 +103,9 @@ class Card extends ComponentBase
                     $metaAuthor = \Theme\Utils\ObjectMeta::getObjectAuthor($object);
 
                     if (! empty($metaAuthor)) {
-                        $metaAuthor = Link::make(...$metaAuthor);
+                        $metaAuthor = ! empty($metaAuthor['url'])
+                            ? Link::make(...$metaAuthor)
+                            : esc_html($metaAuthor['title']);
                         $args['content']['meta'] = sprintf(__('by %s', 'gust'), $metaAuthor);
                     }
                 }
