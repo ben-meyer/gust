@@ -40,7 +40,10 @@
       "Bash(chrome-devtools resize_page 1440 900)",
       "Bash(chrome-devtools take_screenshot --filePath /tmp/trip-header-1440.png)",
       "Bash(chrome-devtools take_screenshot --filePath /tmp/trip-icons.png)",
-      "Bash(:)"
+      "Bash(:)",
+      "Read(//Users/benmeyer/Development/code/work/swimquest/wordpress/**)",
+      "Bash(ddev wp *)",
+      "Read(//private/tmp/**)"
     ]
   },
   "enableAllProjectMcpServers": true,
