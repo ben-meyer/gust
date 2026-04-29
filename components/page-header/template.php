@@ -8,14 +8,6 @@
     <?php } ?>
 
     <div class="page-header__inner">
-        <?php if (! empty($this->image) && $this->image_position === 'mini') { ?>
-            <div class="page-header__mini-image">
-                <div class="page-header__mini-image-inner img-fit">
-                    <?= $this->image; ?>
-                </div>
-            </div>
-        <?php } ?>
-
         <?php if (! empty($this->image) && $this->image_position === 'square') { ?>
             <div class="page-header__square-image">
                 <div class="page-header__square-image-inner img-fit">

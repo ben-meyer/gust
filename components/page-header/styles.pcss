@@ -7,7 +7,6 @@
     --page-header--padding-block: var(--space-layout);
 
     --page-header--content--spacing: space(12);
-    --page-header--mini-image--size: 6.25rem; /* 100px */
     --page-header--heading--max-width: 16em;
     --page-header--subheading--max-width: 40em;
 
@@ -24,14 +23,6 @@
     justify-items: var(--page-header--grid-alignment-x);
     background-color: var(--color-white);
     color: var(--color-navy);
-
-    @media (min-width: theme('screens.md')) {
-        --page-header--mini-image--size: 9.375rem; /* 150px */
-    }
-
-    &.has-mini-image {
-        --page-header--grid-template-areas: 'media' 'content';
-    }
 
     &.has-hero-image {
         --page-header--grid-alignment-x: flex-start;
@@ -200,18 +191,6 @@
 
         .flex-list {
             justify-content: var(--page-header--grid-alignment-x);
-        }
-    }
-
-    :where(.page-header__mini-image) {
-        :where(.page-header__mini-image-inner) {
-            width: var(--page-header--mini-image--size);
-            height: var(--page-header--mini-image--size);
-            flex-flow: column nowrap;
-            border-radius: 999px;
-            margin-right: auto;
-            margin-left: auto;
-            box-shadow: var(--base--shadow);
         }
     }
 

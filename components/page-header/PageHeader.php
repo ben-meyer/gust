@@ -92,7 +92,6 @@ class PageHeader extends ComponentBase
                     $args['meta'] = sprintf(__('Published on %s ', 'gust'), \get_the_date(\get_option('date_format'), $object->ID));
                     $args['labels'] = \Theme\Utils\ObjectMeta::getObjectLabels($object->ID, ['limit' => 3, 'taxonomies' => ['category']]);
                     $args['background'] = false;
-                    $args['image_position'] = 'mini';
                     $args['type'] = 'article';
 
                     if ($author_name = \get_the_author_meta('display_name', $object->post_author)) {
@@ -159,14 +158,7 @@ class PageHeader extends ComponentBase
                 $args['image'] = $args['image']['ID'];
             }
 
-            if (($args['image_position'] ?? '') === 'mini') {
-                $args['image'] = Image::make(
-                    id: $args['image'],
-                    size: 'medium',
-                    sizes: '(min-width: 768px) 50vw, 100vw',
-                );
-                $args['classes'][] = 'has-mini-image';
-            } elseif (($args['image_position'] ?? '') === 'square') {
+            if (($args['image_position'] ?? '') === 'square') {
                 $args['image'] = Image::make(
                     id: $args['image'],
                     size: 'gust_card_square',
