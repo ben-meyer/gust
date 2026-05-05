@@ -368,3 +368,29 @@
 .site-header--hero.site-header--scrolled .site-header__call-to-action-1::before {
     background-color: var(--color-bright-blue);
 }
+
+/* Trip pages: the trip-section-nav already pins on this post type, so let
+   the site header scroll away naturally instead of staying fixed. */
+body.single-trip {
+    @media (width < theme('screens.site-header')) {
+        .site-header.site-header--positioned {
+            position: static;
+
+            & ~ .site-main {
+                margin-top: 0;
+            }
+        }
+
+        /* Mobile menu still needs a fixed shell so the panel fills the screen. */
+        .site-header.site-header--positioned:has(.site-header__panel:not([inert])) {
+            position: fixed;
+        }
+    }
+
+    @media (width >= theme('screens.site-header')) {
+        .site-header.site-header--positioned,
+        .site-header.site-header--hero {
+            position: absolute;
+        }
+    }
+}
