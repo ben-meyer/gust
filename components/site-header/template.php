@@ -1,5 +1,6 @@
 <header class="<?= classes('site-header', $this->classes) ?>" <?= attributes($this->attributes) ?>>
-    <div class="site-header__bar">
+    <div class="site-header__bar_wrapper">
+        <div class="site-header__bar">
         <?= \Gust\Components\Link::make(
             url: home_url('/'),
             classes: ['site-header__logo', 'img-fit'],
@@ -71,6 +72,7 @@
                 <span aria-hidden="true" data-show-collapsed>Menu</span>
                 <span aria-hidden="true" data-hide-collapsed>Close</span>
             </button>
+        </div>
         </div>
     </div>
 

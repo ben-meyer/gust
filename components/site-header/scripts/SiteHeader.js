@@ -24,6 +24,7 @@ export default class SiteHeader {
     init() {
         this.calculateOffset();
         this.initHeroMode();
+        this.initStickyScroll();
 
         const debouncedResize = debounce(() => {
             this.calculateOffset();
@@ -73,6 +74,30 @@ export default class SiteHeader {
 
         this.updateHeroScroll();
         window.addEventListener('scroll', () => this.updateHeroScroll(), { passive: true });
+    }
+
+    initStickyScroll() {
+        this.lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            if (this.isMobileMode()) return;
+
+            const currentScrollY = window.scrollY;
+            const headerHeight = this.barEl.offsetHeight;
+
+            // Only hide after scrolled past the header itself
+            if (currentScrollY > headerHeight) {
+                if (currentScrollY > this.lastScrollY) {
+                    this.el.classList.add('site-header--hidden');
+                } else {
+                    this.el.classList.remove('site-header--hidden');
+                }
+            } else {
+                this.el.classList.remove('site-header--hidden');
+            }
+
+            this.lastScrollY = currentScrollY;
+        }, { passive: true });
     }
 
     updateHeroScroll() {

@@ -71,7 +71,7 @@
     justify-content: space-between;
     pointer-events: auto;
     z-index: 10;
-    transition: background-color 300ms ease;
+    transition: background-color 300ms ease, transform 300ms ease;
 
     @media (width >= theme('screens.site-header')) {
         @apply content-width-fluid-lg;
@@ -145,9 +145,19 @@
     > * {
         object-fit: contain;
         object-position: left center;
+        display: flex;
     }
 
     .logo-white { display: none; }
+}
+
+/* Sticky-on-scroll-up: hide bar when scrolling down (desktop only) */
+.site-header--hidden {
+    @media (width >= theme('screens.site-header')) {
+        .site-header__bar {
+            transform: translateY(-100%);
+        }
+    }
 }
 
 /* Transparent/hero variant — overlays the hero image */
@@ -206,7 +216,7 @@
     left: 0;
     display: grid;
     height: calc(100% - var(--site-header--top));
-    padding-top: var(--site-header--height);
+    padding-top: 0;
     background-color: var(--color-background);
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     grid-template-rows: 1fr;
@@ -243,7 +253,7 @@
 .site-header__menu-panel {
     .site-header__panel-content {
         gap: var(--menu-item--gap);
-        padding: space(40) var(--container-padding) var(--container-padding);
+        padding: calc(var(--site-header--height) + space(40)) var(--container-padding) var(--container-padding);
     }
 }
 
@@ -251,7 +261,9 @@
     .site-header__panel-content {
         align-items: center;
         justify-content: center;
-        padding: var(--container-padding);
+        padding-top: var(--site-header--height);
+        padding-inline: var(--container-padding);
+        padding-bottom: var(--container-padding);
     }
 }
 
@@ -308,11 +320,12 @@
 
     @media (width >= theme('screens.site-header')) {
         position: relative;
+        margin-left: var(--menu-item--gap);
 
         &::before {
             content: '';
             position: absolute;
-            right: calc(100% + var(--menu-item--gap) * 0.5);
+            right: calc(100% + var(--menu-item--gap));
             top: 50%;
             transform: translateY(-50%);
             width: 2px;
