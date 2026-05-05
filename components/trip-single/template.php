@@ -1,8 +1,11 @@
 <?php
 echo \Gust\Components\TripPageHeader::make(post_id: $this->post_id);
 echo \Gust\Components\TripSectionNav::make(post_id: $this->post_id);
+echo \Gust\Components\TripIntro::make(post_id: $this->post_id);
+echo \Gust\Components\Gallery::make(images: $this->intro_gallery);
 echo \Gust\Components\TripHighlights::make(post_id: $this->post_id);
 echo \Gust\Components\TripItineraryPreview::make(post_id: $this->post_id);
+echo \Gust\Components\Gallery::make(images: $this->mid_gallery);
 echo \Gust\Components\TripAccommodationPreview::make(post_id: $this->post_id);
 echo \Gust\Components\TripIncludes::make(post_id: $this->post_id);
 echo \Gust\Components\TripGettingThere::make(post_id: $this->post_id);

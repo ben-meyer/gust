@@ -441,47 +441,46 @@ Top-of-page navigation rendered on every page. Hard-coded into the theme templat
 **Data source:**
 - WP menu at the `header` theme location (top-level items and their first-level children)
 - ACF option (`acf-options-header`): `header_call_to_action_1`
-- ACF option (`acf-options-general`): `social_networks` (mobile panel only)
-- Static asset: `logo-alt.svg` rendered via `Gust\Image::get()` — links to home
+- Static assets: `logo-alt.svg` (default) and `logo-white.svg` (hero variant) — both rendered via `Gust\Image::get()`, both linked to home; visibility swapped by CSS based on header state
+- Note: `social_networks` is not currently consumed by the header
 
 **Top bar layout (both breakpoints):**
 - Logo on the left
 - On desktop: inline navigation + CTA on the right
-- On mobile: burger toggle on the right
-- White background; sits flush at the top of the viewport with a sticky/anchored position
+- On mobile: burger toggle (label toggles "Menu" / "Close") on the right
+- White background; bar is `position: fixed` at the top of the viewport once JS has set the `--site-header--top` offset (`.site-header--positioned` class) — this applies at all breakpoints
+- Top offset is calculated from the WP admin bar plus any `[data-header-offset]` element and exposed as `--site-header--top`; downstream sticky elements (e.g. `.trip-section-nav`) use it to stack below the bar
 
-**Scroll behaviour (desktop only):**
-- After the user scrolls past the top of the page, the bar hides on scroll-down and reveals on scroll-up (sticky-on-scroll-up pattern)
-- At the very top of the page, the bar is always visible
-- Mobile retains the standard sticky/anchored behaviour and is not affected by this rule
+**Scroll behaviour:**
+- Bar stays fixed at the top of the viewport at all breakpoints — it does not hide on scroll
+- A `.site-header--hidden` CSS hook exists for a future hide-on-scroll-down / reveal-on-scroll-up pattern, but no JS currently toggles it
 
-**Transparent variant:**
-- When the page renders a hero with a full-bleed image immediately below the header (i.e. `Page Header` or `Homepage Hero Header` with an image), the bar is rendered with a transparent background so the image extends behind it
-- **Desktop only:** colours are automatically inverted — the white-variant logo (`logo-white.svg`) and white menu/burger link colours are applied so they remain legible against the hero image. Once the hero scrolls past, the bar returns to solid white background and brand-navy colours.
-- **Mobile:** no colour inversion. The bar keeps its solid white background and brand-navy logo + links so navigation stays readable regardless of the hero image content.
-- On pages without a full-bleed hero image, the bar uses the solid white background by default at all breakpoints
+**Transparent variant (hero pages):**
+- JS detects hero pages by inspecting the first element inside `.site-main__content` (falls back to `.site-main__inner`, then `.site-main`); if it matches `.page-header.has-hero-image`, `.homepage-hero-header.has-background-image`, or `.trip-page-header`, the `.site-header--hero` class is added.
+- **Desktop only:** bar background goes transparent and link, burger, and CTA divider colours invert to white; the white-variant logo (`logo-white.svg`) replaces `logo-alt.svg` while the bar overlays the hero image. Once the user scrolls past the bottom of the hero, JS adds `.site-header--scrolled` and the bar returns to solid white background with brand-navy logo + links (CTA divider returns to bright-blue).
+- **Mobile:** no colour inversion. The bar keeps its solid white background and brand-navy logo + links regardless of the hero behind it.
+- On pages without a matching hero element, the bar uses the solid white background by default at all breakpoints.
 
 **Desktop behaviour (≥ `screens.site-header` breakpoint):**
 - Top-level menu items render inline to the right of the logo
 - Items with children show a dropdown caret (`v`) next to the label
-- A vertical divider rule is rendered before the final menu item (visual separator between primary nav and the trailing item, e.g. "Shop")
-- `header_call_to_action_1` renders as a CTA button after the menu
+- A vertical divider rule is rendered immediately before `header_call_to_action_1` to visually separate the primary nav from the CTA — bright-blue on the white variant, orange on the transparent hero variant, returns to bright-blue once `.site-header--scrolled` is set
+- `header_call_to_action_1` renders as an inline uppercase display-type link after the menu
 - Hovering or focusing a top-level item with children opens a full-width mega-menu panel anchored below the top bar:
   - Parent label as a heading at the top-left of the panel
-  - Child links arranged in a multi-column grid (3 columns at standard desktop widths)
+  - Child links arranged in a 3-column grid
   - Closes on mouse-out / blur / Escape
 - Burger toggle is hidden
 
 **Mobile behaviour (< `screens.site-header` breakpoint):**
-- Top bar shows logo + burger toggle (button label toggles "Menu" / "Close")
-- Tapping the burger opens a full-viewport panel that animates in via clip-path/opacity transition; body scroll is locked while open
-- Panel header repeats the logo on the left and a close (X) icon on the right
-- Panel body (vertical list, thin divider lines between items):
-  - Top-level menu items, large type
-  - Items with children show a chevron (`>`) and expand **inline** to reveal child links indented beneath the parent — no separate sub-panel or drill-down
-  - `header_call_to_actiton_1` rendered inline within the list
-  - Social icons row at the bottom of the panel, sourced from `social_networks` option
-- Tapping the burger again, the close icon, or Escape closes the panel with the reverse animation
+- Top bar shows logo + burger toggle (label toggles "Menu" / "Close"); the bar remains visible while the menu is open
+- Tapping the burger opens a panel that starts immediately *below* the bar (so logo + toggle stay above it) and animates in via clip-path + opacity transition; panel content fades and slides up. Body scroll is locked while open via `no-scroll` on `<html>`.
+- Panel body (vertical list, thin horizontal divider lines between top-level items):
+  - Top-level menu items rendered in large League Gothic uppercase display type
+  - Items with children show a chevron (right when collapsed, rotates to down when expanded) and expand **inline** to reveal child links indented beneath the parent — no separate sub-panel or drill-down. Sub-links use small body type with no uppercase transform.
+  - `header_call_to_action_1` rendered inline within the list
+- Tapping the burger again or pressing Escape closes the panel with the reverse animation
+- No social-icon row is currently rendered in the panel
 
 ### Page Header [Block]
 
