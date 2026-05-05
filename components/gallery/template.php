@@ -52,7 +52,6 @@ $image_count = count($this->images ?? []);
                     <?php } ?>
                     </div>
                 </div>
-                </div>
             </div>
         <?php } ?>
     </div>
