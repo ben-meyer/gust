@@ -10,6 +10,7 @@ echo \Gust\Components\TripReviews::make(post_id: $this->post_id);
 
 if (! empty($this->faqs)) {
     echo \Gust\Components\Accordion::make(
+        id: 'trip-faqs',
         heading: __('FAQs', 'gust'),
         accordion_items: array_map(fn ($item) => [
             'title' => $item['question'] ?? '',
