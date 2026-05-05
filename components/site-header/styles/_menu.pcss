@@ -106,7 +106,7 @@
         align-items: center;
         justify-content: center;
         padding: space(4);
-        color: inherit;
+        color: var(--link--color);
         margin-left: space(8);
 
         &::before {
@@ -116,6 +116,7 @@
             height: var(--menu-item--arrow-size);
             border-right: 2px solid currentColor;
             border-bottom: 2px solid currentColor;
+            margin-bottom: 4px;
 
             /* Mobile: right-pointing (collapsed), down-pointing (expanded) */
             @media (width < theme('screens.site-header')) {

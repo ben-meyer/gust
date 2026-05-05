@@ -457,9 +457,9 @@ Top-of-page navigation rendered on every page. Hard-coded into the theme templat
 
 **Transparent variant:**
 - When the page renders a hero with a full-bleed image immediately below the header (i.e. `Page Header` or `Homepage Hero Header` with an image), the bar is rendered with a transparent background so the image extends behind it
-- The hero image must be tall enough to sit beneath the bar; logo and menu link colours stay legible against the image (no automatic colour inversion — the existing dark colours are retained)
-- Once the bar enters its scroll-up reveal state (after the hero scrolls past), it returns to the solid white background
-- On pages without a full-bleed hero image, the bar uses the solid white background by default
+- **Desktop only:** colours are automatically inverted — the white-variant logo (`logo-white.svg`) and white menu/burger link colours are applied so they remain legible against the hero image. Once the hero scrolls past, the bar returns to solid white background and brand-navy colours.
+- **Mobile:** no colour inversion. The bar keeps its solid white background and brand-navy logo + links so navigation stays readable regardless of the hero image content.
+- On pages without a full-bleed hero image, the bar uses the solid white background by default at all breakpoints
 
 **Desktop behaviour (≥ `screens.site-header` breakpoint):**
 - Top-level menu items render inline to the right of the logo
