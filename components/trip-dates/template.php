@@ -1,5 +1,5 @@
 <section class="<?= classes('trip-dates', 'wp-block', $this->classes) ?>" <?= attributes($this->attributes) ?>>
-    <div class="trip-dates__inner content-width-sm align-left w-full">
+    <div id="trip-dates" class="trip-dates__inner content-width-sm align-left w-full">
         <h4 class="trip-dates__heading"><?= esc_html__('Dates & book', 'gust') ?></h4>
 
         <?php if (! empty($this->date_rows)) { ?>
