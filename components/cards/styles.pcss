@@ -291,7 +291,10 @@
         }
 
         .cards__prev {
-            left: calc(var(--cards--carousel--btn-size) / -2);
+            left: max(
+                calc(var(--cards--carousel--btn-size) / -2),
+                calc(var(--container-padding) * -1)
+            );
 
             .btn__icon {
                 rotate: 180deg;
@@ -299,7 +302,10 @@
         }
 
         .cards__next {
-            right: calc(var(--cards--carousel--btn-size) / -2);
+            right: max(
+                calc(var(--cards--carousel--btn-size) / -2),
+                calc(var(--container-padding) * -1)
+            );
         }
     }
 }
