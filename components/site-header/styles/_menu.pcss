@@ -19,10 +19,12 @@
         @apply link--2;
 
         display: inline-flex;
-
-        @media (width < theme('screens.site-header')) {
-            @apply type-h3;
-        }
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: 0.75px;
+        text-transform: uppercase;
 
         &:not([href]) {
             cursor: default;
@@ -84,6 +86,84 @@
         &:where(.menu-item--current) {
             > .menu-item__wrap a {
                 --link--text-decoration: underline;
+            }
+        }
+
+        /* Mobile: horizontal divider between top-level items */
+        &:where(.menu-item--depth-0) {
+            @media (width < theme('screens.site-header')) {
+                border-bottom: 1px solid var(--color-neutral);
+            }
+        }
+
+    }
+
+    /* Sub-menu toggle button — renders a chevron arrow */
+    .sub-menu-toggler {
+        @apply button-reset;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: space(4);
+        color: inherit;
+
+        &::before {
+            content: '';
+            display: block;
+            width: var(--menu-item--arrow-size);
+            height: var(--menu-item--arrow-size);
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            transition: transform var(--site-header--menu--duration) var(--site-header--menu--ease);
+        }
+
+        &[aria-expanded='true']::before {
+            transform: rotate(45deg);
+        }
+    }
+
+    /* Sub-menu container */
+    .sub-menu {
+        /* Mobile: expand inline */
+        @media (width < theme('screens.site-header')) {
+            padding: space(8) 0 space(8) space(16);
+
+            a {
+                @apply type-small;
+
+                text-transform: none;
+            }
+
+            .menu-list {
+                gap: space(12);
+            }
+        }
+
+        /* Desktop: dropdown panel */
+        &.sub-menu--depth-0 {
+            @media (width >= theme('screens.site-header')) {
+                @apply color-context-white;
+
+                position: absolute;
+                top: 100%;
+                left: 0;
+                min-width: space(200);
+                padding: space(16) space(24) space(24);
+                z-index: 10;
+
+                a {
+                    @apply type-small;
+
+                    text-transform: none;
+                }
+
+                .menu-list {
+                    grid-auto-flow: row;
+                    gap: space(12);
+                    text-align: left;
+                }
             }
         }
     }

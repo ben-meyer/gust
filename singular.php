@@ -11,7 +11,7 @@ site_main_open(classes: $site_main_classes, object: $object);
 if ($object instanceof \WP_Post && $object->post_type === 'trip') {
     echo \Gust\Components\TripSingle::make(object: $object);
 } else {
-    if (! has_block('acf/page-header')) {
+    if (! \Gust\Helpers::hasPageHeaderBlock()) {
         echo \Gust\Components\PageHeader::make(object: $object);
     }
 

@@ -431,6 +431,58 @@ Logo is a static SVG file (`logo-alt.svg`) rendered via `Gust\Image::get()` — 
   Block status: [Block] = ACF Gutenberg block, [Partial] = PHP partial only
 -->
 
+### Site Header [Partial]
+
+Top-of-page navigation rendered on every page. Hard-coded into the theme template — not editor-placeable.
+
+**Render rule:**
+- Always renders.
+
+**Data source:**
+- WP menu at the `header` theme location (top-level items and their first-level children)
+- ACF option (`acf-options-header`): `header_call_to_action_1`
+- ACF option (`acf-options-general`): `social_networks` (mobile panel only)
+- Static asset: `logo-alt.svg` rendered via `Gust\Image::get()` — links to home
+
+**Top bar layout (both breakpoints):**
+- Logo on the left
+- On desktop: inline navigation + CTA on the right
+- On mobile: burger toggle on the right
+- White background; sits flush at the top of the viewport with a sticky/anchored position
+
+**Scroll behaviour (desktop only):**
+- After the user scrolls past the top of the page, the bar hides on scroll-down and reveals on scroll-up (sticky-on-scroll-up pattern)
+- At the very top of the page, the bar is always visible
+- Mobile retains the standard sticky/anchored behaviour and is not affected by this rule
+
+**Transparent variant:**
+- When the page renders a hero with a full-bleed image immediately below the header (i.e. `Page Header` or `Homepage Hero Header` with an image), the bar is rendered with a transparent background so the image extends behind it
+- The hero image must be tall enough to sit beneath the bar; logo and menu link colours stay legible against the image (no automatic colour inversion — the existing dark colours are retained)
+- Once the bar enters its scroll-up reveal state (after the hero scrolls past), it returns to the solid white background
+- On pages without a full-bleed hero image, the bar uses the solid white background by default
+
+**Desktop behaviour (≥ `screens.site-header` breakpoint):**
+- Top-level menu items render inline to the right of the logo
+- Items with children show a dropdown caret (`v`) next to the label
+- A vertical divider rule is rendered before the final menu item (visual separator between primary nav and the trailing item, e.g. "Shop")
+- `header_call_to_action_1` renders as a CTA button after the menu
+- Hovering or focusing a top-level item with children opens a full-width mega-menu panel anchored below the top bar:
+  - Parent label as a heading at the top-left of the panel
+  - Child links arranged in a multi-column grid (3 columns at standard desktop widths)
+  - Closes on mouse-out / blur / Escape
+- Burger toggle is hidden
+
+**Mobile behaviour (< `screens.site-header` breakpoint):**
+- Top bar shows logo + burger toggle (button label toggles "Menu" / "Close")
+- Tapping the burger opens a full-viewport panel that animates in via clip-path/opacity transition; body scroll is locked while open
+- Panel header repeats the logo on the left and a close (X) icon on the right
+- Panel body (vertical list, thin divider lines between items):
+  - Top-level menu items, large type
+  - Items with children show a chevron (`>`) and expand **inline** to reveal child links indented beneath the parent — no separate sub-panel or drill-down
+  - `header_call_to_actiton_1` rendered inline within the list
+  - Social icons row at the bottom of the panel, sourced from `social_networks` option
+- Tapping the burger again, the close icon, or Escape closes the panel with the reverse animation
+
 ### Page Header [Block]
 
 Full-width hero that auto-populates from the current page, post, term, or router page, with optional custom heading, subheading, CTA, and image. Block is restricted to `page` and `gust-template` post types.
