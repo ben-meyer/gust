@@ -128,7 +128,7 @@ class Card extends ComponentBase
             if (empty($args['content']['read_more']['title'])) {
                 $args['content']['read_more']['title'] = ! empty($args['read_more_text'])
                     ? $args['read_more_text']
-                    : __('Find Your Trip', 'gust');
+                    : '';
             }
         } elseif (! empty($args['content'])) {
             $content = $args['content'];

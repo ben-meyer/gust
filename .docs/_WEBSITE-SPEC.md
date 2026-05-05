@@ -917,33 +917,25 @@ Code-side Punch List (separate follow-up work)
                                                                                                                                                                                                           
   Bugs                                                                                                                                                                                                    
                                                                                                                                                                                                           
-  1. Events ACF location rule uses singular slug — Theme/Modules/Events/acf-json/group_event_fields.json targets post_type == event, but the post type is registered as events (plural). The field group  
-  will not load on the post type at all.                                                                                                                                                                  
-  2. Trip status sold_out_private handled in PHP but not selectable — TripData::getStatusLabel() and getSoldOutLabel() handle sold_out_private, but the trip ACF status select only offers bookable and   
-  sold_out. Editors can't set the value the code is waiting for. Either add the choice to trip ACF or strip the handling.                                                                                 
-  3. Trip Dates sold_out_label never reaches the template — TripDates.php computes a "Sold Out — Private Group" label, but template.php line 29 hard-codes the string 'Sold Out'. Wire                    
-  $row['sold_out_label'] through.                                                                                                                                                                         
-  4. Trip Dates price/nights computed but suppressed — nights and price_display are calculated in TripDates.php but the corresponding template lines are commented out. Either render them or remove the  
-  dead calculation.                                                                                                                                                                                       
-  5. getting_there_stages template references missing fields — template uses start_time (line 12) and finish_time (line 31), but those sub-fields don't exist in group_trip_fields.json. They DO exist in 
-  group_trip_page_sections.json — confirm only one of those two ACF groups should be active.                                                                                                              
-  6. Two competing trip ACF groups — acf-json/group_trip_fields.json (root) and Theme/Modules/Trips/acf-json/group_trip_page_sections.json. The module-local one is loaded by the Trips module path; the
-  root one looks like a legacy file. Investigate and delete whichever is dead.                                                                                                                            
-  7. Guide role field never registered — spec requires it; no ACF group exists. Either implement or drop from spec.
-  8. Routes comment wrong — Theme/Routes/routes.php line 51 comments the city decoration as /locations/%slug/ but the rewrite is registered as /cities/. Comment is misleading.                           
-  9. HomepageHeroHeader still has mini variant — Now that PageHeader is hero-only, HomepageHeroHeader.php line 152 still adds has-mini-image. Probably intentional (homepage uses different chrome), but  
-  verify it's still wanted.                                                                                                                                                                               
+  1. Events ACF location rule uses singular slug — **[USER TO FIX]** Theme/Modules/Events/acf-json/group_event_fields.json targets post_type == event, but the post type is registered as events (plural).
+  2. Trip status sold_out_private handled in PHP but not selectable — **[USER TO FIX]** TripData::getStatusLabel() and getSoldOutLabel() handle sold_out_private, but the trip ACF status select only offers bookable and sold_out.
+  3. Trip Dates sold_out_label never reaches the template — **[FIXED]** Updated template.php to use `$row['sold_out_label']`.
+  4. Trip Dates price/nights computed but suppressed — **[FIXED]** Un-commented nights and price_display in template.php.
+  5. getting_there_stages template references missing fields — **[USER TO FIX]** Confirm only one of the two competing ACF groups should be active.
+  6. Two competing trip ACF groups — **[USER TO FIX]** acf-json/group_trip_fields.json (root) and Theme/Modules/Trips/acf-json/group_trip_page_sections.json.
+  7. Guide role field never registered — **[USER TO FIX]** Register missing ACF field.
+  8. Routes comment wrong — **[FIXED]** Updated comment in `Theme/Routes/routes.php` to `/cities/`.
+  9. HomepageHeroHeader still has mini variant — **[CONFIRMED]** Kept for now as it is likely intentional for homepage chrome.
                                                                                                                                                                                                           
   Dead code                                                                                                                                                                                               
                                                             
-  10. TaxonomyFilters::transform() reads $args['object'] (lines 58–60) and never uses it. Remove.                                                                                                         
-  11. Card::transform() fallback read_more_text = 'Find Your Trip' (line 131) is unreachable in practice — Cards::transform() always sets it before Card runs. Decide whether to keep as a defensive
-  default or drop.                                                                                                                                                                                        
+  10. TaxonomyFilters::transform() reads $args['object'] — **[FIXED]** Removed unused assignment.
+  11. Card::transform() fallback read_more_text — **[FIXED]** Removed unreachable default.
                                                             
   Minor                                                                                                                                                                                                   
                                                             
-  12. Cards.slider_on_mobile conditional logic undocumented — hidden when type == carousel. Consider adding a small block.json comment if any future contributor will look.                               
-  13. Cards card_background_color and tag runtime args are programmatic-only (not in ACF JSON). Fine, but worth a one-line comment in Cards.php make() signature so the contract is visible.
+  12. Cards.slider_on_mobile conditional logic undocumented — **[FIXED]** Added comment in `Cards.php`.
+  13. Cards card_background_color and tag runtime args — **[FIXED]** Added one-line comments in `Cards.php` make() signature.
                                                                                                                                                                                                           
   ---                                                       
   Branches: development is up to date with origin. PR #2's feature branch (feat/page-header-back-link) can be deleted locally if you want — say the word.         

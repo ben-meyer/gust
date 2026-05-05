@@ -28,6 +28,8 @@ class Cards extends ComponentBase
     /**
      * Create a new Cards component.
      *
+     * @param  string|null  $card_background_color  Programmatic-only: Background color for cards.
+     * @param  array|null  $tag  Programmatic-only: Tags to filter by.
      * @return static|null Returns null if component should not render.
      */
     public static function make(
@@ -161,6 +163,8 @@ class Cards extends ComponentBase
 
         $args['classes'][] = 'cards--type--'.($args['type'] ?? 'default');
         $args['classes'][] = ($args['card_source'] ?? null) === 'custom' ? 'cards--source--custom' : null;
+
+        // slider_on_mobile is hidden when type is carousel as the swiper handles it.
         $args['classes'][] = ! empty($args['slider_on_mobile']) ? 'cards--slider-on-mobile' : null;
 
         return $args;

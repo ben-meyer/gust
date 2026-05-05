@@ -8,14 +8,14 @@
                     <li class="trip-dates__item <?= $row['is_sold_out'] ? 'is-sold-out' : '' ?>">
                         <h6 class="trip-dates__item__label">
                             <?= esc_html($row['label']) ?>
-                            <!-- <?php if ($row['nights']) { ?>
+                            <?php if ($row['nights']) { ?>
                                 <span class="trip-dates__item__nights">(<?= esc_html($row['nights']) ?> nights)</span>
-                            <?php } ?> -->
+                            <?php } ?>
                         </h6>
 
-                        <!-- <?php if ($row['price_display']) { ?>
+                        <?php if ($row['price_display']) { ?>
                             <span class="trip-dates__item__price"><?= esc_html($row['price_display']) ?></span>
-                        <?php } ?> -->
+                        <?php } ?>
 
                         <?php if ($row['is_bookable']) { ?>
                             <a href="<?= esc_url($row['booking_url']) ?>" class="trip-dates__item__cta button btn" target="_blank" rel="noopener">
@@ -23,7 +23,7 @@
                             </a>
                         <?php } elseif ($row['is_sold_out']) { ?>
                             <button class="trip-dates__item__cta trip-dates__item__cta--sold-out button btn" type="button" disabled>
-                                <?= esc_html__('Sold Out', 'gust') ?>
+                                <?= esc_html($row['sold_out_label']) ?>
                             </button>
                         <?php } ?>
                     </li>
