@@ -34,7 +34,16 @@
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__resize_page",
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__emulate",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\(''mcpServers'', {}\\), indent=2\\)\\)\")",
-      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__wait_for"
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__wait_for",
+      "Bash(chrome-devtools list_console_messages:*)",
+      "Bash(chrome-devtools evaluate_script:*)",
+      "Bash(chrome-devtools resize_page 1440 900)",
+      "Bash(chrome-devtools take_screenshot --filePath /tmp/trip-header-1440.png)",
+      "Bash(chrome-devtools take_screenshot --filePath /tmp/trip-icons.png)",
+      "Bash(:)",
+      "Read(//Users/benmeyer/Development/code/work/swimquest/wordpress/**)",
+      "Bash(ddev wp *)",
+      "Read(//private/tmp/**)"
     ]
   },
   "enableAllProjectMcpServers": true,

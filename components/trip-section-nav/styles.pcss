@@ -1,12 +1,13 @@
 .trip-section-nav {
     position: sticky;
     z-index: 20;
-    top: 0;
+    top: var(--site-header--top);
     background-color: #FFE7C2;
     height: space(80);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 0;
 }
 
 .trip-section-nav__inner {
@@ -22,7 +23,7 @@
     @apply type-small;
     display: flex;
     flex-wrap: wrap;
-    gap: space(6);
+    gap: space(32);
     padding: 0;
     margin: 0;
     list-style: none;
@@ -30,11 +31,37 @@
     color: var(--color-navy);
 }
 
-.trip-section-nav__items:hover, .trip-section-nav__link:hover {
+li a.trip-section-nav__link:hover {
     text-decoration: underline;
 }
 
 .trip-section-nav__actions {
     display: flex;
-    gap: space(4);
+    gap: space(14);
+}
+
+@media (max-width: 768px) {
+    .trip-section-nav {
+        position: fixed;
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: calc(space(80) + env(safe-area-inset-bottom, 0));
+        padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    .trip-section-nav__items {
+        display: none;
+    }
+
+    .trip-section-nav__actions {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .trip-section-nav__actions .btn {
+        width: 100%;
+    }
 }

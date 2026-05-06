@@ -34,7 +34,7 @@ class StoriesModule
         \ob_start();
 
         if (! empty($items)) {
-            echo Cards::make(items: $items);
+            echo Cards::make(items: $items, type: 'horizontal');
             echo Pagination::make();
         } else {
             echo NoContent::make(object: $object);

@@ -1,3 +1,5 @@
+@import 'swiper/css' layer(vendor);
+
 .cards {
     --grid--column-gap: spaceFluid(12, 16);
     --grid--row-gap: var(--grid--column-gap);
@@ -91,7 +93,6 @@
 
     &:not(.alignfull) {
         overflow: var(--rounded-overflow, visible);
-        border-radius: var(--rounded-border-radius);
     }
 
     &.alignfull {
@@ -223,6 +224,88 @@
         .g-card {
             width: 100%;
             max-width: none;
+        }
+    }
+
+    &.cards--type--carousel {
+        --cards--carousel--btn-size: 45px;
+
+        display: block;
+
+        .cards__swiper-wrap {
+            position: relative;
+        }
+
+        .cards__swiper {
+            overflow: clip;
+            width: 100%;
+        }
+
+        .cards__items {
+            display: flex;
+            flex-wrap: nowrap;
+            grid-template-columns: none;
+            justify-content: flex-start;
+            gap: 0;
+        }
+
+        .cards__slide {
+            height: auto;
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        .g-card {
+            width: 100%;
+            max-width: none;
+            height: 100%;
+        }
+
+        .cards__prev,
+        .cards__next {
+            position: absolute;
+            top: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--cards--carousel--btn-size);
+            height: var(--cards--carousel--btn-size);
+            padding: 0;
+            border: 1px solid var(--color-navy);
+            border-radius: 0;
+            background: var(--color-white);
+            color: var(--color-navy);
+            cursor: pointer;
+            transform: translateY(-50%);
+            transition: opacity 0.2s;
+
+            &:hover {
+                opacity: 0.6;
+            }
+
+            &.swiper-button-disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+            }
+        }
+
+        .cards__prev {
+            left: max(
+                calc(var(--cards--carousel--btn-size) / -2),
+                calc(var(--container-padding) * -1)
+            );
+
+            .btn__icon {
+                rotate: 180deg;
+            }
+        }
+
+        .cards__next {
+            right: max(
+                calc(var(--cards--carousel--btn-size) / -2),
+                calc(var(--container-padding) * -1)
+            );
         }
     }
 }

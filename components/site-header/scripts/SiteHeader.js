@@ -23,9 +23,11 @@ export default class SiteHeader {
 
     init() {
         this.calculateOffset();
+        this.initHeroMode();
 
         const debouncedResize = debounce(() => {
             this.calculateOffset();
+            this.updateHeroScroll();
             if (!this.isMobileMode()) {
                 this.closeAllPanels();
             }
@@ -53,6 +55,37 @@ export default class SiteHeader {
                 this.closeAllPanels();
             }
         });
+    }
+
+    initHeroMode() {
+        const mainEl = document.querySelector('.site-main');
+        if (!mainEl) return;
+
+        const containerEl = mainEl.querySelector('.site-main__content') || mainEl.querySelector('.site-main__inner') || mainEl;
+        const heroEl = containerEl.querySelector(
+            '.page-header.has-hero-image, .homepage-hero-header.has-background-image, .trip-page-header'
+        );
+
+        if (!heroEl || heroEl !== containerEl.firstElementChild) return;
+
+        this.heroEl = heroEl;
+        this.el.classList.add('site-header--hero');
+
+        this.updateHeroScroll();
+        window.addEventListener('scroll', () => this.updateHeroScroll(), { passive: true });
+    }
+
+    updateHeroScroll() {
+        if (!this.heroEl) return;
+
+        const heroBottom = this.heroEl.offsetTop + this.heroEl.offsetHeight;
+        const headerHeight = this.barEl.offsetHeight;
+
+        if (window.scrollY >= heroBottom - headerHeight) {
+            this.el.classList.add('site-header--scrolled');
+        } else {
+            this.el.classList.remove('site-header--scrolled');
+        }
     }
 
     calculateOffset() {

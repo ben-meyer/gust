@@ -32,7 +32,7 @@ class TripCard extends ComponentBase
             'heading' => get_the_title($postId),
             'url' => get_the_permalink($postId),
             'image' => has_post_thumbnail($postId)
-                ? ['ID' => get_post_thumbnail_id($postId), 'size' => 'medium_large']
+                ? ['ID' => get_post_thumbnail_id($postId), 'size' => 'gust_card_square']
                 : null,
         ];
 

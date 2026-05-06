@@ -1,15 +1,20 @@
 <header class="<?= classes('site-header', $this->classes) ?>" <?= attributes($this->attributes) ?>>
-    <div class="site-header__bar">
+    <div class="site-header__bar_wrapper">
+        <div class="site-header__bar">
         <?= \Gust\Components\Link::make(
             url: home_url('/'),
             classes: ['site-header__logo', 'img-fit'],
-            title: \Gust\Image::get('logo-alt.svg', [
+            title: '<span class="logo-default">' . \Gust\Image::get('logo-alt.svg', [
                 'alt' => get_bloginfo('name'),
                 'loading' => false,
                 'attributes' => [
                     'data-spai-eager' => class_exists('\\ShortPixelAI') ? 'true' : null,
                 ],
-            ]),
+            ]) . '</span>' .
+            '<span class="logo-white" aria-hidden="true">' . \Gust\Image::get('logo-white.svg', [
+                'alt' => '',
+                'loading' => false,
+            ]) . '</span>',
             content_filter: '',
         ); ?>
 
@@ -67,6 +72,7 @@
                 <span aria-hidden="true" data-show-collapsed>Menu</span>
                 <span aria-hidden="true" data-hide-collapsed>Close</span>
             </button>
+        </div>
         </div>
     </div>
 

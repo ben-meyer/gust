@@ -4,32 +4,34 @@
  *
  * @var \Gust\Components\GetInTouch $this
  */
-
-use Gust\Helpers;
 ?>
 
-<div class="<?= classes('get-in-touch', $this->classes) ?>" <?= attributes($this->attributes) ?>>
-    <div class="get-in-touch__content">
-        <p class="get-in-touch__label">Get in touch</p>
+<section class="<?= classes('get-in-touch', 'wp-block', $this->classes) ?>" <?= attributes($this->attributes) ?>>
+    <div class="get-in-touch__inner">
+        <h2 class="get-in-touch__heading"><?= esc_html__('Get in touch', 'gust') ?></h2>
+
         <div class="get-in-touch__contacts-wrapper">
-        <?php
-        $phones = array_filter($this->contacts, fn($c) => $c['type'] !== 'Email');
-        $emails = array_filter($this->contacts, fn($c) => $c['type'] === 'Email');
-        ?>
-        <?php if (!empty($phones)): ?>
-            <ul class="get-in-touch__contacts get-in-touch__phones">
-                <?php foreach ($phones as $contact): ?>
-                    <li><?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/phone.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?> <strong><?php echo esc_html($contact['type']); ?>:</strong><span>&nbsp;<?php echo esc_html($contact['value']); ?></span></li>
+            <ul class="get-in-touch__contacts">
+                <?php foreach ($this->contacts as $contact): ?>
+                    <li class="get-in-touch__contact get-in-touch__contact--<?= esc_attr($contact['icon']) ?>">
+                        <?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/' . $contact['icon'] . '.svg'), ['asset' => false, 'width' => 16, 'height' => 16]) ?>
+
+                        <?php if (! empty($contact['value'])): ?>
+                            <strong><?= esc_html($contact['label']) ?>:</strong>&nbsp;<?php if (! empty($contact['url'])): ?>
+                                <a href="<?= esc_url($contact['url']) ?>"><?= esc_html($contact['value']) ?></a>
+                            <?php else: ?>
+                                <span><?= esc_html($contact['value']) ?></span>
+                            <?php endif; ?>
+                        <?php elseif (! empty($contact['url'])): ?>
+                            <a href="<?= esc_url($contact['url']) ?>"<?= $contact['icon'] === 'whatsapp' ? ' target="_blank" rel="noopener"' : '' ?>>
+                                <?= esc_html($contact['label']) ?>
+                            </a>
+                        <?php else: ?>
+                            <?= esc_html($contact['label']) ?>
+                        <?php endif; ?>
+                    </li>
                 <?php endforeach; ?>
             </ul>
-        <?php endif; ?>
-        <?php if (!empty($emails)): ?>
-            <ul class="get-in-touch__contacts get-in-touch__emails">
-                <?php foreach ($emails as $contact): ?>
-                    <li><?= \Gust\SVG::get(get_theme_file_path('public/build/images/icons/email.svg'), ['asset' => false, 'width' => 16, 'height' => 16]); ?> <?php echo esc_html($contact['value']); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
         </div>
     </div>
-</div>
+</section>

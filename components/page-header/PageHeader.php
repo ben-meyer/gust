@@ -20,7 +20,7 @@ class PageHeader extends ComponentBase
     protected static function getDefaults(): array
     {
         return [
-            'image_position' => 'inset',
+            'image_position' => 'hero',
             'background' => 'accent',
             'show_breadcrumbs' => true,
         ];
@@ -39,6 +39,7 @@ class PageHeader extends ComponentBase
         ?string $background = null,
         array $attributes = [],
         ?bool $show_breadcrumbs = null,
+        ?array $back_link = null,
         ...$others
     ): ?static {
         return static::createFromArgs(static::mergeArgs(get_defined_vars()));
@@ -61,6 +62,7 @@ class PageHeader extends ComponentBase
 
             if ($object instanceof \WP_Term) {
                 $heading = $object->name;
+                $args['show_breadcrumbs'] = false;
 
                 if ($subheading = \get_field('subheading', $object)) {
                     $args['subheading'] = $subheading;
@@ -91,7 +93,6 @@ class PageHeader extends ComponentBase
                     $args['meta'] = sprintf(__('Published on %s ', 'gust'), \get_the_date(\get_option('date_format'), $object->ID));
                     $args['labels'] = \Theme\Utils\ObjectMeta::getObjectLabels($object->ID, ['limit' => 3, 'taxonomies' => ['category']]);
                     $args['background'] = false;
-                    $args['image_position'] = 'mini';
                     $args['type'] = 'article';
 
                     if ($author_name = \get_the_author_meta('display_name', $object->post_author)) {
@@ -108,6 +109,21 @@ class PageHeader extends ComponentBase
                     }
                 } elseif ($object->post_type === 'guide') {
                     $is_guide = true;
+
+                    if (empty($args['image']) && ($thumbnail_id = \get_post_thumbnail_id($object))) {
+                        $args['image'] = $thumbnail_id;
+                        $args['image_position'] = 'square';
+                    }
+                } elseif (in_array($object->post_type, ['accommodation', 'itinerary'], true)) {
+                    $args['background'] = 'none';
+                    $args['image'] = null;
+                    $args['classes'][] = 'page-header--align-left';
+                    $args['type'] = $object->post_type;
+                    $args['show_breadcrumbs'] = false;
+                    $args['back_link'] = [
+                        'url' => \get_post_type_archive_link($object->post_type) ?: \home_url('/'),
+                        'label' => __('Back', 'gust'),
+                    ];
                 }
 
                 if ($heading === 'Auto Draft') {
@@ -143,20 +159,20 @@ class PageHeader extends ComponentBase
                 $args['image'] = $args['image']['ID'];
             }
 
-            if (($args['image_position'] ?? '') === 'mini') {
+            if (($args['image_position'] ?? '') === 'square') {
                 $args['image'] = Image::make(
                     id: $args['image'],
-                    size: 'medium',
-                    sizes: '(min-width: 768px) 50vw, 100vw',
+                    size: 'gust_card_square',
+                    sizes: '300px',
                 );
-                $args['classes'][] = 'has-mini-image';
+                $args['classes'][] = 'has-square-image';
             } else {
                 $args['image'] = Image::make(
                     id: $args['image'],
                     size: 'gust_super',
-                    sizes: '(min-width: 768px) 50vw, 100vw',
+                    sizes: '100vw',
                 );
-                $args['classes'][] = 'has-inset-image';
+                $args['classes'][] = 'has-hero-image';
             }
         }
 

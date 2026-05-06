@@ -37,14 +37,14 @@
 
     @media (width >= theme('screens.site-header')) {
         --site-header--spacing: space(20);
-        --site-header--logo-width: space(120);
+        --site-header--logo-width: space(250);
         --menu-item--arrow-size: 0.625rem;
         --menu-item--gap: space(32);
     }
 
     @media (width < theme('screens.site-header')) {
         &.site-header--positioned {
-            position: absolute;
+            position: fixed;
 
             & ~ .site-main {
                 margin-top: var(--site-header--height);
@@ -55,6 +55,17 @@
             position: fixed;
             height: calc(100% - var(--site-header--top));
             transition: height var(--site-header--menu--duration) 0s;
+        }
+    }
+
+    /* Desktop: always fixed; hero variant overlays the hero image */
+    @media (width >= theme('screens.site-header')) {
+        &.site-header--positioned {
+            position: fixed;
+        }
+
+        &.site-header--positioned:not(.site-header--hero) ~ .site-main {
+            margin-top: var(--site-header--height);
         }
     }
 }
@@ -71,6 +82,7 @@
     justify-content: space-between;
     pointer-events: auto;
     z-index: 10;
+    transition: transform 300ms ease;
 
     @media (width >= theme('screens.site-header')) {
         @apply content-width-fluid-lg;
@@ -88,7 +100,7 @@
         position: relative;
         display: flex;
         align-items: center;
-        gap: var(--site-header--spacing);
+        gap: var(--menu-item--gap);
         pointer-events: auto;
     }
 }
@@ -144,6 +156,79 @@
     > * {
         object-fit: contain;
         object-position: left center;
+        display: flex;
+    }
+
+    .logo-white { display: none; }
+}
+
+/* Sticky-on-scroll-up: hide bar when scrolling down (desktop only) */
+.site-header--hidden {
+
+    @media (width >= theme('screens.site-header')) {
+        .site-header__bar {
+            transform: translateY(-100%);
+        }
+    }
+}
+
+/* Transparent/hero variant — overlays the hero image.
+   On desktop the bar is transparent over the image and brand colours are
+   inverted to white for legibility. On mobile the bar keeps its solid white
+   background (no inversion) so brand navy stays readable. */
+.site-header--hero {
+    position: fixed;
+    width: 100%;
+
+    & ~ .site-main {
+        margin-top: 0;
+    }
+
+    @media (width >= theme('screens.site-header')) {
+        .site-header__bar_wrapper {
+            background-color: transparent;
+        }
+
+        .site-header__bar {
+            background-color: transparent;
+        }
+
+        --link--color: var(--color-white);
+        --link--color-hover: var(--color-white);
+        --burger--color: var(--color-white);
+
+        .site-header__logo {
+            .logo-default { display: none; }
+            .logo-white { display: flex; }
+        }
+    }
+}
+
+/* Once hero has scrolled past — return to solid white + brand colours */
+.site-header--hero.site-header--scrolled {
+    @media (width >= theme('screens.site-header')) {
+        .site-header__bar_wrapper,
+        .site-header__bar {
+            background-color: var(--color-background);
+        }
+
+        --link--color: var(--color-foreground);
+        --link--color-hover: var(--color-foreground);
+        --burger--color: currentColor;
+
+        .site-header__logo {
+            .logo-default { display: flex; }
+            .logo-white { display: none; }
+        }
+
+        /* While the bar is sliding out of view, drop the background back to
+           transparent so a white bar doesn't render over the hero mid-slide. */
+        &.site-header--hidden {
+            .site-header__bar_wrapper
+             {
+                background-color: transparent;
+            }
+        }
     }
 }
 
@@ -153,12 +238,12 @@
     --panel--content-duration: calc(var(--site-header--menu--duration) + 100ms);
 
     position: absolute;
-    top: var(--site-header--top);
+    top: var(--site-header--height);
     right: 0;
     left: 0;
     display: grid;
-    height: calc(100% - var(--site-header--top));
-    padding-top: var(--site-header--height);
+    height: calc(100% - var(--site-header--height));
+    padding-top: 0;
     background-color: var(--color-background);
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     grid-template-rows: 1fr;
@@ -244,4 +329,68 @@
 
     padding: 0;
     border: 0;
+}
+
+.site-header__call-to-action-1 {
+    @apply link--2;
+
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+
+    @media (width >= theme('screens.site-header')) {
+        position: relative;
+        margin-left: var(--menu-item--gap);
+
+        &::before {
+            content: '';
+            position: absolute;
+            right: calc(100% + var(--menu-item--gap));
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: space(20);
+            background-color: var(--color-bright-blue);
+            flex-shrink: 0;
+        }
+    }
+}
+
+.site-header--hero .site-header__call-to-action-1::before {
+    background-color: var(--color-orange);
+}
+
+.site-header--hero.site-header--scrolled .site-header__call-to-action-1::before {
+    background-color: var(--color-bright-blue);
+}
+
+/* Trip pages: the trip-section-nav already pins on this post type, so let
+   the site header scroll away naturally instead of staying fixed. */
+body.single-trip {
+    @media (width < theme('screens.site-header')) {
+        .site-header.site-header--positioned {
+            position: static;
+
+            & ~ .site-main {
+                margin-top: 0;
+            }
+        }
+
+        /* Mobile menu still needs a fixed shell so the panel fills the screen. */
+        .site-header.site-header--positioned:has(.site-header__panel:not([inert])) {
+            position: fixed;
+        }
+    }
+
+    @media (width >= theme('screens.site-header')) {
+        .site-header.site-header--positioned,
+        .site-header.site-header--hero {
+            position: absolute;
+        }
+    }
 }
