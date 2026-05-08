@@ -1,50 +1,205 @@
 .trip-page-header {
-    background-color: var(--color-navy);
     color: var(--color-white);
+    background-color: var(--color-navy);
 }
 
+.trip-page-header__media {
+    position: relative;
+    overflow: hidden;
+}
+
+
 .trip-page-header__media-inner {
-    aspect-ratio: 5 / 2;
+    aspect-ratio: 1440 / 605;
+    min-height: rem(280);
+}
+
+.trip-page-header__media-inner img {
+    transform: scale(1.02);
 }
 
 .trip-page-header__content {
-    padding-block: spaceFluid(24, 40);
+    position: relative;
+    z-index: 2;
+}
+
+.trip-page-header__inner {
+    padding-block: spaceFluid(24, 40) spaceFluid(28, 40);
+}
+
+/* Main layout: single column grid with rows for heading, info-row, description, stats */
+.trip-page-header__layout {
+    display: grid;
+    gap: space(24);
 }
 
 .trip-page-header__heading {
+    max-width: 14ch;
     margin: 0;
+    word-break: normal;
+    overflow-wrap: normal;
+    text-wrap: balance;
+}
+
+/* Info row: summary (left) + CTA (right) */
+.trip-page-header__info-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: space(16);
 }
 
 .trip-page-header__summary {
     display: flex;
     flex-wrap: wrap;
-    gap: space(8);
+    gap: space(12) space(20);
     padding: 0;
-    margin: space(8) 0 0;
+    margin: 0;
     list-style: none;
+    flex: 1 1 auto;
+}
+
+.trip-page-header__summary-item {
+    @apply type-h6;
+
+    display: inline-flex;
+    align-items: center;
+    gap: space(8);
+    color: var(--color-white);
+}
+
+.trip-page-header__summary-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: rem(16);
+    height: rem(16);
+    color: currentColor;
+}
+
+.trip-page-header__summary-icon svg,
+.trip-page-header__summary-icon svg * {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.trip-page-header__summary-currency {
+    font-family: var(--font-sans);
+    font-size: rem(18);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.trip-page-header__actions {
+    flex: 0 0 auto;
+}
+
+.trip-page-header__cta {
+    --btn--background-color: var(--color-orange);
+    --btn--border-color: var(--color-orange);
+    --btn--color: var(--color-navy);
+    --btn--background-color--hover: var(--color-white);
+    --btn--border-color--hover: var(--color-white);
+    --btn--color-hover: var(--color-navy);
+
+    width: min(100%, rem(300));
+    min-height: rem(45);
 }
 
 .trip-page-header__description {
-    max-width: 42rem;
-    margin-top: space(12);
+    @apply type-large;
+
+    max-width: rem(710);
+    margin: 0;
+    color: var(--color-white);
 }
 
 .trip-page-header__stats {
     display: grid;
-    gap: space(8);
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: space(24);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: var(--container-sm);
     margin-top: space(16);
 }
 
 .trip-page-header__stat {
-    border-top: 1px solid rgba(255, 255, 255, 0.25);
-    padding-top: space(6);
+    display: grid;
+    gap: space(4);
+    padding-top: space(12);
+    border-top: 0.5px solid rgb(255 249 240 / 1);
+}
+
+.trip-page-header__stat-label {
+    font-family: var(--font-display);
+    font-size: rem(18);
+    font-weight: 400;
+    line-height: 1.33;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+    color: var(--color-neutral);
 }
 
 .trip-page-header__stat-value {
     @apply type-h6;
+
+    color: var(--color-white);
 }
 
-.trip-page-header__stat-label {
-    text-transform: uppercase;
+@media (min-width: theme('screens.md')) {
+    .trip-page-header__media-inner {
+        aspect-ratio: auto;
+        min-height: 0;
+        height: rem(605);
+    }
+
+    .trip-page-header__content {
+        height: rem(575);
+    }
+
+    .trip-page-header__heading {
+        max-width: none;
+        text-wrap: nowrap;
+    }
+
+    .trip-page-header__inner {
+        height: 100%;
+        padding-top: space(16);
+        padding-bottom: space(40);
+        display: flex;
+        align-items: stretch;
+    }
+
+    .trip-page-header__layout {
+        width: 100%;
+        align-content: start;
+        gap: space(24);
+    }
+
+    .trip-page-header__info-row {
+        flex-wrap: nowrap;
+        gap: space(24);
+    }
+
+    .trip-page-header__cta {
+        width: rem(300);
+    }
+
+    .trip-page-header__stats {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: space(36);
+    }
+}
+
+@media (max-width: calc(theme('screens.md') - 1px)) {
+
+    .trip-page-header__cta {
+        width: 100%;
+    }
+
+    .trip-page-header__actions {
+        width: 100%;
+    }
 }

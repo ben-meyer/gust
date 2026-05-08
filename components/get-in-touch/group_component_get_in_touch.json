@@ -4,11 +4,11 @@
     "fields": [
         {
             "key": "field_component_get_in_touch_contacts",
-            "label": "Contacts",
+            "label": "Contact Items",
             "name": "contacts",
             "aria-label": "",
             "type": "repeater",
-            "instructions": "Add phone numbers and/or email entries.",
+            "instructions": "Contact methods shown in the \"Get in touch\" block.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,7 +16,7 @@
                 "class": "",
                 "id": ""
             },
-            "collapsed": "field_component_get_in_touch_contact_type",
+            "collapsed": "field_component_get_in_touch_contact_label",
             "min": 0,
             "max": 0,
             "layout": "block",
@@ -24,22 +24,50 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_component_get_in_touch_contact_type",
-                    "label": "Type",
-                    "name": "type",
+                    "key": "field_component_get_in_touch_contact_icon",
+                    "label": "Icon",
+                    "name": "icon",
                     "aria-label": "",
-                    "type": "text",
-                    "instructions": "Examples: Office, Person 1, Email.",
+                    "type": "select",
+                    "instructions": "",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "40",
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "whatsapp": "WhatsApp",
+                        "email": "Email",
+                        "phone": "Phone"
+                    },
+                    "default_value": "phone",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_component_get_in_touch_contacts"
+                },
+                {
+                    "key": "field_component_get_in_touch_contact_label",
+                    "label": "Label",
+                    "name": "label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Display text (e.g. \"Message via Whatsapp\", \"info@swimquest.uk.com\", \"Office\").",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
                         "class": "",
                         "id": ""
                     },
                     "default_value": "",
                     "maxlength": "",
-                    "placeholder": "Office",
+                    "placeholder": "",
                     "prepend": "",
                     "append": "",
                     "parent_repeater": "field_component_get_in_touch_contacts"
@@ -50,17 +78,38 @@
                     "name": "value",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Phone number or email address.",
-                    "required": 1,
+                    "instructions": "Secondary text shown after the label, e.g. a phone number. Leave blank for WhatsApp/email rows.",
+                    "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "60",
+                        "width": "25",
                         "class": "",
                         "id": ""
                     },
                     "default_value": "",
                     "maxlength": "",
-                    "placeholder": "example@swimquest.com",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_component_get_in_touch_contacts"
+                },
+                {
+                    "key": "field_component_get_in_touch_contact_url",
+                    "label": "URL",
+                    "name": "url",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Link target (e.g. https://wa.me/..., mailto:..., tel:...). Leave blank for no link.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "https://wa.me/... or mailto:... or tel:...",
                     "prepend": "",
                     "append": "",
                     "parent_repeater": "field_component_get_in_touch_contacts"

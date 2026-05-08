@@ -21,6 +21,13 @@ class GetInTouch extends ComponentBase
     {
         $args['classes'] = array_merge(['get-in-touch'], $args['classes'] ?? []);
 
+        $args['contacts'] = array_map(fn (array $row) => [
+            'icon' => $row['icon'] ?? 'phone',
+            'label' => $row['label'] ?? '',
+            'value' => $row['value'] ?? '',
+            'url' => $row['url'] ?? '',
+        ], $args['contacts'] ?? []);
+
         return $args;
     }
 }

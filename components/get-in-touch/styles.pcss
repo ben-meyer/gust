@@ -1,32 +1,29 @@
 .get-in-touch {
-    display: grid;
-    place-items: center start;
-    width: 100%;
-    max-width: 1280px;
-    height: auto;
-    background-color: var(--color-navy);
-    color: var(--color-white);
-    text-align: left;
-    padding: 24px 20px;
-    font-family: 'Inter', sans-serif;
+    @apply color-context-navy;
+    padding: spaceFluid(24, 40);
 }
 
-@media (min-width: theme('screens.md')) {
-    .get-in-touch {
-        height: 198px;
-        padding: 40px;
-    }
+.get-in-touch__inner {
+    display: flex;
+    flex-direction: column;
+    gap: space(12);
 }
 
-.get-in-touch__label {
-    margin: 0 0 12px;
+.get-in-touch__heading {
+    margin: 0;
+    text-transform: none;
     @apply type-h5;
+}
+
+.get-in-touch__contacts-wrapper {
+    border-left: 1px solid var(--color-orange);
+    padding-left: space(24);
 }
 
 .get-in-touch__contacts {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: space(12);
     list-style: none;
     padding: 0;
     margin: 0;
@@ -34,37 +31,27 @@
 
 @media (min-width: theme('screens.md')) {
     .get-in-touch__contacts {
-        flex-direction: row;
-        column-gap: 24px;
-        row-gap: 12px;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        column-gap: space(24);
+        row-gap: space(12);
     }
 }
 
-.get-in-touch__contacts li {
+.get-in-touch__contact {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: space(2);
     white-space: nowrap;
 }
 
-.get-in-touch__contacts li svg {
+.get-in-touch__contact svg {
     width: 16px;
     height: 16px;
-    margin-right: 12px;
+    margin-right: space(12);
     flex-shrink: 0;
 }
 
-.get-in-touch__content {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.get-in-touch__contacts-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    border-left: 1px solid var(--color-orange);
-    padding-left: 24px;
+.get-in-touch__contact a {
+    text-decoration: underline;
 }

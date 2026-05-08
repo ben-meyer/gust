@@ -86,6 +86,7 @@ class MenuItem extends ComponentBase
                 // Initially hide sub-menus.
                 'hidden' => true,
                 'aria-hidden' => 'true',
+                'data-disclosure' => '',
             ];
 
             $args['button'] = [

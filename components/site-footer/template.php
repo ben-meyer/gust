@@ -5,6 +5,14 @@ use Gust\Components\Image;
 
 <footer class="<?= classes('site-footer', $this->classes) ?>" <?= attributes($this->attributes) ?>>
     <div class="site-footer__inner content-width-fluid-lg">
+        <?php if (! empty($this->featured_in_logos)) { ?>
+            <?= \Gust\Components\LogoGrid::make(
+                logos: $this->featured_in_logos,
+                featured_text: $this->featured_in_heading,
+                classes: ['site-footer__featured'],
+            ); ?>
+        <?php } ?>
+
         <div class="site-footer__top alignwide type-small">
             <?php if ($top_text = get_field('footer_text_top', 'option')) { ?>
                 <div class="site-footer__top-text">

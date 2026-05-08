@@ -42,8 +42,13 @@ class TripDates extends ComponentBase
             $start = $row['start_date'] ?? '';
             $end   = $row['end_date']   ?? '';
 
-            $fmt_start = $start ? \date_i18n('j M Y', \strtotime($start)) : '';
-            $fmt_end   = $end   ? \date_i18n('j M Y', \strtotime($end))   : '';
+            $start_timestamp = $start ? \strtotime($start) : false;
+            $end_timestamp   = $end ? \strtotime($end) : false;
+            $same_month      = $start_timestamp && $end_timestamp
+                && \date('Y-m', $start_timestamp) === \date('Y-m', $end_timestamp);
+
+            $fmt_start = $start_timestamp ? \date_i18n($same_month ? 'j' : 'j M', $start_timestamp) : '';
+            $fmt_end   = $end_timestamp ? \date_i18n('j M Y', $end_timestamp) : '';
 
             $label = $fmt_start;
             if ($fmt_end && $fmt_end !== $fmt_start) {

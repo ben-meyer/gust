@@ -6,8 +6,10 @@ node_modules/**
 .docs/**
 dev-scripts
 dev-scripts/**
-/assets
-/assets/**
+/assets/styles
+/assets/styles/**
+/assets/scripts
+/assets/scripts/**
 .babelrc
 .browserslistrc
 .deployignore

@@ -424,7 +424,8 @@
             },
             "choices": {
                 "default": "Default",
-                "horizontal": "Horizontal"
+                "horizontal": "Horizontal",
+                "carousel": "Carousel"
             },
             "allow_null": 0,
             "default_value": "",
@@ -493,7 +494,15 @@
             "type": "true_false",
             "instructions": "Enable horizontal scrolling on mobile viewports.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_61a65a57e8190",
+                        "operator": "!=",
+                        "value": "carousel"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -524,5 +533,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1683874712
+    "modified": 1809900000
 }

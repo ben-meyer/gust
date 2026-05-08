@@ -13,10 +13,9 @@ use Gust\Components\GetInTouch;
     <p class="component-example-section__description">Example rendering of the GetInTouch component with contact information.</p>
     <div class="component-example-section__preview">
         <?= GetInTouch::make(contacts: [
-            ['type' => 'Office', 'value' => '+44 (0)12 3456 7890'],
-            ['type' => 'Person 1', 'value' => '+44 (0)7987 654 321'],
-            ['type' => 'Person 2', 'value' => '+44 (0)7123 456 789'],
-            ['type' => 'Email', 'value' => 'example@swimquest.com'],
+            ['icon' => 'phone', 'label' => 'Office', 'value' => '+44 (0)12 3456 7890', 'url' => 'tel:+441234567890'],
+            ['icon' => 'whatsapp', 'label' => 'Message via WhatsApp', 'value' => '', 'url' => 'https://wa.me/441234567890'],
+            ['icon' => 'email', 'label' => 'info@swimquest.uk.com', 'value' => '', 'url' => 'mailto:info@swimquest.uk.com'],
         ]); ?>
     </div>
 </section>

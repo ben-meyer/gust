@@ -9,6 +9,7 @@ class SkillLevelTaxonomy
     public static function init(): void
     {
         \add_action('init', [__CLASS__, 'register']);
+        \add_action('admin_enqueue_scripts', [__CLASS__, 'removeNativeDescriptionField']);
     }
 
     public static function register(): void
@@ -34,5 +35,20 @@ class SkillLevelTaxonomy
                 'slug' => 'skill-level',
             ]
         );
+    }
+
+    public static function removeNativeDescriptionField(): void
+    {
+        $screen = \get_current_screen();
+        if (! $screen || $screen->taxonomy !== self::SLUG) {
+            return;
+        }
+
+        \wp_add_inline_script('wp-util', '
+            document.addEventListener("DOMContentLoaded", function () {
+                var el = document.querySelector(".term-description-wrap");
+                if (el) el.parentNode.removeChild(el);
+            });
+        ');
     }
 }

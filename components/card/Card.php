@@ -50,6 +50,8 @@ class Card extends ComponentBase
     {
         $args['classes'] ??= [];
 
+        $incoming_type = $args['type'] ?? null;
+
         if (! empty($args['object'])) {
             $object = $args['object'];
 
@@ -88,8 +90,23 @@ class Card extends ComponentBase
                     $args['content']['meta'] .= $metaDate && $metaAuthor ? ' ' : null;
 
                     if (! empty($metaAuthor)) {
-                        $metaAuthor = Link::make(...$metaAuthor);
+                        $metaAuthor = ! empty($metaAuthor['url'])
+                            ? Link::make(...$metaAuthor)
+                            : esc_html($metaAuthor['title']);
                         $args['content']['meta'] .= sprintf(__('by %s', 'gust'), $metaAuthor);
+                    }
+                } elseif ($object->post_type === 'story') {
+                    $args['type'] = 'story';
+                    $args['show_read_more'] = false;
+                    $args['heading_class'] = 'is-style-type-h4';
+
+                    $metaAuthor = \Theme\Utils\ObjectMeta::getObjectAuthor($object);
+
+                    if (! empty($metaAuthor)) {
+                        $metaAuthor = ! empty($metaAuthor['url'])
+                            ? Link::make(...$metaAuthor)
+                            : esc_html($metaAuthor['title']);
+                        $args['content']['meta'] = sprintf(__('by %s', 'gust'), $metaAuthor);
                     }
                 }
             } elseif ($args['object'] instanceof \WP_Term) {
@@ -111,7 +128,7 @@ class Card extends ComponentBase
             if (empty($args['content']['read_more']['title'])) {
                 $args['content']['read_more']['title'] = ! empty($args['read_more_text'])
                     ? $args['read_more_text']
-                    : __('Find Your Trip', 'gust');
+                    : '';
             }
         } elseif (! empty($args['content'])) {
             $content = $args['content'];
@@ -171,6 +188,10 @@ class Card extends ComponentBase
 
         if (! empty($args['type'])) {
             $args['classes'][] = 'g-card--type--'.$args['type'];
+        }
+
+        if (! empty($incoming_type) && $incoming_type !== ($args['type'] ?? null)) {
+            $args['classes'][] = 'g-card--type--'.$incoming_type;
         }
 
         return $args;

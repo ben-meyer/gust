@@ -26,9 +26,22 @@ class TripPageHeader extends ComponentBase
             return $args;
         }
 
-        $heading = \get_field('trip_heading', $postId);
-        $description = \get_field('trip_description', $postId);
-        $image = \get_field('trip_header_image', $postId);
+        $heading = self::getArgOrField($args, 'heading', 'trip_heading', $postId);
+        $description = self::getArgOrField($args, 'description', 'trip_description', $postId);
+        $image = self::getArgOrField($args, 'image', 'trip_header_image', $postId);
+
+        $durationNights = self::getArgOrField($args, 'duration_nights', 'duration_nights', $postId);
+        $distanceMin = self::getArgOrField($args, 'distance_min_km', 'distance_min_km', $postId);
+        $distanceMax = self::getArgOrField($args, 'distance_max_km', 'distance_max_km', $postId);
+        $waterTempMin = self::getArgOrField($args, 'water_temp_min_c', 'water_temp_min_c', $postId);
+        $waterTempMax = self::getArgOrField($args, 'water_temp_max_c', 'water_temp_max_c', $postId);
+        $maxGroupSize = self::getArgOrField($args, 'max_group_size', 'max_group_size', $postId);
+        $nonSwimmersText = self::getArgOrField($args, 'non_swimmers_text', 'non_swimmers_text', $postId);
+        $techniqueCoachingText = self::getArgOrField($args, 'technique_coaching_text', 'technique_coaching_text', $postId);
+
+        if ($nonSwimmersText === null) {
+            $nonSwimmersText = self::getArgOrField($args, 'welcome_text', 'welcome_text', $postId);
+        }
 
         $imageId = $image['ID'] ?? $image['id'] ?? \get_post_thumbnail_id($postId);
 
@@ -42,6 +55,10 @@ class TripPageHeader extends ComponentBase
 
         $args['heading'] = $heading ?: $post->post_title;
         $args['description'] = $description ?? '';
+        $args['cta'] = TripData::getDateRows($postId) ? [
+            'label' => __('View dates & book', 'gust'),
+            'url' => '#trip-dates',
+        ] : null;
 
         $args['summary_items'] = array_values(array_filter([
             [
@@ -60,19 +77,19 @@ class TripPageHeader extends ComponentBase
 
         $args['stats'] = array_values(array_filter([
             [
-                'value' => ! empty($args['duration_nights']) ? $args['duration_nights'].' '.__('Nights', 'gust') : null,
+                'value' => ! empty($durationNights) ? $durationNights.' '.__('Nights', 'gust') : null,
                 'label' => __('Duration', 'gust'),
             ],
             [
-                'value' => self::formatRange($args['distance_min_km'] ?? null, $args['distance_max_km'] ?? null, 'km'),
+                'value' => self::formatRange($distanceMin, $distanceMax, 'km'),
                 'label' => __('Distance per day', 'gust'),
             ],
             [
-                'value' => self::formatRange($args['water_temp_min_c'] ?? null, $args['water_temp_max_c'] ?? null, '°C'),
+                'value' => self::formatRange($waterTempMin, $waterTempMax, '°C'),
                 'label' => __('Water temperature', 'gust'),
             ],
             [
-                'value' => $args['max_group_size'] ?? null,
+                'value' => $maxGroupSize,
                 'label' => __('Max. group size', 'gust'),
             ],
             [
@@ -84,16 +101,25 @@ class TripPageHeader extends ComponentBase
                 'label' => __('Swim type', 'gust'),
             ],
             [
-                'value' => $args['welcome_text'] ?? null,
-                'label' => __('Welcome', 'gust'),
+                'value' => $nonSwimmersText,
+                'label' => __('Non-swimmers', 'gust'),
             ],
             [
-                'value' => $args['technique_coaching_text'] ?? null,
+                'value' => $techniqueCoachingText,
                 'label' => __('Technique coaching', 'gust'),
             ],
         ], fn ($item) => ! empty($item['value'])));
 
         return $args;
+    }
+
+    protected static function getArgOrField(array $args, string $argKey, string $fieldName, int $postId): mixed
+    {
+        if (array_key_exists($argKey, $args) && $args[$argKey] !== null && $args[$argKey] !== '') {
+            return $args[$argKey];
+        }
+
+        return \get_field($fieldName, $postId);
     }
 
     protected static function formatRange(mixed $min, mixed $max, string $suffix): ?string

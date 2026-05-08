@@ -2,6 +2,7 @@
     <div class="trip-highlights__inner content-width-lg">
         <?= \Gust\Components\Heading::make(
             heading: __('Highlights', 'gust'),
+            el: 'h4',
             classes: ['trip-highlights__heading'],
         ); ?>
 
@@ -15,11 +16,12 @@
                             </div>
                         </div>
                     <?php } ?>
-
+                    
+                    <div class="trip-highlights__item-content">
                     <?php if (! empty($item['heading'])) { ?>
                         <?= \Gust\Components\Heading::make(
                             heading: $item['heading'],
-                            el: 'h3',
+                            el: 'h6',
                             classes: ['trip-highlights__item-heading'],
                         ); ?>
                     <?php } ?>
@@ -27,6 +29,7 @@
                     <?php if (! empty($item['description'])) { ?>
                         <p class="trip-highlights__item-description"><?= esc_html($item['description']); ?></p>
                     <?php } ?>
+                    </div>
                 </article>
             <?php } ?>
         </div>

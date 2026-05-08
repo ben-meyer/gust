@@ -241,7 +241,6 @@ class TripData
     protected static function getStatusLabel(string $status): string
     {
         return match ($status) {
-            'sold_out_private' => __('Sold Out - Private Group', 'gust'),
             'sold_out' => __('Sold Out', 'gust'),
             default => __('Book Now', 'gust'),
         };

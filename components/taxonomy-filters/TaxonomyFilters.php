@@ -55,10 +55,6 @@ class TaxonomyFilters extends ComponentBase
         // Default translated value
         $args['label'] ??= __('Filter by', 'gust');
 
-        if (! empty($args['object'])) {
-            $object = $args['object'];
-        }
-
         if (! empty($args['taxonomy'])) {
             $tax = get_taxonomy($args['taxonomy']);
 
