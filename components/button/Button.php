@@ -63,7 +63,8 @@ class Button extends ComponentBase
 
         $variant_classes = [
             'secondary' => 'btn--theme-2',
-            'inactive' => 'btn--ghost',
+            'inactive' => 'btn--inactive',
+            'ghost' => 'btn--ghost',
         ];
         if (isset($variant_classes[$args['variant']])) {
             $args['classes'][] = $variant_classes[$args['variant']];

@@ -33,6 +33,14 @@ use Gust\Components\Button;
 </section>
 
 <section class="component-example-section">
+    <h2 class="component-example-section__title">Ghost Button</h2>
+    <p class="component-example-section__description">Ghost button with text content.</p>
+    <div class="component-example-section__preview">
+        <?= Button::make(content: 'Ghost Button', variant: 'ghost'); ?>
+    </div>
+</section>
+
+<section class="component-example-section">
     <h2 class="component-example-section__title">No class passed</h2>
     <p class="component-example-section__description">Default button with no variant class passed.</p>
     <div class="component-example-section__preview">
