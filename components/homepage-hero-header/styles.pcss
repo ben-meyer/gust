@@ -73,6 +73,28 @@
                 height: 100%;
                 object-fit: cover;
             }
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                z-index: 1;
+                pointer-events: none;
+                inset-inline: 0;
+            }
+
+            &::before {
+                top: 0;
+                height: 38%;
+                background: linear-gradient(180deg, hsl(var(--color-black--hsl) / 0.75) 0%, hsl(var(--color-black--hsl) / 0) 100%);
+            }
+
+            &::after {
+                bottom: 0;
+                height: 33%;
+                background: linear-gradient(180deg, var(--color-white) 0%, var(--color-navy) 100%);
+                mix-blend-mode: multiply;
+            }
         }
     }
 
