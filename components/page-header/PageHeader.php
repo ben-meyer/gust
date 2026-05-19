@@ -107,6 +107,11 @@ class PageHeader extends ComponentBase
                     if (empty($object->post_parent)) {
                         $args['show_breadcrumbs'] = false;
                     }
+
+                    // Remove breadcrumbs if no image is present on child pages
+                    if (! empty($object->post_parent) && empty($args['image'])) {
+                        $args['show_breadcrumbs'] = false;
+                    }
                 } elseif ($object->post_type === 'story') {
                     $args['background'] = 'none';
                     $args['image'] = null;
