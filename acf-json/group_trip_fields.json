@@ -1070,6 +1070,26 @@
             "selected": 0
         },
         {
+            "key": "field_trip_reviews_embed_code",
+            "label": "Reviews Embed Code",
+            "name": "reviews_embed_code",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "HTML embed code for the reviews section.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 6,
+            "new_lines": "",
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
             "key": "field_trip_faqs",
             "label": "FAQs",
             "name": "faqs",
@@ -1133,26 +1153,6 @@
                     "parent_repeater": "field_trip_faqs"
                 }
             ]
-        },
-        {
-            "key": "field_trip_reviews_embed_code",
-            "label": "Reviews Embed Code",
-            "name": "reviews_embed_code",
-            "aria-label": "",
-            "type": "textarea",
-            "instructions": "HTML embed code for the reviews section.",
-            "required": 0,
-            "conditional_logic": false,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "rows": 6,
-            "new_lines": "",
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": ""
         },
         {
             "key": "field_trip_tab_promo",
@@ -1247,6 +1247,33 @@
             "selected": 0
         },
         {
+            "key": "field_trip_related_stories",
+            "label": "Related Stories",
+            "name": "related_stories",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "Select up to 2 stories.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "story"
+            ],
+            "filters": [
+                "search"
+            ],
+            "min": 0,
+            "max": 2,
+            "return_format": "object",
+            "taxonomy": [],
+            "elements": [],
+            "bidirectional_target": []
+        },
+        {
             "key": "field_trip_related_trips",
             "label": "Related Trips",
             "name": "related_trips",
@@ -1269,33 +1296,6 @@
             ],
             "min": 0,
             "max": 3,
-            "return_format": "object",
-            "taxonomy": [],
-            "elements": [],
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_trip_related_stories",
-            "label": "Related Stories",
-            "name": "related_stories",
-            "aria-label": "",
-            "type": "relationship",
-            "instructions": "Select up to 2 stories.",
-            "required": 0,
-            "conditional_logic": false,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "story"
-            ],
-            "filters": [
-                "search"
-            ],
-            "min": 0,
-            "max": 2,
             "return_format": "object",
             "taxonomy": [],
             "elements": [],
@@ -1330,5 +1330,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1779128643
+    "modified": 1779309494
 }
