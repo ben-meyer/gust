@@ -3,7 +3,7 @@
         <div class="site-header__bar">
         <?= \Gust\Components\Link::make(
             url: home_url('/'),
-            classes: ['site-header__logo', 'img-fit'],
+            classes: ['site-header__logo'],
             title: '<span class="logo-default">' . \Gust\Image::get('logo-alt.svg', [
                 'alt' => get_bloginfo('name'),
                 'loading' => false,

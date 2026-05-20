@@ -126,16 +126,21 @@
 
 .site-header__logo {
     display: flex;
-    width: 100%;
+    width: var(--site-header--logo-width);
     max-width: var(--site-header--logo-width);
-    height: 100%;
-    max-height: calc(100% - space(8));
+    align-items: center;
     margin-right: auto;
 
     > * {
-        object-fit: contain;
-        object-position: left center;
         display: flex;
+        width: 100%;
+        align-items: center;
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
     }
 
     .logo-white { display: none; }
