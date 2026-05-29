@@ -17,10 +17,16 @@ class CardsCarousel {
 
 		const cols = readColumns(this.element);
 
+		const readSlides = () =>
+    	parseFloat(getComputedStyle(el).getPropertyValue('--cards--carousel--slides')) || 1.2;
+
+		const readGap = () =>
+    	parseFloat(getComputedStyle(el).getPropertyValue('--cards--carousel--gap')) || 24;
+
 		this.swiper = new Swiper(swiperEl, {
 			modules: [Navigation, Keyboard, Mousewheel, FreeMode],
-			slidesPerView: 1.2,
-			spaceBetween: 24,
+			slidesPerView: readSlides(),
+			spaceBetween: readGap(),
 			speed: 500,
 			roundLengths: true,
 			grabCursor: true,
@@ -48,6 +54,13 @@ class CardsCarousel {
 					slidesPerView: cols,
 				},
 			},
+			on: {
+        resize: (swiper) => {
+            swiper.params.slidesPerView = readSlides();
+            swiper.params.spaceBetween = readGap();
+            swiper.update();
+        }
+    	}
 		});
 
 		this.element.dataset.cardsInitialized = 'true';
