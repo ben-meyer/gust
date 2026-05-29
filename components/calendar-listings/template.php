@@ -35,7 +35,7 @@ use Theme\Utils\TripData;
                                 <span class="calendar-listings__item-icon">
                                     <?= \Gust\SVG::get('icons/location.svg'); ?>
                                 </span>
-                                <?= $locationHtml; ?>
+                                <span><?= $locationHtml; ?></span>
                             </div>
                         <?php } ?>
 
