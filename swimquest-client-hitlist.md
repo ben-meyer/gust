@@ -62,8 +62,8 @@ All in `components/trip-dates/` (used by both Trip and Event) and `TripPageHeade
   Closes: [Guest story design](https://trello.com/c/k1CMWWxC) — *❓ confirm desired layout*
 - [ ] **Team page role subtitle** — `components/text-items/template.php` already has `meta` field rendered above title. Either expose `meta` for team items or add a dedicated `role` subfield in the team component.
   Closes: [HQ team role subtitle](https://trello.com/c/VBikBKso) — *❓ confirm: small-caps light-blue style under name?*
-- [ ] **Form styling** — Turkey family booking form, restyle to match brand
-  Closes: [Form styling](https://trello.com/c/h4RADrOJ) — *❓ which form plugin? CF7 / Gravity / Fluent?*
+- [x] **Form styling** — CF7. Added `assets/styles/3-patterns/_contact-form-7.pcss` base pattern: brand-styled checkboxes/radios (appearance:none + custom box), inline-grid centring (covers both CF7 markup variants — with/without `<label>` wrapper), explicit `transform: none` to defeat the base `translateY(0.15em)` baseline nudge that breaks custom-styled boxes. Inherited by every CF7 form on the site.
+  Closes: [Form styling](https://trello.com/c/h4RADrOJ)
 - [ ] **Itinerary day heading override** — `preview_days` repeater already has a `title` subfield (`components/trip-itinerary-preview/TripItineraryPreview.php:17`). Verify it's being rendered in place of "Day N" when populated; if not, update template to prefer custom title over `sprintf('Day %d')`.
   Closes: [Override "Day 1" headings](https://trello.com/c/qSLTcfWC)
 - [ ] **Getting There: general note field** — add a top-level textarea/wysiwyg to the Getting There ACF group, render in `TripGettingThere`
