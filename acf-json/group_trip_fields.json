@@ -1281,7 +1281,7 @@
             "name": "related_trips",
             "aria-label": "",
             "type": "relationship",
-            "instructions": "Select up to 3 trips.",
+            "instructions": "Select up to 3 trips or events.",
             "required": 0,
             "conditional_logic": false,
             "wrapper": {
@@ -1290,7 +1290,8 @@
                 "id": ""
             },
             "post_type": [
-                "trip"
+                "trip",
+                "events"
             ],
             "filters": [
                 "search",

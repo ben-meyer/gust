@@ -41,7 +41,7 @@ All in `components/trip-dates/` (used by both Trip and Event) and `TripPageHeade
 
 - [ ] **Destinations archive: hide empty terms** — `Theme/Controllers/DestinationsController.php:12-18`, `hide_empty => false` → `true`
   Closes: [Destinations: hide if no trips assigned](https://trello.com/c/y07tMdej)
-- [ ] **Related Trips: allow Events** — `acf-json/group_trip_fields.json` `field_trip_related_trips`, add `"event"` to `post_type` array
+- [x] **Related Trips: allow Events** — Added `"events"` (plural, the actual slug per `Theme/Modules/Events/PostType.php`) to `post_type` array on `field_trip_related_trips` in `acf-json/group_trip_fields.json`; instructions updated. `TripCards`/`TripCard` render path has no post-type assumptions so events render via the same card component.
   Closes: [Related trips include events](https://trello.com/c/RoUDb8gN)
 - [ ] **Intro paragraph → rich text** — `acf-json/group_trip_fields.json` `intro_body`: `textarea` → `wysiwyg`; render with `wp_kses_post` (template change required)
   Closes: [Link in intro paragraphs](https://trello.com/c/31vZISBT)
