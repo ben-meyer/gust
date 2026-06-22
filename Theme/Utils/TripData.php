@@ -270,8 +270,22 @@ class TripData
             ];
         }
 
+        if (\in_array($row['status'], ['sold_out', 'sold_out_private'], true)) {
+            return [
+                'label' => $row['status'] === 'sold_out_private'
+                    ? __('Private Group', 'gust')
+                    : __('Sold Out', 'gust'),
+                'url' => null,
+                'is_link' => false,
+            ];
+        }
+
+        if (self::getPrimaryEnquiryAction($postId)) {
+            return null;
+        }
+
         return [
-            'label' => $row['status_label'],
+            'label' => __('Coming Soon', 'gust'),
             'url' => null,
             'is_link' => false,
         ];

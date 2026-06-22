@@ -588,8 +588,9 @@ Sticky trip-only section navigation under the hero, registered as `acf/trip-sect
 - Secondary CTA states:
   - Multiple dates: "View dates & book" anchor link to `#trip-dates`
   - Single bookable date with `booking_url`: "Book" linking to the external booking URL
-  - Single date that is not bookable (or bookable with no `booking_url`): non-linked status label (e.g. "Sold Out", "Private Group")
-  - No dates (coming-soon state): suppressed if an enquiry URL exists (the Enquire button stands alone); otherwise a non-linked "Coming Soon" label
+  - Single sold-out date: non-linked "Sold Out" or "Private Group" label
+  - Single bookable date with **no** `booking_url`: suppressed if an enquiry URL is available (Enquire stands alone); non-linked "Coming Soon" otherwise
+  - No dates (coming-soon state): suppressed if an enquiry URL exists (Enquire stands alone); otherwise a non-linked "Coming Soon" label
 - Enquiry CTA: rendered when any departure has an `enquiry_url`, or — for no-dates trips — when the trip-level `trip_enquiry_url` is set. With multiple dates it links to `#trip-dates`; with a single date or coming-soon state it links directly to the relevant URL.
 
 **Fields:**
