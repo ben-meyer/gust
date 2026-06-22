@@ -10,9 +10,12 @@
     }
 
     :where(.trip-cards__heading) {
+        @apply type-h4;
+
         max-width: var(--heading--max-width);
-        margin-inline: auto;
+        margin: 0;
         text-align: left;
+        text-transform: unset;
     }
 
     :where(.trip-cards__subheading) {
