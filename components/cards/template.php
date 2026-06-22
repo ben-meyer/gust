@@ -58,10 +58,15 @@ $tag = $is_carousel ? 'sq-cards' : 'section';
                 </div>
             <?php } ?>
 
-            <?php if (! empty($this->button)) { ?>
+            <?php if (! empty($this->button['url']) && ! empty($this->button['title'])) { ?>
                 <div class="cards__footer">
                     <div class="cards__more-link">
-                        <?= \Gust\Components\Link::make(...$this->button); ?>
+                        <?= \Gust\Components\Link::make(
+                            title: $this->button['title'],
+                            url: $this->button['url'],
+                            target: $this->button['target'] ?? null,
+                            classes: ['btn', 'btn--theme-2'],
+                        ); ?>
                     </div>
                 </div>
             <?php } ?>
