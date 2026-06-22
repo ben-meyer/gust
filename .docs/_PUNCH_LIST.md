@@ -6,16 +6,17 @@ Items surfaced during audits that need investigation or fixing in code. These ar
 
 ## Open Items
 
-### 1. Banner — `block.json` disabled, ACF group orphaned
-**Type**: Stale artefact / decision needed
-**Detail**: `components/banner/block.json.disabled` exists (block intentionally disabled), but `group_component_banner.json` still has a location rule targeting `acf/banner` as if the block were live. Result: the ACF group will never fire — banners are rendered programmatically only. The component works fine as a Partial.
-**Question**: Either remove the ACF location rule (or convert it to a different target if banners are wanted as a block) — or restore `block.json`. The spec has been updated to mark Banner as `[Partial]`.
+*(None currently open.)*
 
 ---
 
-### 2. `TripData::getStatusLabel()` did not handle `sold_out_private`
-**Type**: Bug — **[FIXED]**
-**Detail**: `getStatusLabel()` returned "Book Now" for `sold_out_private` via the default arm of the match. Added the explicit `'sold_out_private' => 'Private Group'` arm so the section nav secondary CTA renders the correct label. Canonical label sourced from `TripDates.php` which already uses "Private Group" for the same status.
+## Recently Fixed
+
+### Banner — `block.json` disabled, ACF group orphaned — **[FIXED]**
+`components/banner/block.json.disabled` exists (block intentionally disabled), but `group_component_banner.json` still carried a location rule targeting `acf/banner`. Removed the orphaned location rule (set to `[]`) and added a description noting that the banner is rendered programmatically. The component works fine as a Partial.
+
+### `TripData::getStatusLabel()` did not handle `sold_out_private` — **[FIXED]**
+`getStatusLabel()` returned "Book Now" for `sold_out_private` via the default arm of the match. Added the explicit `'sold_out_private' => 'Private Group'` arm so the section nav secondary CTA renders the correct label. Canonical label sourced from `TripDates.php` which already uses "Private Group" for the same status.
 
 ---
 

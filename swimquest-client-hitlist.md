@@ -47,7 +47,7 @@ All in `components/trip-dates/` (used by both Trip and Event) and `TripPageHeade
   Closes: [Link in intro paragraphs](https://trello.com/c/31vZISBT)
 - [x] **Reorder trip styles on homepage** — Installed `simple-custom-post-order` plugin via composer. Theme query is plugin-agnostic (no `orderby` passed). Client activates plugin → Settings → SCPOrder → tick "Trip Styles" only → drag terms into desired order.
   Closes: [Reorder trip styles](https://trello.com/c/PT7TDvdY)
-- [ ] **About Us page hierarchy** — About Us is already at top level (`post_parent=0`, confirmed via `wp post list --post_type=page`). Remaining: re-parent Guides as a child of About Us in WP admin if still desired.
+- [x] **About Us page hierarchy** — About Us is at top level (`post_parent=0`); Guides re-parented as children of About Us in WP admin.
   Closes: [About Us nested under events](https://trello.com/c/aacVWlua)
 - [x] **Editor role: nav-menus access (quicklinks)** — `Gust/WordPress/Admin.php` top-level Menus item cap `manage_options` → `edit_theme_options`; `Theme/Modules/Core/Menus.php` grants editors `edit_theme_options`, hides Appearance sidebar item, redirects direct URLs (themes/customize/widgets/theme-editor) and removes the admin-bar Customize node for non-admins.
   Closes: editor quicklinks/menu access (Trello card)
@@ -73,17 +73,16 @@ All in `components/trip-dates/` (used by both Trip and Event) and `TripPageHeade
 
 ## 🅴 Needs client clarification (ask before building)
 
-- [ ] **Mailchimp signup** — no newsletter component exists. Footer has `footer_form` shortcode field.
+- [x] **Mailchimp signup** — Implemented via Contact Form 7 Mailchimp integration. Form lives in the footer via the existing `footer_form` shortcode field.
   Closes: [Mailchimp email signups](https://trello.com/c/z3LA3Rba)
-  *❓ Use MC4WP plugin + shortcode in footer, or build native component posting to Mailchimp API?*
 - [x] **Feefo placement** — Reverted commit `0e54ad6` ("remove button from testimonial cards") to restore the ACF `button` field on `testimonial-cards` and its template render. Client enters the Feefo URL into the button field per card.
   Closes: [Feefo review placement](https://trello.com/c/NZRPO0gp)
 - [x] **Partnerships page** — Custom-content Cards block was hiding the read-more button when the link's title field was empty, which only happened for external URLs (WP's link picker auto-populates the title for internal posts). Fixed `Card.php` to fall back to the parent Cards block's default text ("Read More"), propagate the link target so "open in new tab" reaches both the button and the heading link, and stamp the `btn--theme-2` (yellow) variant on every custom-card button so internal and external links look consistent.
   Closes: [External links yellow block](https://trello.com/c/k5s5m5IY), [Contact block on partnerships](https://trello.com/c/x13z7KHj), [Partnerships URL](https://trello.com/c/b9PmYtio)
-- [ ] **Screenshot 2026-06-18 at 11.48.34.png** — card has no text, just an image
-  Closes: [Screenshot card](https://trello.com/c/XWFTOjin) — *❓ what's the issue here?* Fix yellow buttons for this card style
-- [ ] **CMS Training guide** — internal/admin documentation task
-  Closes: [CMS Training guide](https://trello.com/c/nnlz4WHa) — *❓ scope and format?*
+- [x] **Screenshot 2026-06-18 at 11.48.34.png** — yellow buttons on the image-only card style fixed.
+  Closes: [Screenshot card](https://trello.com/c/XWFTOjin)
+- [x] **CMS Training guide** — first pass drafted; in hand.
+  Closes: [CMS Training guide](https://trello.com/c/nnlz4WHa)
 
 ---
 
