@@ -205,6 +205,17 @@ class TripData
         $enquiryRows = array_values(array_filter($rows, fn ($row) => ! empty($row['enquiry_url'])));
 
         if (empty($enquiryRows)) {
+            $tripUrl = \get_field('trip_enquiry_url', $postId);
+
+            if (! empty($tripUrl)) {
+                return [
+                    'label' => __('Enquire', 'gust'),
+                    'url' => $tripUrl,
+                    'target' => '_blank',
+                    'is_link' => true,
+                ];
+            }
+
             return null;
         }
 
@@ -227,6 +238,18 @@ class TripData
     public static function getPrimaryBookingAction(int $postId): ?array
     {
         $rows = self::getDateRows($postId);
+
+        if (empty($rows)) {
+            if (self::getPrimaryEnquiryAction($postId)) {
+                return null;
+            }
+
+            return [
+                'label' => __('Coming Soon', 'gust'),
+                'url' => null,
+                'is_link' => false,
+            ];
+        }
 
         if (count($rows) !== 1) {
             return [

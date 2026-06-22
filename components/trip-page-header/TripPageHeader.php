@@ -55,10 +55,20 @@ class TripPageHeader extends ComponentBase
 
         $args['heading'] = $heading ?: $post->post_title;
         $args['description'] = $description ?? '';
-        $args['cta'] = TripData::getDateRows($postId) ? [
-            'label' => __('View dates & book', 'gust'),
-            'url' => '#trip-dates',
-        ] : null;
+
+        if (! empty(TripData::getDateRows($postId))) {
+            $args['cta'] = [
+                'label' => __('View dates & book', 'gust'),
+                'url' => '#trip-dates',
+                'is_link' => true,
+            ];
+        } else {
+            $args['cta'] = TripData::getPrimaryEnquiryAction($postId) ?: [
+                'label' => __('Coming Soon', 'gust'),
+                'url' => null,
+                'is_link' => false,
+            ];
+        }
 
         $args['summary_items'] = array_values(array_filter([
             [

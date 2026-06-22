@@ -295,6 +295,23 @@
             "selected": 0
         },
         {
+            "key": "field_trip_enquiry_url",
+            "label": "Enquiry URL (Coming Soon fallback)",
+            "name": "trip_enquiry_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Used for the enquiry CTA when this trip has no scheduled dates yet. Leave blank to show \"Coming Soon\" instead.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "https:\/\/",
+            "default_value": ""
+        },
+        {
             "key": "field_trip_dates",
             "label": "Dates",
             "name": "dates",

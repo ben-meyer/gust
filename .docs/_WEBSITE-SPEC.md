@@ -76,6 +76,7 @@ Core swim holiday product. Each post represents a trip that may run on multiple 
 - **trip_header_image** (image, return: array) - Optional hero image override
 
 **Fields:**
+- **trip_enquiry_url** (url) - Trip-level enquiry fallback used as the primary CTA when `dates` is empty (coming-soon state). Leave blank to render a non-linked "Coming Soon" label in the page header and Trip Nav instead.
 - **dates** (repeater) - One or more date windows; UI shows date range if single, "Multiple dates" if more than one
   - **start_date** (date_picker, return: Y-m-d)
   - **end_date** (date_picker, return: Y-m-d)
@@ -548,7 +549,10 @@ Trip hero section registered as `acf/trip-page-header`, restricted to the `trip`
 - Price is derived from the cheapest `dates` row
 - Ability level and swim type come from taxonomies
 - Image falls back to featured image unless overridden
-- A "View dates & book" CTA button (anchor to `#trip-dates`) is rendered in the summary zone whenever the trip has at least one date row (regardless of bookability status)
+- CTA button rendered in the summary zone:
+  - **At least one date row**: "View dates & book" anchor to `#trip-dates` (regardless of bookability status)
+  - **No date rows + `trip_enquiry_url` set**: "Enquire" linking to that URL (new tab)
+  - **No date rows + no enquiry URL anywhere**: non-linked "Coming Soon" label
 
 **Data source:**
 - Post-level ACF and taxonomies on `trip`
@@ -580,12 +584,13 @@ Sticky trip-only section navigation under the hero, registered as `acf/trip-sect
 
 **Auto-population logic:**
 - Jump links cover: Highlights, Itinerary, Accommodation, What's Included, Getting There, Reviews, FAQs (only for sections with content). No jump link for Dates & Book.
-- Primary CTA opens the first available departure `enquiry_url`
-- Secondary CTA has four states:
-  - Zero dates or multiple dates: "View dates & book" anchor link to `#trip-dates`
+- Primary CTA opens the first available departure `enquiry_url`, or the trip-level `trip_enquiry_url` fallback if no row-level URL is set.
+- Secondary CTA states:
+  - Multiple dates: "View dates & book" anchor link to `#trip-dates`
   - Single bookable date with `booking_url`: "Book" linking to the external booking URL
   - Single date that is not bookable (or bookable with no `booking_url`): non-linked status label (e.g. "Sold Out", "Private Group")
-- Enquiry CTA: when any departure has an `enquiry_url`, a separate "Enquire" button is rendered. With multiple dates it links to `#trip-dates`; with a single date it links directly to that departure's `enquiry_url`.
+  - No dates (coming-soon state): suppressed if an enquiry URL exists (the Enquire button stands alone); otherwise a non-linked "Coming Soon" label
+- Enquiry CTA: rendered when any departure has an `enquiry_url`, or — for no-dates trips — when the trip-level `trip_enquiry_url` is set. With multiple dates it links to `#trip-dates`; with a single date or coming-soon state it links directly to the relevant URL.
 
 **Fields:**
 - No block fields. Derived from trip data and relationships.

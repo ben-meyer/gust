@@ -24,12 +24,12 @@ All in `components/trip-dates/` (used by both Trip and Event) and `TripPageHeade
 
 - [ ] **Hide empty stat rows on event header** — `components/trip-page-header/TripPageHeader.php:78-111` already has `formatRange()` / `array_filter()`; verify they're applied in the events flow and that the title row doesn't render with no value
   Closes: [Leave stats blank → don't show](https://trello.com/c/LSX8Dhkc)
-- [ ] **Hide "Dates and Booking" section + top button when no dates exist** — guard in event template + page header
+- [x] **Hide "Dates and Booking" section + top button when no dates exist** — `TripDates` self-hides via `validate()` when `dates` is empty. `TripPageHeader` CTA and `TripSectionNav` primary action now branch on the no-dates case (see "Coming soon" item below) instead of rendering a broken `#trip-dates` anchor.
   Closes: [Remove booking dates → remove section](https://trello.com/c/oRzd94aY)
 - [x] **Single-date formatting** — when start == end show "8 Feb" not "8-8 Feb"; fix in the date range formatter in `TripData` / `TripDates`
   Closes: [Sole date display](https://trello.com/c/O4UTKFOw)
-- [ ] **"Coming soon" CTA when no dates/booking link** — add ACF option (form URL) on event; render fallback button when dates array is empty
-  Closes: [Coming soon button](https://trello.com/c/flpZnz2X) — *needs form URL from client*
+- [x] **"Coming soon" CTA when no dates/booking link** — Added trip-level `trip_enquiry_url` ACF field as the no-dates fallback. `TripData::getPrimaryEnquiryAction()` now consults this when no row-level enquiry URL exists; `TripData::getPrimaryBookingAction()` returns null (or a non-link "Coming Soon" label when no enquiry URL is set anywhere) when `dates` is empty. Page header + Trip Nav render the resulting CTA accordingly. Listings/calendar already exclude no-dates trips via `getUpcomingPostIds()`.
+  Closes: [Coming soon button](https://trello.com/c/flpZnz2X)
 - [x] **Temperature: single number → no dash** — `formatRange()` guard, or specific handling in stats rendering. Currently `28 - 0` style appears.
   Closes: [Temperature field 1 number](https://trello.com/c/N4GT87Kp)
 - [x] **Investigate "not pulling in all events"** — `Theme/Modules/Events/module.php:38-59` filters archive to upcoming only via `filterArchiveToUpcomingEvents()`. Confirm with client whether past/no-date events should be hidden or shown.

@@ -45,11 +45,16 @@ use Gust\SVG;
 
                     <?php if (! empty($this->cta)) { ?>
                         <div class="trip-page-header__actions">
-                            <?= \Gust\Components\Link::make(
-                                title: $this->cta['label'],
-                                url: $this->cta['url'],
-                                classes: ['btn', 'trip-page-header__cta'],
-                            ); ?>
+                            <?php if (! empty($this->cta['is_link']) && ! empty($this->cta['url'])) { ?>
+                                <?= \Gust\Components\Link::make(
+                                    title: $this->cta['label'],
+                                    url: $this->cta['url'],
+                                    target: $this->cta['target'] ?? null,
+                                    classes: ['btn', 'trip-page-header__cta'],
+                                ); ?>
+                            <?php } else { ?>
+                                <span class="btn trip-page-header__cta trip-page-header__cta--status"><?= esc_html($this->cta['label']); ?></span>
+                            <?php } ?>
                         </div>
                     <?php } ?>
                 </div>
