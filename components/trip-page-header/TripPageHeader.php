@@ -124,8 +124,8 @@ class TripPageHeader extends ComponentBase
 
     protected static function formatRange(mixed $min, mixed $max, string $suffix): ?string
     {
-        $hasMin = $min !== null && $min !== '';
-        $hasMax = $max !== null && $max !== '';
+        $hasMin = is_numeric($min);
+        $hasMax = is_numeric($max);
 
         if (! $hasMin && ! $hasMax) {
             return null;

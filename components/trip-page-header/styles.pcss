@@ -135,7 +135,7 @@
 .trip-page-header__stats {
     display: grid;
     gap: space(24);
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     max-width: var(--container-sm);
     margin-top: space(16);
 }
@@ -204,7 +204,6 @@
     }
 
     .trip-page-header__stats {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
         margin-top: space(36);
     }
 }
