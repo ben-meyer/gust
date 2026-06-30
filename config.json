@@ -16,7 +16,8 @@
                 "core/separator",
                 "core/freeform",
                 "core/block",
-                "core/missing"
+                "core/missing",
+                "core/html"
             ],
             "disabled_blocks": [
                 "core/pullquote",

@@ -10,11 +10,11 @@ pull:
     db_backup: true
 
 push:
-    db: true
+    db: false
     themes: false
     plugins: true
-    uploads: true
-    db_backup: true
+    uploads: false
+    db_backup: false
 
 environments:
     staging:
